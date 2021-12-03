@@ -1,0 +1,14 @@
+<div class="slide-inner">
+  <div class="slide-top">
+    <div class="slide-header">
+      <div class="question-heading slide-question slide-question-small text-center">How Would You Rate Your Fitness Level?</div>
+    </div> 
+  </div>
+  <div class="slide-bottom">
+    {% render 'include-number-range', min: 1, max: 10, step: 1, active: 3, message: 'Worst it could be.', emoticon: 'semi-happy' %}
+    <div class="slide-continue-wrapper">
+      <p class="nothing-selected text-center">Please select an answer before continuing :)</p>
+      <a class="btn--kleva btn--quiz-continue ">Continue</a>
+    </div>
+  </div>
+</div>

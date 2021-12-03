@@ -1,0 +1,16 @@
+{% if settings.breadcrumb_layout == 'top' %}
+    {% render 'breadcrumb' %}
+{% endif %}
+<div class="container">
+    <div class="page page-default">
+        <div class="section-header text-center">
+            <h1 class="title">{{ page_title | upcase }}</h1>
+        </div>
+        <div class="rte">
+            {{ page.content }}
+        </div>
+    </div>
+</div>
+{% if settings.breadcrumb_layout == 'bottom' %}
+    {% render 'breadcrumb' %}
+{% endif %}

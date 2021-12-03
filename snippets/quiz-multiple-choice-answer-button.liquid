@@ -1,0 +1,10 @@
+
+{% assign show_product_wishlist = show_product_wishlist | default: settings.show_product_wishlist %}
+
+{% if skipValues != blank %}
+  {% for repeater_item in skipValues %}
+    {% assign skipQuestionOutput = repeater_item["deactivated_questions"] %}
+  {% endfor %}
+{% endif %}
+
+<a class="btn--kleva btn--answer btn--quiz{% if active_state %} btn--quiz-active{% endif %}" data-skip-question='{{ skipQuestionOutput }}' data-answer="{{ button_text }}">{{ button_text }}</a>

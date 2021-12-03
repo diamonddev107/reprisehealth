@@ -1,0 +1,28 @@
+<div class="slide-inner">
+  <div class="slide-top">
+    <div class="slide-header">
+      <div class="question-heading slide-question slide-question-small text-center">What are your skin concerns?</div>
+    </div>
+  </div>
+  <div class="slide-bottom">
+    <div class="slide-answer-wrapper">
+      {% assign button_label = "Breakouts" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "Hyperpigmentation" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "Wrinkles" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "Elasticity" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "General aging" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "None" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+    </div>
+    <div class="slide-continue-wrapper">
+      <p class="nothing-selected text-center">Please select at least 1 area of interest before continuing :)</p>
+      <a class="btn--kleva btn--quiz-continue btn--quiz-continue-inactive">Continue</a>
+    </div>
+  </div>
+</div>
+

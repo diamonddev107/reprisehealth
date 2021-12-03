@@ -1,0 +1,28 @@
+<div class="slide-inner">
+  <div class="slide-top">
+    <div class="slide-header">
+      <div class="question-heading slide-question slide-question-small text-center">Your hair is:</div>
+    </div>
+  </div>
+  <div class="slide-bottom">
+    <div class="slide-answer-wrapper">
+      {% assign button_label = "Starting to thin" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "Dry" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "Damaged" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "Growing slowly" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "None of these" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+    </div>
+    <div class="slide-continue-wrapper">
+      <p class="nothing-selected text-center">Please select at least 1 area of interest before continuing :)</p>
+      <a class="btn--kleva btn--quiz-continue btn--quiz-continue-inactive">Continue</a>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,130 @@
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/swiper/swiper-bundle.min.css"
+/>
+
+<div class="container">
+    <div class="page page-default">
+    
+        <div class="assets-test-area">
+        
+
+            <div class="asset-wrapper">
+                {% render 'quiz-breadcrumbs-progress' %}
+            </div>
+
+            {% for item in shop.metafields.custom_fields["quiz_questions"] %}
+                <script>
+                    console.log('{{ item["question_section"] }}', '{{ item["unique_slide_id"] }}', '{{ item["question_type"] }}');
+                </script>
+            {% endfor %}
+
+            <div class="asset-wrapper swiper-wrapper" >
+                <div class="swiper mySwiper" >
+                    <div class="swiper-wrapper">
+                    {%- comment -%}
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="">
+                            {% render 'quiz-slide-0' %}
+                        </div> 
+                        {%- endcomment -%}
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="">{% render 'quiz-slide-categories' %} </div>
+
+                        {% for item in shop.metafields.custom_fields["quiz_questions"] %}
+                            {% if item["question_type"] == "Dynamic Range" %}
+                                <div class="swiper-slide swiper-slide-dynamic" data-question-type="{{ item['question_type'] }}" data-unique-slide-id="{{ item['unique_slide_id'] }}" data-show-slide="false" data-slide-category="{{ item['question_section'] }}" >
+                                    {% render 'quiz-slide-blank-dynamic-range', item: item %}
+                                </div>
+                            {% elsif item["question_type"] == "Yes/No" %}
+                                <div class="swiper-slide swiper-slide-dynamic" data-question-type="{{ item['question_type'] }}" data-unique-slide-id="{{ item['unique_slide_id'] }}" data-show-slide="false" data-slide-category="{{ item['question_section'] }}" >
+                                    {% render 'quiz-slide-blank-yes-no', item: item %}
+                                </div>
+                            {% elsif item["question_type"] == "Multiple Choice" %}
+                                <div class="swiper-slide swiper-slide-dynamic" data-question-type="{{ item['question_type'] }}" data-unique-slide-id="{{ item['unique_slide_id'] }}" data-show-slide="false" data-slide-category="{{ item['question_section'] }}" >
+                                    {% render 'quiz-slide-blank-multiple-choice', item: item %}
+                                </div>
+                            {% elsif item["question_type"] == "Multiple Select" %}
+                                <div class="swiper-slide swiper-slide-dynamic" data-question-type="{{ item['question_type'] }}" data-unique-slide-id="{{ item['unique_slide_id'] }}" data-show-slide="false" data-slide-category="{{ item['question_section'] }}" >
+                                    {% render 'quiz-slide-blank-multiple-select', item: item %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+
+                        {%- comment -%}
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Stress">{% render 'quiz-slide-stress-01' %} </div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Stress">{% render 'quiz-slide-stress-02' %} </div>
+
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Gut">{% render 'quiz-slide-gut-01' %} </div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Gut">{% render 'quiz-slide-gut-02' %} </div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Gut">{% render 'quiz-slide-gut-03' %} </div>
+
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Immunity">{% render 'quiz-slide-immunity-01' %} </div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Immunity">{% render 'quiz-slide-immunity-02' %} </div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Immunity">{% render 'quiz-slide-immunity-03' %} </div>
+
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Energy">{% render 'quiz-slide-energy-01' %} </div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Energy">{% render 'quiz-slide-energy-02' %} </div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Energy">{% render 'quiz-slide-energy-03' %} </div>
+
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Brain">{% render 'quiz-slide-brain-01' %} </div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Brain">{% render 'quiz-slide-brain-02' %} </div>
+                        
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Fitness">{% render 'quiz-slide-fitness-01' %} </div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Fitness">{% render 'quiz-slide-fitness-02' %} </div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Fitness">{% render 'quiz-slide-fitness-03' %} </div>
+                        
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Heart">{% render 'quiz-slide-heart-01' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Heart">{% render 'quiz-slide-heart-02' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Heart">{% render 'quiz-slide-heart-03' %}</div>
+                        
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Hair">{% render 'quiz-slide-hair-01' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Hair">{% render 'quiz-slide-hair-02' %}</div>
+                        
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Skin">{% render 'quiz-slide-skin-01' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Skin">{% render 'quiz-slide-skin-02' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Skin">{% render 'quiz-slide-skin-03' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Skin">{% render 'quiz-slide-skin-04' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Skin">{% render 'quiz-slide-skin-05' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Skin">{% render 'quiz-slide-skin-06' %}</div>
+
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Bones">{% render 'quiz-slide-bone-01' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Bones">{% render 'quiz-slide-bone-02' %}</div>
+                        
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Joints">{% render 'quiz-slide-joints-01' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Joints">{% render 'quiz-slide-joints-02' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="Joints">{% render 'quiz-slide-joints-03' %}</div>
+                        
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="">{% render 'quiz-slide-funfact-01' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="">{% render 'quiz-slide-3' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="">{% render 'quiz-slide-1' %}</div>
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="">{% render 'quiz-slide-6' %}</div>
+                        {%- endcomment -%}
+
+                        <div class="swiper-slide" data-show-slide="false" data-slide-category="">Product Recs here...</div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div id="devScoreWrapper">
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<style>
+div#shopify-section-header {
+    display: none;
+}
+div#shopify-section-footer {
+    display: none;
+}
+body.template-page.page-full-width {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#PageContainer {
+    width: 1200px;
+}
+</style>

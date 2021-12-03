@@ -1,0 +1,182 @@
+<div class="halo-section" data-section-id="{{ section.id }}"  data-section-type="list-collections-products-1">
+    {% for block in section.blocks %}
+
+        {% assign collection = collections[block.settings.collection] %}
+        {% assign product_limit = product_limit | default: block.settings.limit %}
+
+        {% assign column = column | default: block.settings.column %}
+        {% assign arrows = arrows | default: block.settings.carousel-arrows %}
+        {% assign dots = dots | default: block.settings.carousel-dots %}
+
+        <div class="about-information{% if block.settings.layout == 'right' %} about-information--right{% endif %}">
+            <div class="about-information__image"{% if block.settings.image != blank %} style="background-image: url({{ block.settings.image | img_url: 'master' }});"{% endif %}>
+                {% if block.settings.image == blank %}
+                    <div class="placeholder-background">
+                        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                {% endif %}
+                <div class="about-information__image--content text-center">
+                    {% if block.settings.title != blank %}
+                        <h2 class="hero__heading mega-title--medium">
+                            {{ block.settings.title | upcase }}
+                        </h2>
+                    {% endif %}
+                    {% if block.settings.text != blank %}
+                        <div class="hero__text">{{ block.settings.text }}</div>
+                    {% endif %}
+                    {% if block.settings.button != blank %}
+                        <div class="hero__button--wrapper">
+                            <a href="{{ block.settings.button_link }}" class="btn btn--primary hero__button" aria-label="link">
+                                {{ block.settings.button }}
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="about-information__content">
+                <div class="halo-row column-4"
+                    data-slick-pc data-slick='{
+                       "rows": 0,
+                        "rtl": false,
+                        "dots": {{ dots }},
+                        "arrows": {{ arrows }},
+                        "infinite": false,
+                        "adaptiveHeight": true,
+                        "slidesToShow": {{ column }},
+                        "slidesToScroll": 1,
+                        "prevArrow": "<div class=&apos;slick-prev slick-arrow slick-arrow--large&apos;><svg class=&apos;icon&apos;><use xlink:href=&apos;#icon-chevron-left&apos; /></svg></div>", 
+                        "nextArrow": "<div class=&apos;slick-next slick-arrow slick-arrow--large&apos;><svg class=&apos;icon&apos;><use xlink:href=&apos;#icon-chevron-right&apos; /></svg></div>"
+                    }'>
+                    {% for product in collection.products limit: product_limit %}
+                        <div class="halo-row__item">
+                            {% render 'product-card-grid' with product as product, serial: forloop.index %}
+                        </div>
+                    {% else %}
+                        {% for i in (1..product_limit) %}
+                            <div class="halo-row__item">
+                                <div class="product-card">
+                                    <div class="product-card__image">
+                                        <a class="product-card__link" href="#">
+                                            {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                                            {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                                        </a>
+                                    </div>
+                                    <div class="product-card__content">
+                                        <h4 class="product-card__title">{{ 'homepage.onboarding.product_title' | t }}</h4>
+                                        {% render 'product-price', variant: nil %}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% schema %}
+{
+    "name": "Blog Customs",
+    "settings": [
+    ],
+    "blocks": [
+        {
+            "type": "blog_infomation",
+            "name": "Blog Custom",
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Layout"
+                },
+                {
+                    "type": "select",
+                    "id": "layout",
+                    "label": "Layout",
+                    "default": "left",
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "Image Left"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Image Right"
+                        }
+                    ]
+                },
+                {
+                    "type": "header",
+                    "content": "Banner Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Heading",
+                    "default": "Banner with text overlay"
+                },
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": "Text",
+                    "default": "<p>Use overlay text to give your customers insight into your brand. Select image and text that relates to your style and story.</p>"
+                },
+                {
+                    "type": "text",
+                    "id": "button",
+                    "label": "Button"
+                },
+                {
+                    "type": "url",
+                    "id": "button_link",
+                    "label": "Button link"
+                },
+                {
+                    "type": "header",
+                    "content": "Content"
+                },
+                {
+                    "type": "collection",
+                    "id": "collection",
+                    "label": "Collection Show"
+                },
+                {
+                    "type": "range",
+                    "id": "column",
+                    "label": "Column show",
+                    "min": 1,
+                    "max": 6,
+                    "step": 1,
+                    "default": 2
+                },
+                {
+                    "type": "range",
+                    "id": "limit",
+                    "label": "Limit product",
+                    "min": 1,
+                    "max": 10,
+                    "step": 1,
+                    "default": 3
+                },
+                {
+                    "type": "checkbox",
+                    "id": "carousel-arrows",
+                    "label": "show arrows (Layout carousel)",
+                    "default": true
+                },
+                {
+                    "type": "checkbox",
+                    "id": "carousel-dots",
+                    "label": "show dots (Layout carousel)",
+                    "default": false
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

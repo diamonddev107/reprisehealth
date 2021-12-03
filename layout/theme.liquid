@@ -1,0 +1,199 @@
+<!doctype html>
+<html class="no-js" lang="{{ shop.locale }}">
+<head>
+<script
+  async type="text/javascript"
+  src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=VfZXpR"
+></script>
+  {% comment %} Theme: Gymuso-1.0.0-sections-ready {% endcomment %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="{{ settings.color_button }}">
+    <meta name="Description" content="Gymuso Shopify theme developed by HaloTheme">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+{%- comment -%}
+
+// Replace "PUBLIC_API_KEY" with your real API key.
+<script
+  async type="text/javascript"
+  src="//static.klaviyo.com/onsite/js/klaviyo.js?company_id=VfZXpR"
+></script>
+
+
+{%- endcomment -%}
+
+    {%- if settings.favicon != blank -%}
+        <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+    {%- endif -%}
+
+    {%- capture seo_title -%}
+        {%- if request.page_type == 'search' and search.performed == true -%}
+            {{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+        {%- else -%}
+            {{ page_title }}
+        {%- endif -%}
+        {%- if current_tags -%}
+            {%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+        {%- endif -%}
+        {%- if current_page != 1 -%}
+            &ndash; {{ 'general.meta.page' | t: page: current_page }}
+        {%- endif -%}
+        {%- assign escaped_page_title = page_title | escape -%}
+        {%- unless escaped_page_title contains shop.name -%}
+            &ndash; {{ shop.name }}
+        {%- endunless -%}
+    {%- endcapture -%}
+    <title>{{ seo_title | strip }}</title>
+
+    {%- if page_description -%}
+        <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {% render 'social-meta-tags' %}
+
+    {% render 'head-script' %}
+
+    {{ content_for_header }}
+</head>
+
+<body class="template-{{ request.page_type | handle }} {{ settings.body_layout }}">
+    <svg data-src="{{ 'icon-gymuso.svg' | asset_url }}" class="icons-svg-sprite"></svg>
+
+    {% section 'header' %}
+
+    <div class="page-container" id="PageContainer">
+        <main class="main-content js-focus-hidden" id="MainContent" role="main" tabindex="-1">
+            {{ content_for_layout }}
+            <div class="clearfix"></div>
+        </main>
+    </div>
+    
+    {% section 'footer' %}
+
+    {% render 'modal-popup' %}
+
+    {% assign pagename = request.page_type | handle %}
+
+    <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
+    <script src="{{ 'vendor.min.js' | asset_url }}" defer="defer"></script>
+    {% if pagename == 'product' %}
+        <script src="{{ 'resizeSensor.js' | asset_url }}" defer="defer"></script>
+        <script src="{{ 'sticky-sidebar.min.js' | asset_url }}" defer="defer"></script>
+    {% endif %}
+    <script src="{{ 'theme.min.js' | asset_url }}" defer="defer"></script>
+
+    {% render 'recently-viewed-product-popup'%}
+
+    {% if settings.enable_language %}
+        {% render 'language-converter' %}
+    {% endif %}
+
+    {% include 'new-currency' %}
+<script>
+
+$(document).ready(function(){
+    var data;
+        $.ajax({
+        type: "GET",  
+        url: '{{ shop.metafields.custom_fields["csv_test"] }}',
+        dataType: "text",       
+        success: function(response)  
+        {
+            var array = CSVToArray(response);
+            var productsRow = array[0];
+            var numberOfProducts=productsRow.length - 3;
+            var labelsRemoved = productsRow.splice(0, 3);
+            
+            //console.log({productsRow});
+            //console.log({numberOfProducts});
+
+            var scoreWrapper = $('#devScoreWrapper');
+
+            productsRow.forEach((item, index)=>{
+                var htmlProduct = `<div class-"product-score-wrapper"><p><span>${item}</span>: <span data-total-score-${item} data-total-score="0">0</span></p></div>`;
+                scoreWrapper.append(htmlProduct);
+            })
+
+            array.forEach((item, index)=>{
+                var thisQuestion = item[0];
+                var thisType = item[1];
+                var thisAnswer = item[2];
+
+                var dynamicClassAdd = "found-question-" + thisQuestion;
+                var questionElement = $(`div[data-unique-slide-id=${thisQuestion}]`);
+                questionElement.addClass(dynamicClassAdd);
+
+                var dynamicAnswerClassAdd = "found-answer-" + thisAnswer;
+                var answerElement = questionElement.find(`[data-answer='${thisAnswer}']`);
+                answerElement.addClass(dynamicAnswerClassAdd);
+
+                productsRow.forEach((pitem, pindex)=>{
+                    var productIndex = pindex + 3;
+                    var productAnswerScoreValue = item[productIndex];
+                    
+                    //console.log(thisQuestion, thisAnswer, pitem, productAnswerScoreValue);
+                    var dataLabel = "data-score-" + pitem;
+                    answerElement.attr(dataLabel,productAnswerScoreValue); 
+                })
+            })
+        }   
+    });
+
+  function CSVToArray(strData, strDelimiter) {
+    // Check to see if the delimiter is defined. If not,
+    // then default to comma.
+    strDelimiter = (strDelimiter || ",");
+    // Create a regular expression to parse the CSV values.
+    var objPattern = new RegExp((
+    // Delimiters.
+    "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+    // Quoted fields.
+    "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+    // Standard fields.
+    "([^\"\\" + strDelimiter + "\\r\\n]*))"), "gi");
+    // Create an array to hold our data. Give the array
+    // a default empty first row.
+    var arrData = [[]];
+    // Create an array to hold our individual pattern
+    // matching groups.
+    var arrMatches = null;
+    // Keep looping over the regular expression matches
+    // until we can no longer find a match.
+    while (arrMatches = objPattern.exec(strData)) {
+        // Get the delimiter that was found.
+        var strMatchedDelimiter = arrMatches[1];
+        // Check to see if the given delimiter has a length
+        // (is not the start of string) and if it matches
+        // field delimiter. If id does not, then we know
+        // that this delimiter is a row delimiter.
+        if (strMatchedDelimiter.length && (strMatchedDelimiter != strDelimiter)) {
+            // Since we have reached a new row of data,
+            // add an empty row to our data array.
+            arrData.push([]);
+        }
+        // Now that we have our delimiter out of the way,
+        // let's check to see which kind of value we
+        // captured (quoted or unquoted).
+        if (arrMatches[2]) {
+            // We found a quoted value. When we capture
+            // this value, unescape any double quotes.
+            var strMatchedValue = arrMatches[2].replace(
+            new RegExp("\"\"", "g"), "\"");
+        } else {
+            // We found a non-quoted value.
+            var strMatchedValue = arrMatches[3];
+        }
+        // Now that we have our value string, let's add
+        // it to the data array.
+        arrData[arrData.length - 1].push(strMatchedValue);
+    }
+    // Return the parsed data.
+    return (arrData);
+}
+
+});
+</script>
+</body>
+</html>

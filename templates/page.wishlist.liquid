@@ -1,0 +1,14 @@
+{% if settings.breadcrumb_layout == 'top' %}
+    {% render 'breadcrumb' %}
+{% endif %}
+<div class="page page-wishlist">
+	<div class="container">
+        <div class="section-header text-center">
+            <h1 class="title">{{ page_title | upcase }}</h1>
+        </div>
+        {% section 'wishlist-template' %}
+	</div>
+</div>
+{% if settings.breadcrumb_layout == 'bottom' %}
+    {% render 'breadcrumb' %}
+{% endif %}

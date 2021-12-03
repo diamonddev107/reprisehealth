@@ -1,0 +1,13 @@
+{% comment %}
+    The contents of the collection.liquid template can be found in /sections/collection-template.liquid
+{% endcomment %}
+
+{% section 'collection-hero' %}
+
+{% section 'collection-template' %}
+
+{% section 'list-collections-products-2' %}
+
+{% if settings.breadcrumb_layout == 'bottom' %}
+    {% render 'breadcrumb' %}
+{% endif %}

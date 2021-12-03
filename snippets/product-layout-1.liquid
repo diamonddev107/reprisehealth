@@ -1,0 +1,19 @@
+{% if settings.breadcrumb_layout == 'top' %}
+    {% render 'breadcrumb' %}
+{% endif %}
+<div class="page page-productDetail">
+    <div class="container">
+        {% section 'product-template' %}
+
+    	{% section 'tab-vertical' %}
+    </div>
+
+    {% section 'product-add-more' %}
+
+    {% section 'product-recommendations' %}
+
+    {% section 'recently-viewed-products' %}
+</div>
+{% if settings.breadcrumb_layout == 'bottom' %}
+    {% render 'breadcrumb' %}
+{% endif %}

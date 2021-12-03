@@ -1,0 +1,312 @@
+{% assign column = column | default: section.settings.column %}
+{% assign limit = limit | default: section.settings.limit %}
+
+{% if settings.breadcrumb_layout == 'top' %}
+    {% render 'breadcrumb' %}
+{% endif %}
+
+{% if current_tags == blank %}
+    {% assign has_refined = false %}
+{% else %}
+    {% assign has_refined = true %} 
+{% endif %}
+
+{% paginate collection.products by limit %}
+
+<div id="page-collection" class="page page-collection" data-section-id="{{ section.id }}" data-section-type="collection-template">
+    <div id="page-collection__sidebar" class="page-collection__sidebar page-sidebar">
+        <div class="page-sidebar__close">
+            <a href="javascript:void(0)" class="close">
+                <span class="icon">&#215;</span>
+                <span class="text">{{ 'general.accessibility.close_modal' | t }}</span>
+            </a>
+        </div>
+        <div class="page-sidebar__content">
+        </div>
+    </div>
+    <div class="container">
+        <div class="section-header text-center">
+            <h1 class="title">
+                {{ collection.title | upcase }}
+            </h1>
+            {% if collection.description != blank %}
+                <p>{{ collection.description }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Filter and short -->
+    {% if section.settings.enable_filter or section.settings.enable_sort %}
+    <div class="collection-sort-filter">
+        <div class="container">
+            {% if section.settings.enable_filter %}
+                <div id="collection-filter" class="collection-filter__item text-left">
+                    <div id="filters-toolbar" class="filters-toolbar__item-child" data-url="{{ collection.url }}">
+                        <label class="filters-toolbar__label select-label" for="SortBy">
+                            <svg class="icon"><use xlink:href="#icon-filter" /></svg>
+                            <span class="text">{{ 'collections.filters.title_tags' | t }}</span>
+                        </label>
+                        <div>
+                            <div class="filters-toolbar__refined" {% if has_refined == false %} style="display:none"{% endif %}>
+                                <div class="filters-toolbar__refined-title">
+                                    <h3 class="title">{{ 'collections.filters.refined_by' | t }}</h3>
+                                    <a href="javascript:void(0)" class="clear clear-all" {% if has_refined == false %}style="display:none"{% endif %}>
+                                        {{ 'collections.filters.clear_all' | t }}
+                                    </a>
+                                </div>
+                                <div class="filters-toolbar__refined-content">
+                                    <ul class="refined">    
+                                        {% for t in current_tags %}
+                                            {% assign tag = t | strip %}
+                                            {% assign tag_value = tag | handleize %}
+                                            <li>
+                                                <input type="checkbox" value="{{ tag_value }}" {% if current_tags contains tag %}checked{% endif %}/>
+                                                <a href="javascript:void(0)" class="selected-tag">{{ tag}}&nbsp; <span>&#215;</span></a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            {% for block in section.blocks %}
+                                {% if block.type == 'filter_text' %}
+                                    <div class="filters-toolbar__input-wrapper select-group" data-select="Filter">
+                                        <div class="filters-toolbar__input-title">
+                                            <h3 class="title">{{ block.settings.title }}</h3>
+                                            <svg class="icon"><use xlink:href="#icon-chevron-down" /></svg>
+                                        </div>
+                                        <div class="filters-toolbar__input-content">
+                                            <div class="filters-toolbar__input-list text">
+                                                {% assign tags = block.settings.list_tags | split: ',' %}
+                                                {% for t in tags %}
+                                                    {% assign tag = t | strip %}
+                                                    {% assign tag_value = tag | handleize %}
+                                                    {% assign current_tags_value = current_tags | handleize %}
+                                                    {% if collection.tags contains tag %}
+                                                        <div data-filter data-value="{{ tag_value }}"{% if current_tags contains tag %} class="active"{% endif %}>{{ tag }}</div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                {% if block.type == 'filter_color' %}
+                                    <div class="filters-toolbar__input-wrapper select-group" data-select="Filter">
+                                        <div class="filters-toolbar__input-title">
+                                            <h3 class="title">{{ block.settings.title }}</h3>
+                                            <svg class="icon"><use xlink:href="#icon-chevron-down" /></svg>
+                                        </div>
+                                        <div class="filters-toolbar__input-content">
+                                            <div class="filters-toolbar__input-list color">
+                                                {% assign tags = block.settings.list_tags | split: ',' %}
+                                                {% for t in tags %}
+                                                    {% assign tag = t | strip %}
+                                                    {% assign tag_value = tag | handleize %}
+                                                    {% assign current_tags_value = current_tags | handleize %}
+                                                    {% if collection.tags contains tag %}
+                                                        <div data-filter data-value="{{ tag_value }}"{% if current_tags contains tag %} class="active"{% endif %} style="background-color: {{ tag_value }}">{{ tag }}</div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if section.settings.enable_sort %}
+                <div class="collection-filter__item text-right">
+                    <div class="filters-toolbar__item-child">
+                        {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+                        <label class="filters-toolbar__label select-label" for="SortBy">
+                            <svg class="icon"><use xlink:href="#icon-sort" /></svg>
+                            <span class="text">{{ 'collections.sorting.title' | t }}</span>
+                        </label>
+                        <div class="filters-toolbar__input-wrapper select-group text-left" data-select="SortBy">
+                            <div class="filters-toolbar__input-title">
+                                <h3 class="title"></h3>
+                                <svg class="icon"><use xlink:href="#icon-chevron-down" /></svg>
+                            </div>
+                            <div class="filters-toolbar__input-content">
+                                <div class="filters-toolbar__input-list text">
+                                    {% for option in collection.sort_options %}
+                                        <div data-sortby data-value="{{ option.value }}"{% if option.value == sort_by %} class="active"{% endif %}>{{ option.name }}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <!-- sidebar mobile icon -->
+            <div class="sidebar_mobile_wrapper">
+                <div class="sidebar_mobile">
+                    <span class='text'>{{ 'general.sidebar.title' | t }}:</span>
+                    <svg class="icon"><use xlink:href="#icon-sidebar" /></svg>
+                </div>
+            </div>
+            <!-- end sidebar mobile icon -->
+        </div>
+    </div>
+    {% endif %}
+    <!-- End Filter and Short -->
+    <div class="container">
+        <div id="collection" class="halo-column column-{{ column }}" {% if section.settings.pagination_type == 'infinite_scroll' %}data-collection="infiniteScroll"{% endif %}>
+            {% for product in collection.products %}
+                <div class="halo-column__item">
+                    {% render 'product-card-grid', product: product, serial: forloop.index, compare: settings.enable_compare_product %}
+                </div>
+            {% else %}
+                {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+                    {% for i in (1..limit) %}
+                        <div class="halo-row__item">
+                            <div class="product-card">
+                                <div class="product-card__image">
+                                    <a class="product-card__link" href="#">
+                                        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                                        {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                                    </a>
+                                </div>
+                                <div class="product-card__content">
+                                    <h4 class="product-card__title">{{ 'homepage.onboarding.product_title' | t }}</h4>
+                                    {% render 'product-price', variant: nil %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {%- assign is_empty_collection = true -%}
+                {% endif %}
+            {% endfor %}
+        </div>
+        <!-- Pagination -->
+        {% if section.settings.pagination_type == 'infinite_scroll' %}
+            {% if paginate.next.is_link %}
+                <div class="infinite-scrolling mt-5 text-center">
+                    <a class="btn btn--primary btn--large" href="{{ paginate.next.url }}">
+                        show more
+                    </a>
+                </div>
+            {% endif %}
+        {% else %}
+            {% if paginate.pages > 1 %}
+                {% render 'pagination-2', paginate: paginate %}
+            {% endif %}
+        {% endif %}
+        <!-- End Pagination -->
+    </div>
+</div>
+
+{% if settings.enable_compare_product %}
+    <div class="compare-link">
+        <a class="btn btn--primary btn--compare" href="javascript:void(0)" data-toggle="modal" data-target="#compare" data-compare-selected>
+            <span class="compare-text">{{ 'general.compare.title' | t }}</span> (<span class="compare-countPill" data-compare-count></span>)
+        </a>
+    </div>
+    {% render 'compare-products-popup' %}
+{% endif %}
+
+{% endpaginate %}
+
+
+{% schema %}
+{
+    "name": "Collection Content",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Layout"
+        },
+        {
+            "type": "range",
+            "id": "column",
+            "label": "Column",
+            "default": 4,
+            "min": 1,
+            "max": 6,
+            "step": 1
+        },
+        {
+            "type": "range",
+            "id": "limit",
+            "label": "Limits product per page",
+            "default": 12,
+            "min": 4,
+            "max": 48,
+            "step": 4
+        },
+        {
+            "type": "header",
+            "content": "Filter & Sorting"
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_filter",
+            "label": "Enable filter",
+            "default": true
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_sort",
+            "label": "Enable sorting",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Pagination"
+        },
+        {
+            "type": "radio",
+            "id": "pagination_type",
+            "label": "Select Pagination to show",
+            "default": "pagination",
+            "options": [
+                {
+                    "value": "pagination",
+                    "label": "Pagination"
+                },
+                {
+                    "value": "infinite_scroll",
+                    "label": "Show more"
+                }
+            ]
+        }
+    ],
+    "blocks": [
+        {
+            "type": "filter_text",
+            "name": "Filter Text",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Heading"
+                },
+                {
+                    "type": "textarea",
+                    "id": "list_tags",
+                    "label": "List Tags",
+                    "info": "Separate by a comma, i.e \"Dincidunteros, Nectellus, Solutmades\"."
+                }
+            ]
+        },
+        {
+            "type": "filter_color",
+            "name": "Filter Color",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Heading"
+                },
+                {
+                    "type": "textarea",
+                    "id": "list_tags",
+                    "label": "List Tags",
+                    "info": "Separate by a comma, i.e \"Dincidunteros, Nectellus, Solutmades\"."
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

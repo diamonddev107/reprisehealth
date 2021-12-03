@@ -1,0 +1,53 @@
+$large: 1025px;
+$large-below: 1024px;
+$medium: 768px;
+$medium-below: 767px;
+
+@font-face {
+  font-family: "newyork";
+  src: url("{{ 'NewYork.otf' | asset_url }}");
+}
+
+.btn--kleva:not([href]) {
+  border: 2px solid;
+  border-radius: {{ settings.quiz_button_corner_radius }}px;
+  border-color: {{ settings.quiz_button_border }};
+  background-color: {{ settings.quiz_button_background }};
+  color: {{ settings.quiz_button_text }}!important;
+  padding-top: {{ settings.quiz_button_padding_top }}px;
+  padding-bottom: {{ settings.quiz_button_padding_top }}px;
+  padding-left: {{ settings.quiz_button_padding_left }}px;
+  padding-right: {{ settings.quiz_button_padding_left }}px;
+  min-width: {{ settings.quiz_button_width }}px;
+  &.btn--quiz-active {
+    border-color: {{ settings.quiz_button_border_active }};
+    background-color: {{ settings.quiz_button_background_active }};
+    color: {{ settings.quiz_button_text_active }}!important;
+  }
+}
+.question-heading {
+  font-size: {{ settings.quiz_desktop_heading }}px;
+  @media (max-width: $large-below) {
+    font-size: {{ settings.quiz_mobile_heading }}px;
+  }
+}
+.slide-answer-wrapper {
+  max-width: {{ settings.quiz_answers_wrapper_width }}px;
+}
+.btn--kleva {
+  font-size: {{ settings.quiz_desktop_answer }}px;
+  @media (max-width: $large-below) {
+    font-size: {{ settings.quiz_mobile_answer }}px;
+  }
+}
+
+input#userName {
+}
+.single-text-input {
+  input[type="submit"] {
+    background-image: url('{{ "buttonCircleArrow.png" | asset_img_url }}');
+  }
+  .inline-continue {
+    background-image: url('{{ "buttonCircleArrow.png" | asset_img_url }}');
+  }
+}

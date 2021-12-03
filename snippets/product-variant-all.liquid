@@ -1,0 +1,135 @@
+<div class="product-card__variant--popup--content">
+    {% form 'product', product, data-productid: product.id, class:form_classes, novalidate: 'novalidate', data-product-form2: '' %}
+        {% for option in product.options_with_values %}
+            {% assign option_name = option.name | downcase %}
+            {% assign option_color_swatch = settings.option_color_swatch | downcase %}
+            {% assign option_size_swatch = settings.option_size_swatch | downcase %}
+            {% assign option_material_swatch = settings.option_material_swatch | downcase %}
+
+            {% if option_name == option_size_swatch %}
+                <div class="selector-wrapper selector-wrapper-{{forloop.index}} swatch js product-form__item">
+                    <label class="form-label {% if option.name == 'default' %}label--hidden{% endif %}">
+                        {{ option.name }}: <span class="label-value-{{ forloop.index }}">{{ option.selected_value }}</span>
+                    </label>
+                    {% assign option_index0 = forloop.index0 %}
+                    {% assign option_index = forloop.index %}
+                    {% assign values = '' %}
+
+                    {% for variant in product.variants %}
+                        {% assign value = variant.options[option_index0] %}
+                        {% unless values contains value %}
+                            {% assign values = values | join: ';' %}
+                            {% assign values = values | append: ';' | append: value %}
+                            {% assign values = values | split: ';' %}
+                            {% assign value_2 = value | remove: " " | downcase %}
+                            <div class="swatch-element size {{ value_2 }} {% unless variant.available %}soldout{% endunless %}">
+                                <input {% unless variant.available %}disabled{% endunless %} class="single-option-selector single-option-selector-quick single-option-selector-{{ section.id }}" type="radio" name="SingleOptionSelector-{{ option_index0 }}-{{ product.id }}-{{ section.id }}" data-index="option{{ option_index }}" value="{{ value | escape }}" {% if option.selected_value == value %} checked="checked"{% endif %} id="SingleOptionSelector{{ option_index0 }}-{{ value }}-{{ product.id }}-{{ section.id }}">
+                                <label data-toggle="tooltip" data-placement="top" title="{{ value }}" for="SingleOptionSelector{{ option_index0 }}-{{ value }}-{{ product.id }}-{{ section.id }}">{{ value }}</label>
+                            </div>
+                        {% endunless %}
+                    {% endfor %}
+                </div>
+            {% elsif option_name == option_color_swatch %}
+                <div class="selector-wrapper selector-wrapper-{{forloop.index}} swatch js product-form__item">
+                    <label class="form-label {% if option.name == 'default' %}label--hidden{% endif %}">
+                        {{ option.name }}: <span class="label-value-{{ forloop.index }}">{{ option.selected_value }}</span>
+                    </label>
+                    {% assign option_index0 = forloop.index0 %}
+                    {% assign option_index = forloop.index %}
+                    {% assign values = '' %}
+                    {% for variant in product.variants %}
+                        {% assign value = variant.options[option_index0] %}
+                        {% unless values contains value %}
+                            {% assign values = values | join: ';' %}
+                            {% assign values = values | append: ';' | append: value %}
+                            {% assign values = values | split: ';' %}
+                            {% assign value_2 = value | remove: " " | downcase %}
+                            <div class="swatch-element color {{ value_2 }} {% unless variant.available %}soldout{% endunless %}">
+                                <input {% unless variant.available %}disabled{% endunless %} class="single-option-selector single-option-selector-quick single-option-selector-{{ section.id }}" type="radio" name="SingleOptionSelector-{{ option_index0 }}-{{ product.id }}-{{ section.id }}" data-index="option{{ option_index }}" value="{{ value | escape }}" {% if option.selected_value == value %} checked="checked"{% endif %} id="SingleOptionSelector{{ option_index0 }}-{{ value }}-{{ product.id }}-{{ section.id }}">
+                                <label data-toggle="tooltip" data-placement="top" title="{{ value }}" for="SingleOptionSelector{{ option_index0 }}-{{ value }}-{{ product.id }}-{{ section.id }}"{% if settings.show_product_variant_img %}{% if variant.image != blank %} data-imge="{{ variant.image.src | product_img_url: 'compact' }}"{% else %} style="background-color: {{ value_2 }}; background-image: url({{ value_2 | handle | append: '.png' | file_url }})"{% endif %}{% else %}{% if variant.image != blank %} data-imge="{{ variant.image.src | product_img_url: 'compact' }}"{% else %} style="background-color: {{ value_2 }};"{% endif %}{% endif %}>{% if variant.image != blank %}<img class="lazyload" data-srcset="{{ variant.image.src | img_url: '34x34' }}" alt="" data-image>{% endif %}</label>
+                            </div>
+                        {% endunless %}
+                    {% endfor %}
+                </div>
+            {% elsif option_name == option_material_swatch %}
+                <div class="selector-wrapper selector-wrapper-{{forloop.index}} swatch js product-form__item">
+                    <label class="form-label {% if option.name == 'default' %}label--hidden{% endif %}">
+                        {{ option.name }}: <span class="label-value-{{ forloop.index }}">{{ option.selected_value }}</span>
+                    </label>
+                    {% assign option_index0 = forloop.index0 %}
+                    {% assign option_index = forloop.index %}
+                    {% assign values = '' %}
+
+                    {% for variant in product.variants %}
+                        {% assign value = variant.options[option_index0] %}
+                        {% unless values contains value %}
+                            {% assign values = values | join: ';' %}
+                            {% assign values = values | append: ';' | append: value %}
+                            {% assign values = values | split: ';' %}
+                            {% assign value_2 = value | remove: " " | downcase %}
+                            <div class="swatch-element size {{ value_2 }} {% unless variant.available %}soldout{% endunless %}">
+                                <input {% unless variant.available %}disabled{% endunless %} class="single-option-selector single-option-selector-quick single-option-selector-{{ section.id }}" type="radio" name="SingleOptionSelector-{{ option_index0 }}-{{ product.id }}-{{ section.id }}" data-index="option{{ option_index }}" value="{{ value | escape }}" {% if option.selected_value == value %} checked="checked"{% endif %} id="SingleOptionSelector{{ option_index0 }}-{{ value }}-{{ product.id }}-{{ section.id }}">
+                                <label data-toggle="tooltip" data-placement="top" title="{{ value }}" for="SingleOptionSelector{{ option_index0 }}-{{ value }}-{{ product.id }}-{{ section.id }}">{{ value }}</label>
+                            </div>
+                        {% endunless %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="selector-wrapper js product-form__item">
+                    <label class="form-label {% if option.name == 'default' %}label--hidden{% endif %}">
+                        {{ option.name }}: <span class="label-value-{{ forloop.index }}">{{ option.selected_value }}</span>
+                    </label>
+                    <select class="single-option-selector single-option-selector-quick single-option-selector-{{ section.id }} product-form__input form-control" id="SingleOptionSelector-{{ forloop.index0 }}-{{ product.id }}-{{ section.id }}" data-index="option{{ forloop.index }}">
+                        {% for value in option.values %}
+                            <option value="{{ value | escape }}"{% if option.selected_value == value %} selected="selected"{% endif %}>{{ value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% endif %}
+        {% endfor %}
+
+        <select name="id" data-productid="{{ product.id }}" id="ProductSelect-{{ product.id }}-{{ section.id }}" class="product-form__variants no-js">
+            {% for variant in product.variants %}
+                {% if variant.available %}
+                    <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} value="{{ variant.id }}">
+                        {{ variant.title }}
+                    </option>
+                {% else %}
+                    <option disabled="disabled">{{ variant.title }} - {{ 'products.product.sold_out' | t }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <div class="product-form__error-message-wrapper product-form__error-message-wrapper--hidden"
+            data-error-message-wrapper role="alert">
+            <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+            <svg class="icon"><use xlink:href="#icon-error" /></svg>
+            <span class="product-form__error-message" data-error-message>{{ 'products.product.quantity_minimum_message' | t }}</span>
+        </div>
+
+        <div class="product-card__button2">
+            <input type="hidden" name="quantity" value="1" />
+            <button type="submit" name="add"
+                {% unless current_variant.available %} aria-disabled="true"{% endunless %}
+                aria-label="{% unless current_variant.available %}{{ 'products.product.sold_out' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endunless %}"
+                class="btn btn--primary product-card__btn"
+                data-add-to-cart>
+                <span data-add-to-cart-text>
+                    {% unless current_variant.available %}
+                        {{ 'products.product.sold_out' | t }}
+                    {% else %}
+                        {% if current_variant.inventory_quantity > 0 %}
+                            {{ 'products.product.add_to_cart' | t }}
+                        {% else %}
+                            {{ 'products.product.pre_order' | t }}
+                        {% endif %}
+                    {% endunless %}
+                </span>
+                <span class="hide" data-loader>
+                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-spinner" viewBox="0 0 20 20"><path d="M7.229 1.173a9.25 9.25 0 1 0 11.655 11.412 1.25 1.25 0 1 0-2.4-.698 6.75 6.75 0 1 1-8.506-8.329 1.25 1.25 0 1 0-.75-2.385z" fill="#919EAB"></path></svg>
+                </span>
+            </button>
+        </div>
+        
+    {% endform %}
+</div>

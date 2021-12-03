@@ -1,0 +1,19 @@
+<div class="slide-inner">
+  <div class="slide-top">
+    <div class="slide-header">l
+      <div class="question-heading slide-question slide-question-small text-center">How do you feel at the end of a Stressful Day?</div>
+    </div>
+  </div>
+  <div class="slide-bottom">
+    <div class="slide-answer-wrapper">
+      {% assign button_label = "Worked Up" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "Drained" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %}
+    </div>
+    <div class="slide-continue-wrapper">
+      <p class="nothing-selected text-center">Please select an answer before continuing :)</p>
+      <a class="btn--kleva btn--quiz-continue btn--quiz-continue-inactive">Next Question</a>
+    </div>
+  </div>
+</div>

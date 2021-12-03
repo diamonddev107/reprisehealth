@@ -1,0 +1,122 @@
+<!-- Language -->
+<script>
+    var theme = {
+        breakpoints: {
+            medium: 768,
+            large: 990,
+            widescreen: 1400
+        },
+        strings: {
+            addToCart: {{ 'products.product.add_to_cart' | t | json }},
+            preOrder: {{ 'products.product.pre_order' | t | json }},
+            soldOut: {{ 'products.product.sold_out' | t | json }},
+            select_options: {{ 'products.product.select_options' | t | json }},
+            goToProduct: {{ 'products.product.go_to_product' | t | json}},
+            unavailable: {{ 'products.product.unavailable' | t | json }},
+            regularPrice: {{ 'products.product.regular_price' | t | json }},
+            salePrice: {{ 'products.product.sale_price' | t | json }},
+            sale: {{ 'products.product.on_sale' | t | json }},
+            showMore: {{ 'general.filters.show_more' | t | json }},
+            showLess: {{ 'general.filters.show_less' | t | json }},
+            noMore: {{ 'general.filters.no_more' | t | json }},
+            addressError: {{ 'sections.map.address_error' | t | json }},
+            addressNoResults: {{ 'sections.map.address_no_results' | t | json }},
+            addressQueryLimit: {{ 'sections.map.address_query_limit_html' | t | json }},
+            authError: {{ 'sections.map.auth_error_html' | t | json }},
+            newWindow: {{ 'general.accessibility.link_messages.new_window' | t | json }},
+            external: {{ 'general.accessibility.link_messages.external' | t | json }},
+            newWindowExternal: {{ 'general.accessibility.link_messages.new_window_and_external' | t | json }},
+            removeLabel: {{ 'cart.label.remove' | t: product: '[product]' | json }},
+            update: {{ 'cart.label.update' | t | json }},
+            remove: {{ 'cart.general.remove' | t | json }},
+            quantity: {{ 'cart.label.quantity' | t | json }},
+            discountedTotal: {{ 'cart.label.discounted_total' | t | json }},
+            regularTotal: {{ 'cart.label.regular_total' | t | json }},
+            priceColumn: {{ 'cart.label.price_column' | t | json }},
+            quantityMinimumMessage: {{ 'products.product.quantity_minimum_message' | t | json }},
+            cartError: {{ 'cart.general.cart_error' | t | json }},
+            cartErrorMaximum: {{ 'cart.general.cart_error_maximum' | t: quantity: '[quantity]' | json }},
+            removedItemMessage: {{ 'cart.general.removed_item_html' | t: quantity: '[quantity]', link: '[link]' | json }},
+            unitPrice: {{ 'products.product.unit_price_label' | t | json }},
+            unitPriceSeparator: {{ 'general.accessibility.unit_price_separator' | t | json }},
+            oneCartCount: {{ 'cart.popup.cart_count' | t: count: 1 | json }},
+            otherCartCount: {{ 'cart.popup.cart_count' | t: count: '[count]' | json }},
+            quantityLabel: {{ 'cart.popup.quantity_label' | t: quantity_count: '[count]' | json }},
+            freeShipping: {{ 'cart.shipping.free_shipping' | t | json }},
+            shippingMessage: {{ 'cart.shipping.shipping_message' | t: price: '[price]' | json }},
+            in_stock: {{ 'products.product.in_stock' | t | json }},
+            out_of_stock: {{ 'products.product.out_of_stock' | t | json }},
+            previous: {{ 'general.pagination.previous' | t | json }},
+            next: {{ 'general.pagination.next' | t | json }},
+            priceFreeShipping: {{ settings.shipping_price }}
+
+        },
+        moneyFormat: {{ shop.money_format | json }},
+        moneyFormatWithCurrency: {{ shop.money_with_currency_format | json }}
+    }
+    window.shop_currency = "{{ shop.currency }}";
+    window.show_multiple_currencies = {{ settings.enable_multiple_currencies }};
+    window.show_auto_currency = {{ settings.enable_auto_currency }};
+    window.swatch_recently = "{{settings.option_color_swatch | downcase}}";
+    window.router = "{{ routes.cart_url | split: '/cart' | first}}";
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+</script>
+
+{% if request.page_type contains 'customers/' %}
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+{% endif %}
+
+<!-- css style -->
+{{ 'vendor.min.css' | asset_url | stylesheet_tag }}
+{{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+
+
+{% assign pagename = request.page_type | handle %}
+
+{% if pagename == 'blog' %}
+    {{ 'theme-blog.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{% if pagename == 'article' %}
+    {{ 'theme-article.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{% if pagename == 'list-collections' %}
+    {{ 'theme-collections-list.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{% if pagename == 'collection' %}
+    {{ 'theme-collection.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{% if pagename == 'cart' %}
+    {{ 'theme-cart.css' | asset_url | stylesheet_tag }}
+{% endif %}
+
+{% if pagename == 'product' %}
+    {{ 'theme-product.scss' | asset_url | stylesheet_tag }}
+    {{ 'jquery.min.js' | asset_url | script_tag }}
+{% endif %}
+
+{% if pagename == 'page' %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    {{ 'theme-page.css' | asset_url | stylesheet_tag }}
+    {{ 'quiz-liquid.scss.css' | asset_url | stylesheet_tag }}
+    {{ 'quiz.scss.css' | asset_url | stylesheet_tag }}
+    
+    {{ 'jquery.min.js' | asset_url | script_tag }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+     <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    {{ 'quiz.js' | asset_url | script_tag }}
+    {{ 'quiz-liquid.js' | asset_url | script_tag }}
+
+{% endif %}
+
+{% if pagename == 'customers-register' or pagename == 'customers-login' or pagename == 'customers-account' or pagename == 'customers-addresses' or pagename == 'customers-activate_account' or pagename == 'customers-order' or pagename == 'customers-reset_password' %}
+    {{ 'theme-login.css' | asset_url | stylesheet_tag }}
+{% endif %}
+

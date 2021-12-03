@@ -1,0 +1,7 @@
+{% if show_product_countdown %}
+    <div class="product-card__countdowns countdown">
+        {% if product.metafields.halo['countdown'] %}
+            <div id="product-countdown-{{ product.id }}" class="product-card__countdown" data-countdown-card data-countdown-value="{{ product.metafields.halo['countdown'] }}"></div>
+        {% endif %}
+    </div>
+{% endif %}

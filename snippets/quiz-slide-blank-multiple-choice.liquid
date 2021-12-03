@@ -1,0 +1,25 @@
+<div class="slide-inner">
+  <div class="slide-top">
+    <div class="slide-header">
+      <div class="question-heading slide-question slide-question-small text-center">{{ item["question_text"] }}</div>
+    </div>
+  </div>
+  <div class="slide-bottom">
+    <div class="slide-answer-wrapper">
+      {% for answer_choices_item in item["answer_choices"] %}
+        {% assign skipValues = "" %}
+        {% if answer_choices_item["deactivated_questions"] != blank %}
+          {% assign skipValues = answer_choices_item["deactivated_questions"] %}
+        {% endif %}
+        {% assign button_label = answer_choices_item['answer_text'] %}
+        {% render 'quiz-multiple-choice-answer-button', button_text: button_label, skipValues: skipValues %} 
+      {% endfor %}
+    </div>
+    {%- comment -%}
+    <div class="slide-continue-wrapper">
+      <p class="nothing-selected text-center">Please select at least 1 area of interest before continuing :)</p>
+      <a class="btn--kleva btn--quiz-continue btn--quiz-continue-inactive">Continue</a>
+    </div>
+    {%- endcomment -%}
+  </div>
+</div>

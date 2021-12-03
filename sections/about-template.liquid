@@ -1,0 +1,88 @@
+{% if settings.breadcrumb_layout == 'top' %}
+    {% render 'breadcrumb' %}
+{% endif %}
+
+<div class="page page-about">
+    {% if page.content.size > 0 %}
+        <div class="rte mt-5 mb-5">
+            {{ page.content }}
+        </div>
+    {% endif %}
+    {% for block in section.blocks %}
+        <div class="about-information{% if block.settings.layout == 'right' %} about-information--right{% endif %}">
+            <div class="about-information__image"{% if block.settings.image != blank %} style="background-image: url({{ block.settings.image | img_url: 'master' }});"{% endif %}>
+                {% if block.settings.image == blank %}
+                    <div class="placeholder-background">
+                        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="about-information__content">
+                <div class="rte">
+                    {{ block.settings.description }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% if settings.breadcrumb_layout == 'bottom' %}
+    {% render 'breadcrumb' %}
+{% endif %}
+
+{% schema %}
+{
+    "name": "Page Content",
+    "class": "page-content",
+    "max_blocks": 4,
+    "settings": [
+    ],
+    "blocks": [
+        {
+            "type": "about_infomation",
+            "name": "About Infomation",
+            "settings": [
+                {
+                    "type": "header",
+                    "content": "Layout"
+                },
+                {
+                    "type": "select",
+                    "id": "layout",
+                    "label": "Layout",
+                    "default": "left",
+                    "options": [
+                        {
+                            "value": "left",
+                            "label": "Image Left"
+                        },
+                        {
+                            "value": "right",
+                            "label": "Image Right"
+                        }
+                    ]
+                },
+                {
+                    "type": "header",
+                    "content": "Banner Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "header",
+                    "content": "Content"
+                },
+                {
+                    "type": "html",
+                    "id": "description",
+                    "label": "HTML Source",
+                    "default": "<p>Use overlay text to give your customers insight into your brand. Select image and text that relates to your style and story.</p>"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

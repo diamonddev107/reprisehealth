@@ -1,0 +1,14 @@
+{% if settings.breadcrumb_layout == 'top' %}
+    {% render 'breadcrumb' %}
+{% endif %}
+<div class="container">
+    <div class="page page-lookbook">
+        <div class="section-header text-center">
+            <h1 class="title">{{ page_title | upcase }}</h1>
+        </div>
+        {% section 'lookbook-template' %}
+    </div>
+</div>
+{% if settings.breadcrumb_layout == 'bottom' %}
+    {% render 'breadcrumb' %}
+{% endif %}

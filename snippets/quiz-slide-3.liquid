@@ -1,0 +1,23 @@
+<div class="slide-inner">
+  <div class="slide-top">
+    <div class="slide-header">
+      <div class="question-heading slide-question slide-question-small text-center">Are you looking for support with any of the following?</div>
+    </div>
+  </div>
+  <div class="slide-bottom">
+    <div class="slide-answer-wrapper">
+      {% assign button_label = "Muscle Recovery" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "Hydration" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "Muscle Cramping" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "None" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+    </div>
+    <div class="slide-continue-wrapper">
+      <p class="nothing-selected text-center">Please select at least 1 area of interest before continuing :)</p>
+      <a class="btn--kleva btn--quiz-continue btn--quiz-continue-inactive">Continue</a>
+    </div>
+  </div>
+</div>

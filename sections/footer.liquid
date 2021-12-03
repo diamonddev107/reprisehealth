@@ -1,0 +1,370 @@
+
+{% for block in section.blocks %}
+    {% case block.type %}
+        {% when 'logo' %}
+            {% capture logo %}
+                <div class="footer-logo">
+                    {% if  block.settings.logo_footer != blank %}
+                        <div class="footer-logo__item">
+                            <a href="{{ routes.root_url }}" aria-label="link"><img class="lazyload" data-srcset="{{ block.settings.logo_footer | img_url: 'x40' }}" alt="" data-image></a>
+                        </div>
+                    {% endif %}
+                    {% if  block.settings.logo_footer_content != blank %}
+                        <div class="footer-logo__item">{{ block.settings.logo_footer_content }}</div>
+                    {% endif %}
+                </div>
+            {% endcapture %}
+        {% when 'info_store' %}
+            {% capture info_store %}
+                {% if block.settings.title %}
+                    <h5 class="footer-heading">{{ block.settings.title }}</h5>
+                {% endif %}
+                <ul class="footer-list">
+                    <li class="store-address">
+                        {{ block.settings.info_text_1 }}
+                    </li>
+                    <li class="store-phone">
+                        {{ block.settings.info_text_2 }}
+                    </li>
+                    <li class="store-email last">
+                        {{ block.settings.info_text_3 }}
+                    </li>
+                </ul>
+            {% endcapture %}
+        {% when 'newsletter' %}
+            {% capture newsletter %}
+                {% if block.settings.title %}
+                    <h5 class="footer-heading">{{ block.settings.title }}</h5>
+                {% endif %}
+                <div class="footer-list footer-newsletter">
+                    {% assign formId = 'ContactFooter' %}
+                    {% form 'customer', id: formId, class: 'contact-form-footer' %}
+                        {% if form.posted_successfully? %}
+                            <p class="form-message form-message--success" tabindex="-1" data-form-status>
+                                {{ 'general.newsletter_form.confirmation' | t }}
+                            </p>
+                        {% endif %}
+                        <input type="hidden" name="contact[tags]" value="newsletter">
+                        <div class="input-group {% if form.errors %} input-group--error{% endif %}">
+                            <label class="hide" for="{{ formId }}-email"></label>
+                            <input type="email"
+                                name="contact[email]"
+                                id="{{ formId }}-email"
+                                class="input-group__field input-group__field--small newsletter__input{% if form.errors %} input--error{% endif %}"
+                                value="{{ form.email }}"
+                                placeholder="{{ 'general.newsletter_form.email_placeholder' | t }}"
+                                aria-required="true"
+                                required
+                                autocapitalize="off"
+                                {% if form.errors %}
+                                    aria-invalid="true"
+                                    aria-describedby="{{ formId }}-email-error"
+                                    data-form-status
+                                {% endif %}>
+                            <span class="input-group__btn input-group__btn--small">
+                                <button type="submit" class="btn newsletter__submit" name="commit" id="Subscribe" aria-label="button">
+                                    <span class="newsletter__submit-text--large"><svg class="icon"><use xlink:href="#icon-chevron-right" /></svg></span>
+                                </button>
+                            </span>
+                        </div>
+                        {% if form.errors contains 'email' %}
+                            <span id="{{ formId }}-email-error" class="input-error-message">
+                                <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+                                <svg class="icon"><use xlink:href="#icon-error" /></svg>
+                                <span class="site-footer__newsletter-error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+                            </span>
+                        {% endif %}
+                    {% endform %}
+                </div>
+                {% render 'social-media' %}
+            {% endcapture %}
+    {% endcase %}
+{% endfor %}
+
+<footer class="site-footer {% if settings.enable_footer_effect %}footer-sticky{% endif %}" data-section-type="footer">
+    {% if section.settings.message %}
+        {% if section.settings.home_page_only == false or template.name == 'index' %}
+        <div class="announcement-bar-footer text-center">
+            <div class="rte">{{ section.settings.message_text }}</div>
+        </div>
+        {% endif %}
+    {% endif %}
+    {% if section.settings.footer_top %}
+        <div class="site-footer__top">
+            <div class="container">
+                <div class="footer-owner">
+                    <div class="text">
+                        {{ section.settings.contact_description }}
+                    </div>
+                    <a class="btn btn--white link" href="javascript:void(0);" aria-label="link" data-popup-newsletter-2>{{ 'customer.login.sign_in' | t }}</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if section.settings.footer_middle %}
+        <div class="site-footer__middle">
+            <div class="container">
+                {% if logo %}
+                    {{ logo }}
+                {% endif %}
+                <div class="footer-row">
+                    {% for block in section.blocks %}
+                        {% case block.type %}
+                            {% when 'info_store' %}
+                                <div class="footer-row__item footer-row__item--mobile">
+                                    {{ info_store }}
+                                </div>
+                            {% when 'navigation_list' %}
+                                <div class="footer-row__item footer-row__item--small footer-row__item--mobile">
+                                    {% if block.settings.title %}
+                                        <h5 class="footer-heading">{{ block.settings.title }}</h5>
+                                    {% endif %}
+                                    <ul class="footer-list">
+                                        {% for link in linklists[block.settings.navigation].links %}
+                                            <li {% if forloop.last %}class="last"{% endif %}>
+                                                <a href="{{ link.url }}" aria-label="link">
+                                                    {{ link.title | escape }}
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% when 'newsletter' %}
+                                <div class="footer-row__item footer-row__item--large">
+                                    {{ newsletter }}
+                                </div>
+                        {% endcase %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if section.settings.footer_bottom %}
+        <div class="site-footer__bottom">
+            <div class="container">
+                {% if section.settings.copyright != blank %}
+                    <div class="site-footer__bottom__item">
+                        <div class="footer-copyright">
+                            {{ section.settings.copyright }}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="site-footer__bottom__item">
+                    <div class="payment-methods">
+                        {% assign payment_string = '1,2,3,4,5,6,7,8' %}
+                        {% assign methods = payment_string | split: ',' %}
+                        {% for method in methods %}
+                            {%- assign current_method_icon = method | prepend: 'payment_image_' -%}
+                            {% if section.settings[current_method_icon] != blank %}
+                            <div class="payment-methods--item">
+                                {{ section.settings[current_method_icon] }}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</footer>
+
+{% schema %}
+    {
+        "name": "Footer",
+        "settings": [
+            {
+                "type": "header",
+                "content": "Announcement Bar"
+            },
+            {
+                "type": "checkbox",
+                "id": "message",
+                "label": "Show announcement",
+                "default": false
+            },
+            {
+                "type": "checkbox",
+                "id": "home_page_only",
+                "label": "Home page only",
+                "default": false
+            },
+            {
+                "type": "html",
+                "id": "message_text",
+                "label": "Text"
+            },
+            {
+                "type": "header",
+                "content": "Footer top"
+            },
+            {
+                "type": "checkbox",
+                "id": "footer_top",
+                "label": "Show Footer Top",
+                "default": true
+            },
+            {
+                "type": "richtext",
+                "id": "contact_description",
+                "label": "Text"
+            },
+            {
+                "type": "header",
+                "content": "Footer Middle"
+            },
+            {
+                "type": "checkbox",
+                "id": "footer_middle",
+                "label": "Show Footer Middle",
+                "default": true,
+                "info": "Please add block content for Footer Middle"
+            },
+            {
+                "type": "header",
+                "content": "Footer Bottom"
+            },
+            {
+                "type": "checkbox",
+                "id": "footer_bottom",
+                "label": "Show Footer Bottom",
+                "default": true
+            },
+            {
+                "type": "text",
+                "id": "copyright",
+                "label": "Copyright"
+            },
+            {
+                "type": "text",
+                "id": "payment_image_1",
+                "label": "Payment methods 1",
+                "info": "Please use icon svg for Payment methods"
+            },
+            {
+                "type": "text",
+                "id": "payment_image_2",
+                "label": "Payment methods 2",
+                "info": "Please use icon svg for Payment methods"
+            },
+            {
+                "type": "text",
+                "id": "payment_image_3",
+                "label": "Payment methods 3",
+                "info": "Please use icon svg for Payment methods"
+            },
+            {
+                "type": "text",
+                "id": "payment_image_4",
+                "label": "Payment methods 4",
+                "info": "Please use icon svg for Payment methods"
+            },
+            {
+                "type": "text",
+                "id": "payment_image_5",
+                "label": "Payment methods 5",
+                "info": "Please use icon svg for Payment methods"
+            },
+            {
+                "type": "text",
+                "id": "payment_image_6",
+                "label": "Payment methods 6",
+                "info": "Please use icon svg for Payment methods"
+            },
+            {
+                "type": "text",
+                "id": "payment_image_7",
+                "label": "Payment methods 7",
+                "info": "Please use icon svg for Payment methods"
+            },
+            {
+                "type": "text",
+                "id": "payment_image_8",
+                "label": "Payment methods 8",
+                "info": "Please use icon svg for Payment methods"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "logo",
+                "name": "Logo Footer",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "logo_footer",
+                        "label": "Logo image"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "logo_footer_content",
+                        "label": "Logo content"
+                    }
+                ]
+            },
+            {
+                "type": "info_store",
+                "name": "Store Location",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Heading",
+                        "default": "Contact"
+                    },
+                    {
+                        "type" : "textarea",
+                        "id" : "info_text_1",
+                        "label" : "Text 1",
+                        "default": "9087S Divamus Faucibus Str., City name, CA 90896, United States."
+                    },
+                    {
+                        "type" : "textarea",
+                        "id" : "info_text_2",
+                        "label" : "Text 2",
+                        "default": "Call: 1-800-000-8910"
+                    },
+                    {
+                        "type" : "textarea",
+                        "id" : "info_text_3",
+                        "label" : "Text 3",
+                        "default": "support@halothemes.com"
+                    }
+                ]
+            },
+            {
+                "type": "navigation_list",
+                "name": "Navigation Vertical",
+                "limit": 4,
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Heading",
+                        "default": "Navigation"
+                    },
+                    {
+                        "type": "link_list",
+                        "id": "navigation",
+                        "label": "Navigation",
+                        "default": "main-menu"
+                    }
+                ]
+            },
+            {
+                "type": "newsletter",
+                "name": "Newsletter signup",
+                "limit": 1,
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Heading",
+                        "info": "Subscribers will be added to your “accepts marketing” [customer list.](/admin/customers?query=&accepts_marketing=1)",
+                        "default": "Newsletter"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

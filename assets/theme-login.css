@@ -1,0 +1,121 @@
+.page-full-width .container {
+    max-width: 1100px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.alert {
+    border-radius: 0;
+}
+
+.alert-warning p {
+    color: inherit;
+}
+
+.btn:not(.newsletter__submit):not(.btn--tertiary) {
+    min-width: 120px;
+}
+
+.btn--tertiary,
+.btn--tertiary:hover {
+    min-width: 0;
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+.section-header > .btn {
+    min-width: 0;
+    margin-top: 15px;
+    text-decoration: underline;
+    text-underline-position: under;
+} 
+
+.loginTitle {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.loginTitle--border {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f8f8f8;
+    margin-bottom: 20px;
+}
+
+.loginDes {
+    margin-bottom: 30px;
+}
+
+.button-group {
+    position: relative;
+}
+
+.button-group--two {
+    font-size: 0;
+}
+
+.button-group--two .btn {
+    margin: 0;
+}
+
+.button-group--two .btn + .btn {
+    margin-left: 15px;
+}
+
+.halo-column__item {
+    margin: 0;
+}
+
+.btn--return {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-transform: capitalize;
+    font-family: Arimo,sans-serif;
+}
+
+.btn--delete {
+    color: #ffffff;
+    border-color: #e13f3f;
+    background-color: #e13f3f;
+}
+.btn--delete:hover {
+    color: #ffffff;
+    filter: brightness(85%);
+}
+
+@media (min-width: 551px) {
+    .RecoverPassword-wrapper {
+        top: calc(50% - 8px);
+        right: 0;
+        position: absolute;
+        transform: translateY(-50%);
+    }
+
+    .contact-infomation {
+        padding: 30px;
+    }
+}
+
+@media (min-width: 1025px) {
+    .page-login {
+        min-height: calc(100vh - 175px);
+    }
+
+    .loginTitle {
+        font-size: 18px;
+    }
+
+    .btn--big {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .btn--big2 {
+        min-width: 270px;
+    }
+
+    .halo-column__item {
+        margin: 0;
+    }
+}

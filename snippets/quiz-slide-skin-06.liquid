@@ -1,0 +1,19 @@
+<div class="slide-inner">
+  <div class="slide-top">
+    <div class="slide-header">
+      <div class="question-heading slide-question slide-question-small text-center">Do you live in a city or industrial area?</div>
+    </div>
+  </div>
+  <div class="slide-bottom">
+    <div class="slide-answer-wrapper">
+      {% assign button_label = "Yes" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %} 
+      {% assign button_label = "No" %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label %}
+    </div>
+    <div class="slide-continue-wrapper">
+      <p class="nothing-selected text-center">Please select Yes or No before continuing :)</p>
+      <a class="btn--kleva btn--quiz-continue btn--quiz-continue-inactive">Continue</a>
+    </div>
+  </div>
+</div>

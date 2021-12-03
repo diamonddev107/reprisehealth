@@ -1,0 +1,19 @@
+{% comment %}
+    The contents of the blog.liquid template can be found in /sections/blog-template.liquid
+{% endcomment %}
+
+{% if settings.breadcrumb_layout == 'top' %}
+    {% render 'breadcrumb' %}
+{% endif %}
+<div class="container">
+    <div class="page page-blog">
+        {% section 'sidebar-blogs' %}
+        {% section 'blog-template' %}
+    </div>
+</div>
+
+{% section 'blog-template-custom' %}
+
+{% if settings.breadcrumb_layout == 'bottom' %}
+    {% render 'breadcrumb' %}
+{% endif %}

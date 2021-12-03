@@ -1,0 +1,94 @@
+{% assign pagename = request.page_type | handle %}
+
+<div class="header-PC">
+    <div class="container">
+        <div class="header-middle">
+            <div class="header-middle__left{% if section.settings.main-menu-position == 'left' %} header-middle__navigation{% endif %}">
+                {% if section.settings.main-menu-position == 'left' %}
+                    {% render 'site-nav', main_menu: section.settings.main_linklist %}
+                {% endif %}
+                {% if section.settings.enable-header-search and section.settings.header-search-position == 'left' %}
+                    <div class="header-middle__item header-middle__item--quickSearch">
+                        {% render 'search-bar' %}
+                    </div>
+                {% endif %}
+                {% if section.settings.enable-header-cart and section.settings.header-cart-position == 'left' %}
+                    <div class="header-middle__item header-middle__item--cart">
+                        {% render 'header-cart', pagename: pagename %}
+                    </div>
+                {% endif %}
+                {% if shop.customer_accounts_enabled %}
+                    {% if section.settings.enable-header-account and section.settings.header-account-position == 'left' %}
+                        <div class="header-middle__item header-middle__item--account">
+                            {% render 'header-account', pagename: pagename %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if section.settings.enable-header-language and section.settings.header-language-position == 'left' %}
+                    <div class="header-middle__item header-middle__item--language">
+                        {% render 'header-language' %}
+                    </div>
+                {% endif %}
+                {% if section.settings.enable-header-currency and section.settings.header-currency-position == 'left' %}
+                    <div class="header-middle__item header-middle__item--currency">
+                        <div class="currency-groups mt-2">
+                            {% render 'header-currency' %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="header-middle__center">
+                <div class="logo-wrapper" itemscope itemtype="http://schema.org/Organization">
+                    <meta itemprop="url" content="{{ shop.url }}">
+                    {% if section.settings.logo != blank %}
+                        {% assign img_url = section.settings.logo | img_url: 'master' %}
+                        <a href="{{ routes.root_url }}" class="site-header__logo-image" aria-label="logo" style="width: {{ section.settings.logo_max_width }}px; max-width: {{ section.settings.logo_max_width }}px">
+                            {% capture logo_alt %}{{ section.settings.logo.alt | default: shop.name }}{% endcapture %}
+                            <img itemprop="logo" src="{{ img_url }}" alt="{{ logo_alt | escape }}">
+                        </a>
+                    {% else %}
+                        <a class="logo_text" href="{{ routes.root_url }}" aria-label="logo" style="width: {{ section.settings.logo_max_width }}px">
+                            {% if section.settings.logo_text != blank %}
+                                {{ section.settings.logo_text }}
+                            {% else %}
+                                {{ shop.name }}
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="header-middle__right{% if section.settings.main-menu-position == 'right' %} header-middle__navigation{% endif %}">
+                {% if section.settings.main-menu-position == 'right' %}
+                    {% render 'site-nav', main_menu: section.settings.main_linklist %}
+                {% endif %}
+                {% if section.settings.enable-header-language and section.settings.header-language-position == 'right' %}
+                    <div class="header-middle__item header-middle__item--language">
+                        {% render 'header-language' %}
+                    </div>
+                {% endif %}
+                {% if section.settings.enable-header-currency and section.settings.header-currency-position == 'right' %}
+                    <div class="header-middle__item header-middle__item--currency">
+                        {% render 'header-currency' %}
+                    </div>
+                {% endif %}
+                {% if shop.customer_accounts_enabled %}
+                    {% if section.settings.enable-header-account and section.settings.header-account-position == 'right' %}
+                        <div class="header-middle__item header-middle__item--account">
+                            {% render 'header-account', pagename: pagename %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+                {% if section.settings.enable-header-cart and section.settings.header-cart-position == 'right' %}
+                    <div class="header-middle__item header-middle__item--cart">
+                        {% render 'header-cart', pagename: pagename %}
+                    </div>
+                {% endif %}
+                {% if section.settings.enable-header-search and section.settings.header-search-position == 'right' %}
+                    <div class="header-middle__item header-middle__item--quickSearch">
+                        {% render 'search-bar' %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

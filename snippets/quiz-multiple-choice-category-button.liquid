@@ -1,0 +1,6 @@
+
+{% assign show_product_wishlist = show_product_wishlist | default: settings.show_product_wishlist %}
+
+
+
+<a class="btn--kleva btn--category btn--quiz{% if active_state %} btn--quiz-active{% endif %}" data-category="{{ button_text }}">{{ button_text }}</a>
