@@ -7,12 +7,15 @@ $(document).ready(function(){
   var questionsArray = [];
   quiz.questions = questionsArray;
   var $continueButton = $('.btn--quiz-continue');
+  var $backButton = $('.btn--quiz-back');
   var $answerSelector = $('.btn--answer');
   var $categorySelector = $('.btn--category');
   var $rangeAnswer = $('.range-dot-wrapper');
   var $inlineContinues = $('form .inline-continue');
   console.log({ timestamp });
-
+  // temp start
+  // var slideLen = $(".mySwiper").data("len");
+  // temp end
   var swiper = new Swiper(".mySwiper", {
     allowTouchMove: false,
     speed: 1,
@@ -20,7 +23,12 @@ $(document).ready(function(){
     on: {
       init: function(swiper) {
         checkForAutomaticTransition(swiper);
-      }
+      },
+      reachEnd: function(swiper) {
+        $('.breadcrumbs-progress-wrapper').addClass("hide");
+        $(".calculating-announcement-bar").addClass('show');
+        $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
+      } 
     }
   });
 
@@ -29,7 +37,11 @@ $(document).ready(function(){
   });
 
   function checkForAutomaticTransition(swiper) {
-    
+    // temp start
+    // var indexBeforeLast = slideLen - 1;
+    // var currentSlide = $(swiper.slides[indexBeforeLast]);
+    // swiper.slideNext();
+    // temp end
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var currentSection = currentSlide.data('slide-section');
     setBreadCrumbsProgress(currentSection);
@@ -42,7 +54,9 @@ $(document).ready(function(){
         }, transitionTime);
     }
   }
-
+  $backButton.on('click', function() {
+    swiper.slidePrev();
+  })
   $rangeAnswer.on('click',function(e){
     console.log($(this));
     var thisSlide = $(this).closest('.swiper-slide');

@@ -4,23 +4,28 @@
 />
 
 <div class="container">
+    <div class="btn--quiz-back desktop-hide">
+        <img src="{{ 'back-button.png' | asset_img_url:'482x' }}" />
+        Back
+    </div>
+    <div class="calculating-announcement-bar desktop-hide">
+        <span> Questions Completed</span>
+    </div>
     <div class="page page-default">
     
         <div class="assets-test-area">
-        {%- comment -%}
-{%- endcomment -%}  
 
         {% for item in shop.metafields.custom_fields["quiz_questions"] %}
             <script>console.log('{{ item["unique_slide_id"] }}', '{{ item["question_section"] }}', '{{ item["question_type"] }}');</script>
         {% endfor %}
 
 
-            <div class="asset-wrapper">
+            <div class="asset-wrapper breadcrumbs-progress-wrapper">
                 {% render 'quiz-breadcrumbs-progress' %}
             </div>
 
             <div class="asset-wrapper swiper-wrapper" >
-                <div class="swiper mySwiper" >
+                <div class="swiper mySwiper" data-len='{{ shop.metafields.custom_fields["quiz_questions"].size }}'>
                     <div class="swiper-wrapper">
                     
 
@@ -145,7 +150,28 @@
                             {% endif %}
                         {% endfor %}
 
-                        <div class="swiper-slide" data-show-slide="false" data-slide-category="">Product Recs here...</div>
+                        <div class="swiper-slide calculating-slide" data-show-slide="false" data-slide-category="">
+                            <div class="calculating-wrapper">
+                                <div class="calculating-heading mobile-hide">
+                                    <span>We’re So Excited To Show You...</span>
+                                </div>
+                                <div class="calculating-body">
+                                    <div class="body-inner">
+                                        <img src="{{ 'loading-image.png' | asset_img_url:'482x' }}" />
+                                        <div class="center-group">
+                                            <img class="" src="{{ 'emoticon-10.png' | asset_img_url }}" />
+                                            <span>Calculating Results...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="calculating-heading desktop-hide">
+                                    <span>We’re So Excited To Show You...</span>
+                                </div>
+                                <div class="calculating-sidebar">
+                                    <span>Just One Second</span>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
