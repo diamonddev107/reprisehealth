@@ -5,7 +5,11 @@
     display: none;
 }
 .mySwiper {
-    // height: 100vh; // As height of slide items is different each other, Need to keep same height of items in 100vh
+    height: 100vh; // As height of slide items is different each other, Need to keep same height of items in 100vh
+}
+.page.page-default.vh {
+    height: 100vh;
+    padding: 0;
 }
 .calculating-slide {
     display: flex;
@@ -60,14 +64,68 @@
         }
     }
 }
-.btn--quiz-back {
-    font-family: 'DM Sans',sans-serif;
-    font-weight: 400;
-    font-size: 11px;
-    display: flex;
-    align-items: center;
-    img {
-        margin-right: 8px;
+.sidebar-button-slide {
+    background-color: #92C79D;
+    color: white;
+    border-radius: 7px;
+    position: absolute;
+    z-index: 9;
+    left: 0px;
+    top: 200px;
+    width: 100%;
+
+    .inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 50px 0px;
+
+        span.title {
+            transform: rotate(180deg);
+            font-family: 'DM Sans',sans-serif;
+            font-size: 20px;
+            writing-mode: vertical-lr;
+            margin-left: 40px;
+        }
+        p {
+            color: white;
+            margin: 0;
+            font-size: 27px;
+            font-family: 'DM Sans',sans-serif;
+            line-height: 28px;
+            max-width: 700px;
+            text-align: center;
+        }
+        .left-arrow-button {
+            width: 25px;
+            height: 25px;
+            display: block;
+            display: flex;
+            align-items: center;
+            transform: rotate(-45deg);
+            border-left: 4px solid;
+            border-top: 4px solid;
+            border-radius: 2px;
+            margin-right: 40px;
+            &:hover {
+            cursor: pointer;
+            }
+        }
+    }
+}
+.sidebar-button-slide.hide {
+    display: none;
+}
+.sidebar-button-slide.collapsed {
+    width: 60px;
+    .inner span.title {
+        margin-left: 20px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    .left-arrow-button, p {
+        display: none;
     }
 }
 .calculating-announcement-bar {
@@ -77,6 +135,7 @@
     margin-right: -15px;
     color: white;
     margin-top: 30px;
+    margin-bottom: 30px;
     span {
         font-family: 'DM Sans', sans-serif;
         font-style: normal;
@@ -113,5 +172,40 @@
             }
         }
     }
-    
+    .btn--quiz-back {
+        font-family: 'DM Sans',sans-serif;
+        font-weight: 400;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        img {
+            margin-right: 8px;
+        }
+    }
+    .sidebar-button-slide {
+        .inner {
+            span.title {
+                font-size: 9px;
+                margin-left: 10px;
+            }
+            p {
+                font-size: 12px;
+                padding: 0 10px;
+                width: 86%;
+            }
+            .left-arrow-button {
+                width: 15px;
+                height: 15px;
+                border-left: 3px solid;
+                border-top: 3px solid;
+                margin-right: 20px;
+            }
+        }
+    }
+    .sidebar-button-slide.collapsed {
+        width: 30px;
+        .inner span.title {
+            margin-left: 4px;
+        }
+    }
 }

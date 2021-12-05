@@ -189,6 +189,9 @@
   justify-content: space-between;
   align-items: center;
 }
+.slide-header-stacked img {
+  max-width: 500px;
+}
 .slide-bottom {
   text-align: center;
 }
@@ -416,7 +419,6 @@ text-align: left;
 .swiper-slide-opening-category {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 @mixin placeholderName() {

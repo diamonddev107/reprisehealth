@@ -14,7 +14,7 @@ $(document).ready(function(){
   var $inlineContinues = $('form .inline-continue');
   console.log({ timestamp });
   // temp start
-  // var slideLen = $(".mySwiper").data("len");
+  var slideLen = $(".mySwiper").data("len");
   // temp end
   var swiper = new Swiper(".mySwiper", {
     allowTouchMove: false,
@@ -28,6 +28,8 @@ $(document).ready(function(){
         $('.breadcrumbs-progress-wrapper').addClass("hide");
         $(".calculating-announcement-bar").addClass('show');
         $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
+        $(".page.page-default").addClass('vh');
+        $(".sidebar-button-slide").addClass("hide");
       } 
     }
   });
@@ -44,16 +46,35 @@ $(document).ready(function(){
     // temp end
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var currentSection = currentSlide.data('slide-section');
+    var whyWeAsk = currentSlide.data('why-we-ask');
+    $(".sidebar-button-slide .inner p").text(whyWeAsk);
     setBreadCrumbsProgress(currentSection);
     if ( currentSlide.data('transition-time') ) {
       var transitionTime = currentSlide.data('transition-time') * 1000;
       setTimeout(
         function() 
         {
-          swiper.slideNext(300)
+          swiper.slideNext(300);
         }, transitionTime);
     }
   }
+  swiper.on('slideChange', function () {
+    var currentSlide = $(swiper.slides[swiper.realIndex]);
+    var whyWeAsk = currentSlide.data('why-we-ask');
+    var offset = currentSlide.find(".slide-bottom").offset();
+    $(".sidebar-button-slide .inner p").text(whyWeAsk);
+    if (offset != undefined) {
+      $(".sidebar-button-slide").css('top', offset.top);
+    }
+  });
+  $(".left-arrow-button").on("click", function() {
+    $(".sidebar-button-slide").addClass("collapsed");
+  })
+  $(".sidebar-button-slide span.title").on("click", function() {
+    if ($(".sidebar-button-slide").hasClass("collapsed")) {
+      $(".sidebar-button-slide").removeClass("collapsed");  
+    }
+  })
   $backButton.on('click', function() {
     swiper.slidePrev();
   })

@@ -5,6 +5,15 @@
     </div> 
   </div>
   <div class="slide-bottom">
+    {% comment %} {% if item["why_we_ask_text"] %}
+      <div class="sidebar-button-slide">
+        <div class="inner">
+          <span class="title">Why We Ask?</span>
+          <p>{{ item["why_we_ask_text"] }}</p>
+          <span class="left-arrow-button"></span>
+        </div>
+      </div>  
+    {% endif %} {% endcomment %}
     <div class="slide-answer-wrapper">
       {% render 'quiz-text-field', placeholder: "" %}
     </div>

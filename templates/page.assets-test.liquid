@@ -11,13 +11,22 @@
     <div class="calculating-announcement-bar desktop-hide">
         <span> Questions Completed</span>
     </div>
+    <div class="sidebar-button-slide collapsed">
+        <div class="inner">
+            <span class="title">Why We Ask?</span>
+            <p></p>
+            <span class="left-arrow-button"></span>
+        </div>
+    </div>  
     <div class="page page-default">
     
         <div class="assets-test-area">
 
-        {% for item in shop.metafields.custom_fields["quiz_questions"] %}
-            <script>console.log('{{ item["unique_slide_id"] }}', '{{ item["question_section"] }}', '{{ item["question_type"] }}');</script>
-        {% endfor %}
+            {%- comment -%}
+            {% for item in shop.metafields.custom_fields["quiz_questions"] %}
+                <script>console.log('{{ item["unique_slide_id"] }}', '{{ item["question_section"] }}', '{{ item["question_type"] }}');</script>
+            {% endfor %}
+            {%- endcomment -%}
 
 
             <div class="asset-wrapper breadcrumbs-progress-wrapper">
@@ -52,6 +61,7 @@
                                 <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
                                         data-answer-value=""
                                         data-slide-section="{{ slideSection }}"
+                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
                                         data-question-text="{{ item['question_text'] }}"
                                         data-question-type="{{ item['question_type'] }}" 
@@ -63,12 +73,14 @@
                             {% elsif item["question_type"] == "Health Topics Listing" %}
                                 <div    class="swiper-slide" data-show-slide="false"
                                         data-unique-slide-id="Categories01"
+                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-question-text="Health Topics" 
                                         data-slide-category="">
                                     {% render 'quiz-slide-categories' %} </div>
                             {% elsif item["question_type"] == "Name of User" %}
                                 <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
                                         data-slide-section="{{ slideSection }}"
+                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
                                         data-question-text="{{ item['question_text'] }}"
                                         data-question-type="{{ item['question_type'] }}" 
@@ -80,6 +92,7 @@
                             {% elsif item["question_type"] contains "Wow" %}
                                 <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
                                         data-slide-section="{{ slideSection }}"
+                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
                                         data-question-text="{{ item['question_text'] }}"
                                         data-question-type="{{ item['question_type'] }}" 
@@ -91,6 +104,7 @@
                             {% elsif item["question_type"] == "Short Answer" %}
                                 <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
                                         data-slide-section="{{ slideSection }}"
+                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
                                         data-question-text="{{ item['question_text'] }}"
                                         data-question-type="{{ item['question_type'] }}" 
@@ -102,6 +116,7 @@
                             {% elsif item["question_type"] == "Yes/No" %}
                                 <div    class="swiper-slide swiper-slide-yes-no swiper-slide-dynamic {{ extraSlideClass }}" 
                                         data-slide-section="{{ slideSection }}"
+                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
                                         data-answer-value=""
                                         data-question-text="{{ item['question_text'] }}"
@@ -114,6 +129,7 @@
                             {% elsif item["question_type"] == "" %}
                                 <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
                                         data-slide-section="{{ slideSection }}"
+                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="false"
                                         data-question-text="{{ item['question_text'] }}"
                                         data-question-type="{{ item['question_type'] }}" 
@@ -126,6 +142,7 @@
                             {% elsif item["question_type"] == "Multiple Choice" %}
                                 <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
                                         data-slide-section="{{ slideSection }}"
+                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
                                         data-answer-value=""
                                         data-question-text="{{ item['question_text'] }}"
@@ -138,6 +155,7 @@
                             {% elsif item["question_type"] == "Multiple Select" %}
                                 <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
                                         data-slide-section="{{ slideSection }}"
+                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
                                         data-answer-value=""
                                         data-question-text="{{ item['question_text'] }}"
@@ -159,7 +177,7 @@
                                     <div class="body-inner">
                                         <img src="{{ 'loading-image.png' | asset_img_url:'482x' }}" />
                                         <div class="center-group">
-                                            <img class="" src="{{ 'emoticon-10.png' | asset_img_url }}" />
+                                            {% comment %} <img class="" src="{{ 'emoticon-10.png' | asset_img_url }}" /> {% endcomment %}
                                             <span>Calculating Results...</span>
                                         </div>
                                     </div>
