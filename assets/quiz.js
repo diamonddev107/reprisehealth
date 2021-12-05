@@ -30,6 +30,14 @@ $(document).ready(function(){
         $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
         $(".page.page-default").addClass('vh');
         $(".sidebar-button-slide").addClass("hide");
+        setTimeout(
+          function() 
+          {
+            $(".pre-product-recommendation").removeClass("hide");
+            $(".page.page-default").addClass("hide");
+            $backButton.addClass("proper");
+            $(".calculating-announcement-bar").removeClass('show');
+          }, 5000);
       } 
     }
   });

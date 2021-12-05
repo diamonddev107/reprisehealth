@@ -1,0 +1,52 @@
+<section class="section-wrapper flex">
+    <div class="left-side half-width">
+        <img src="{{ section.settings.image | img_url: 'master' }}" loading="lazy" class="lazyload" alt="{{ section.settings.title | escape }}">
+    </div>
+    <div class="right-side half-width">
+        <span>{{ section.settings.sub_title }}</span>
+        <h2 class="h1">{{ section.settings.title }}</h2>
+        <p>{{ section.settings.text }}</p>
+        <a href="{{ section.settings.btn_link }}">{{ section.settings.btn_text }}</a>
+    </div>
+</section>
+{% schema %}
+{
+    "name": "Pre recommendation",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+           "type": "text",
+           "id": "title",
+           "label": "Heading",
+           "default": "Created Just For Emma"
+        },
+        {
+            "type": "text",
+            "id": "sub_title",
+            "label": "Sub Heading",
+            "default": "Your Results Are Ready!"
+        },
+        {
+            "type": "textarea",
+            "id": "text",
+            "label": "Text",
+            "default": "Your Recommendations are based on your goals for x, y and z. To perfect your routine we recommend you take the following supplements."
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button Title",
+            "default": "Check Out Our Recommendations"
+        },
+        {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button Link"
+        }
+    ]
+}
+{% endschema %}

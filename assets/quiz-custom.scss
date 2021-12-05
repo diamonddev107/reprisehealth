@@ -11,6 +11,9 @@
     height: 100vh;
     padding: 0;
 }
+.page.page-default.hide {
+    display: none;
+}
 .calculating-slide {
     display: flex;
     align-items: center;
@@ -144,6 +147,65 @@
         line-height: 14px;
     }
 }
+.pre-product-recommendation.hide {
+    display: none;
+}
+.pre-product-recommendation {
+    margin-left: -30px;
+    margin-right: -30px;
+    // height: 100vh;
+    .section-wrapper.flex {
+        background: #92C79D;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100vh;
+        .half-width {
+            width: 50%;
+        }
+        .left-side {
+            height: 100%;
+            img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .right-side {
+            margin-left: 50px;
+            margin-right: 50px;
+            span {
+                font-family: 'DM Sans',sans-serif;
+                font-size: 15px;
+                line-height: 14px;
+                color: #000000;
+            }
+            .h1 {
+                font-family: 'NewYork';
+                font-size: 50px;
+                font-weight: normal;
+                line-height: 55px;
+                text-transform: capitalize;
+                color: #FFFFFF;
+                margin: 45px 0px;
+            }
+            p {
+                font-family: 'DM Sans',sans-serif;
+                font-size: 20px;
+                line-height: 24px;
+                color: #000000;
+                margin-bottom: 35px;
+            }
+            a {
+                font-family: 'DM Sans',sans-serif;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 14px;
+                color: #FFFFFF;
+            }
+        }
+    }
+}
 @media (max-width: 798px) {
     .desktop-hide {
         display: block;
@@ -182,6 +244,12 @@
             margin-right: 8px;
         }
     }
+    .btn--quiz-back.proper {
+        background: #92c79d;
+        margin-left: -15px;
+        margin-right: -15px;
+        padding: 0 22px;
+    }
     .sidebar-button-slide {
         .inner {
             span.title {
@@ -207,5 +275,23 @@
         .inner span.title {
             margin-left: 4px;
         }
+    }
+    .pre-product-recommendation {
+        margin-left: -15px;
+        margin-right: -15px;
+        .section-wrapper.flex {
+            align-items: normal;
+            padding-top: 50px;
+            .right-side {
+                width: 100%;
+                text-align: center;
+                margin-left: 22px;
+                margin-right: 22px;
+            }
+            .left-side {
+                display: none;
+            }
+        }
+        
     }
 }
