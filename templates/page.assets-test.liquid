@@ -21,6 +21,42 @@
     <div class="pre-product-recommendation hide">
         {% section 'pre-product-recommendation' %}
     </div>
+    <!-- frontpage -->
+    <div class="recommended-products hide">
+        {% assign collection = collections["frontpage"] %}
+        <h2 class="h1">Your Bottle:</h2>
+        <div class="products-wrapper">
+            {% for product in collection.products limit: 4 %}
+                {% unless product.title contains "Subscription" %}
+                    <div class="item">
+                        <div class="image-wrapper">
+                            <a href="{{ product.url }}">
+                                <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}">
+                            </a>
+                        </div>
+                        <div class="text-wrapper">
+                            <h3>You Don’t Sleep Well.. </h3>
+                            <span class="sub-heading">So We’re Recommending....</span>
+                            <h3 class="product-title">{{ product.title | escape }}</h3>
+                            <ul>
+                                <li>You dont sleep well<span>Ashwaganda has vitamin d to help people who dont sleep well. </span></li>
+                                <li>You dont sleep well<span>Ashwaganda has vitamin d to help people who dont sleep well. </span></li>
+                            </ul>
+                            <div class="bottom">
+                                <span class="text">Learn More</span>
+                                <span class="btn-right-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                {% endunless %}
+            {% endfor %}
+            <div class="item arrow">
+                <span class="text mobile-hide">Next </span>
+                <span class="text desktop-hide">Get My Herbs</span>
+                <span class="btn-right-arrow"></span>
+            </div>
+        </div>
+    </div>
     <div class="page page-default">
     
         <div class="assets-test-area">

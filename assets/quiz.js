@@ -48,9 +48,9 @@ $(document).ready(function(){
 
   function checkForAutomaticTransition(swiper) {
     // temp start
-    // var indexBeforeLast = slideLen - 1;
-    // var currentSlide = $(swiper.slides[indexBeforeLast]);
-    // swiper.slideNext();
+    var indexBeforeLast = slideLen - 1;
+    var currentSlide = $(swiper.slides[indexBeforeLast]);
+    swiper.slideNext();
     // temp end
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var currentSection = currentSlide.data('slide-section');
@@ -82,6 +82,12 @@ $(document).ready(function(){
     if ($(".sidebar-button-slide").hasClass("collapsed")) {
       $(".sidebar-button-slide").removeClass("collapsed");  
     }
+  })
+  $("#checkout_our_recommendations").on("click", function() {
+    $(".pre-product-recommendation").addClass("hide");
+    $(".recommended-products").removeClass("hide");
+    $(".calculating-announcement-bar").addClass("show");
+    $(".btn--quiz-back").removeClass("proper");
   })
   $backButton.on('click', function() {
     swiper.slidePrev();
