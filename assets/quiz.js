@@ -34,10 +34,11 @@ $(document).ready(function(){
           function() 
           {
             $(".pre-product-recommendation").removeClass("hide");
+            $(".pre-product-recommendation #created_for_someone").text("Created Just For " + quiz.name);
             $(".page.page-default").addClass("hide");
             $backButton.addClass("proper");
             $(".calculating-announcement-bar").removeClass('show');
-          }, 5000);
+          }, 1000);
       } 
     }
   });
@@ -70,25 +71,43 @@ $(document).ready(function(){
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var whyWeAsk = currentSlide.data('why-we-ask');
     var offset = currentSlide.find(".slide-bottom").offset();
-    $(".sidebar-button-slide .inner p").text(whyWeAsk);
-    if (offset != undefined) {
-      $(".sidebar-button-slide").css('top', offset.top);
+    if (whyWeAsk == '' || whyWeAsk == undefined) {
+      $(".sidebar-button-slide").addClass("hide");
+    } else {
+      $(".sidebar-button-slide").removeClass("hide");
+      $(".sidebar-button-slide .inner p").text(whyWeAsk);
+      if (offset != undefined) {
+        $(".sidebar-button-slide").css('top', offset.top);
+      }
     }
+    
   });
-  $(".left-arrow-button").on("click", function() {
+  $(".left-arrow-button").on("click", function(e) {
     $(".sidebar-button-slide").addClass("collapsed");
   })
-  $(".sidebar-button-slide span.title").on("click", function() {
-    if ($(".sidebar-button-slide").hasClass("collapsed")) {
-      $(".sidebar-button-slide").removeClass("collapsed");  
+  $(".sidebar-button-slide").on("click", function(e) {
+    var target = $(e.target);
+    if (!target.hasClass('left-arrow-button')) {
+      if ($(".sidebar-button-slide").hasClass("collapsed")) {
+        $(".sidebar-button-slide").removeClass("collapsed");  
+      }  
     }
+  })
+  $(".learn-more-popup .close").on("click", function() {
+    $(".learn-more-popup").removeClass("popup-open");
   })
   $("#checkout_our_recommendations").on("click", function() {
     $(".pre-product-recommendation").addClass("hide");
     $(".recommended-products").removeClass("hide");
     $(".calculating-announcement-bar").addClass("show");
     $(".btn--quiz-back").removeClass("proper");
+    setTimeout(
+      function() 
+      {
+        $(".learn-more-popup").addClass("popup-open");
+      }, 1000);
   })
+
   $backButton.on('click', function() {
     swiper.slidePrev();
   })
@@ -192,11 +211,13 @@ $(document).ready(function(){
     if ( singleInput.length === 0 ) {
       $(nothingSlected).slideDown();
     } else {
-      $('.dynamic-name').html(singleInput);
-      var uniqueSessionEmail = singleInput + "_" + timestamp + "@klevahealthquiz.com";
-      quiz.email = uniqueSessionEmail;
-      quiz.name = singleInput;
-      $(nameFields).html(singleInput);
+      if (quiz.name == undefined) {
+        $('.dynamic-name').html(singleInput);
+        var uniqueSessionEmail = singleInput + "_" + timestamp + "@klevahealthquiz.com";
+        quiz.email = uniqueSessionEmail;
+        quiz.name = singleInput;
+        $(nameFields).html(singleInput);
+      }
       swiper.slideNext();
       console.log(quiz);
     }

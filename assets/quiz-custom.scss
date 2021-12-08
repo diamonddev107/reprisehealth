@@ -121,11 +121,11 @@
 }
 .sidebar-button-slide.collapsed {
     width: 60px;
+    &:hover {
+        cursor: pointer;
+    }
     .inner span.title {
         margin-left: 20px;
-        &:hover {
-            cursor: pointer;
-        }
     }
     .left-arrow-button, p {
         display: none;
@@ -133,7 +133,7 @@
 }
 .calculating-announcement-bar {
     text-align: center;
-    background: black;
+    background: #272C2F;
     margin-left: -15px;
     margin-right: -15px;
     color: white;
@@ -199,7 +199,7 @@
             a {
                 font-family: 'DM Sans',sans-serif;
                 font-weight: bold;
-                font-size: 14px;
+                font-size: 20px;
                 line-height: 14px;
                 color: #FFFFFF;
             }
@@ -210,6 +210,7 @@
     display: none;
 }
 .recommended-products {
+    height: 100vh;
     .h1 {
         font-family: 'NewYork';
         font-weight: normal;
@@ -217,7 +218,7 @@
         line-height: 65px;
         text-align: center;
         color: #000000;
-        margin-bottom: 50px ;
+        margin-bottom: 50px;
     }
     .products-wrapper {
         display: flex;
@@ -348,6 +349,112 @@
         }
     }
 }
+.learn-more-popup {
+    position: absolute;
+    bottom: 0;
+    left: -681px;
+    width: 681px;
+    transition: transform .4s cubic-bezier(.46, .01, .32, 1);
+    .item {
+        h3, span, ul li {
+            font-family: 'DM Sans',sans-serif;
+            color: #000000;
+        }
+        .image-wrapper {
+            a {
+                display: block;
+                padding-bottom: 20%;
+                img {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+        .text-wrapper {
+            background: #92c79d;
+            padding: 25px 35px;
+            .inner-wrapper {
+                text-align: center;
+                .product-title {
+                    font-weight: normal;
+                    font-size: 61px;
+                    color: #FFFFFF;
+                    border-bottom: 1px solid #000000;
+                    width: 66%;
+                    margin: 0 auto;
+                    line-height: 1.3;
+                }
+                .recommend_label {
+                    font-weight: normal;
+                    font-size: 20px;
+                    margin: 15px 0px 20px;
+                }
+                .recommend_short_text {
+                    font-weight: bold;
+                    font-size: 20px;
+                }
+                ul {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-evenly;
+                    margin-top: 20px;
+                    flex-wrap: wrap;
+                    li {
+                        font-weight: normal;
+                        font-size: 9px;
+                        list-style: disc;
+                        width: 17%;
+                        line-height: 1.5;
+                        label {
+                            font-weight: bold;
+                            font-size: 11px;
+                        }
+                    }
+                }
+                .bottom {
+                    margin-top: 45px;
+                    .learn-more {
+                        font-weight: normal;
+                        font-size: 11px;
+                    }
+                }  
+            }
+            .close-wrapper {
+                display: flex;
+                justify-content: flex-end;
+                .close {
+                    width: 45px;
+                    height: 45px;
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    transform: rotate(45deg);
+                    &::before, &:after {
+                        content: '';
+                        position: absolute;
+                        background: #272C2F;
+                    }
+                    &::before {
+                        width: 45px;
+                        height: 5px;
+                    }
+                    &:after {
+                        width: 5px;
+                        height: 45px;
+                        left: 0;
+                        right: 0;
+                        margin: 0 auto;
+                    }
+                }
+            } 
+        }
+    }
+}
+.learn-more-popup.popup-open {
+    transform: translateX(681px);
+}
 @media (max-width: 798px) {
     .desktop-hide {
         display: block;
@@ -427,8 +534,9 @@
             .right-side {
                 width: 100%;
                 text-align: center;
-                margin-left: 22px;
-                margin-right: 22px;
+                padding-left: 22px;
+                padding-right: 22px;
+                margin: 0;
             }
             .left-side {
                 display: none;
@@ -437,6 +545,7 @@
         
     }
     .recommended-products {
+        height: auto;
         .h1 {
             display: none;
         }
@@ -448,7 +557,7 @@
                 margin-bottom: 20px;
                 .image-wrapper {
                     a {
-                        padding-bottom: 30%;
+                        padding-bottom: 36%;
                     }
                 }
                 .text-wrapper {
@@ -516,5 +625,96 @@
                 }
             }
         }
+    }
+    .learn-more-popup {
+        width: 248px;
+        height: 100%;
+        left: -248px;
+        .item {
+            .image-wrapper {
+                display: none;
+            }
+            .text-wrapper {
+                padding: 32px 16px;
+                .inner-wrapper {
+                    margin-top: 42px;
+                    text-align: left;
+                    .product-title {
+                        font-weight: bold;
+                        font-size: 24px;
+                        width: 100%;
+                        border-color: white;
+                        line-height: 2;
+                    }
+                    .recommend_label {
+                        font-family: "NewYork";
+                        font-weight: normal;
+                        font-size: 40px;
+                        line-height: 140%;
+                    }
+                    .recommend_short_text {
+                        font-weight: normal;
+                        font-size: 17px;
+                        line-height: 140%;
+                    }
+                    ul {
+                        margin-left: 14px;
+                        margin-right: 95px;
+                        li {
+                            width: 100%;
+                            margin-bottom: 16px;
+                        }
+                    }
+                    .bottom {
+                       text-align: center;
+                       display: flex;
+                       align-items: center;
+                       justify-content: space-evenly;
+                        .learn-more {
+                            font-weight: normal;
+                            font-size: 24px;
+                        }
+                        .btn-right-arrow {
+                            width: 6px;
+                            height: 6px;
+                            margin-left: 15px;
+                            margin-top: 3px;
+                            transform: rotate(45deg);
+                            border-top: 1px solid black;
+                            border-right: 1px solid black;
+                            &::before {
+                                content: '';
+                                background: #fff;
+                                position: absolute;
+                                transform: rotate(135deg);
+                                height: 1px;
+                                width: 30px;
+                                right: -1px;
+                                margin-right: -5px;
+                                top: 9px;
+                                background-color: #000;
+                            }
+                        }
+                    }  
+                }
+                .close-wrapper {
+                    .close {
+                       width: 26px;
+                       height: 26px;
+                        &::before {
+                            width: 26px;
+                            height: 3px;
+                        }
+                        &:after {
+                            width: 3px;
+                            height: 26px;
+                        }
+                    }
+                } 
+            }
+        }
+    }
+    .learn-more-popup.popup-open {
+        transform: translateX(248px);
     }
 }

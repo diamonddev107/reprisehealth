@@ -21,7 +21,6 @@
     <div class="pre-product-recommendation hide">
         {% section 'pre-product-recommendation' %}
     </div>
-    <!-- frontpage -->
     <div class="recommended-products hide">
         {% assign collection = collections["frontpage"] %}
         <h2 class="h1">Your Bottle:</h2>
@@ -54,6 +53,34 @@
                 <span class="text mobile-hide">Next </span>
                 <span class="text desktop-hide">Get My Herbs</span>
                 <span class="btn-right-arrow"></span>
+            </div>
+        </div>
+    </div>
+    <div class="learn-more-popup">
+        {% assign handle = 'sleep-beans' %}
+        {% assign product = all_products[handle] %}
+        <div class="item">
+            <div class="image-wrapper">
+                <a href="{{ product.url }}">
+                    {{ product.metafields.custom_fields["recommend_image"] }}
+                </a>
+            </div>
+            <div class="text-wrapper">
+                <div class="close-wrapper">
+                    <div class="close"></div>
+                </div>
+                <div class="inner-wrapper">
+                    <h3 class="recommend_label desktop-hide">{{ product.metafields.custom_fields["recommend_label"] }}</h3>
+                    <span class="recommend_short_text desktop-hide">{{ product.metafields.custom_fields["recommend_short_text"] }}</span>
+                    <h3 class="product-title">{{ product.title | escape }}</h3>
+                    <h3 class="recommend_label mobile-hide">{{ product.metafields.custom_fields["recommend_label"] }}</h3>
+                    <span class="recommend_short_text mobile-hide">{{ product.metafields.custom_fields["recommend_short_text"] }}</span>
+                    {{ product.metafields.custom_fields["recommend_content"] }}
+                    <div class="bottom">
+                        <span class="learn-more">Learn More</span>
+                        <span class="btn-right-arrow desktop-hide"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -214,7 +241,7 @@
                                 </div>
                                 <div class="calculating-body">
                                     <div class="body-inner">
-                                        <img src="{{ 'loading-image.png' | asset_img_url:'482x' }}" />
+                                        <img src="{{ 'Rolling.gif' | asset_img_url:'482x' }}" />
                                         <div class="center-group">
                                             {% comment %} <img class="" src="{{ 'emoticon-10.png' | asset_img_url }}" /> {% endcomment %}
                                             <span>Calculating Results...</span>
