@@ -24,15 +24,12 @@
     <div class="recommended-products hide">
         {% assign collection = collections["quiz"] %}
         {% assign custom_bottle = all_products['custom-bottle'] %}
-        <script class="kjh">
-            {{ custom_bottle | json }}
-        </script>
-        <input type="hidden" id="custom_bottle_variant_id" value="{{ product.custom_bottle.first.id }}">
+        <input type="hidden" id="custom_bottle_variant_id" value="{{ custom_bottle.variants.first.id }}">
         <h2 class="h1">Your Bottle:</h2>
         <div class="products-wrapper">
             {% for product in collection.products %}
                 {% unless product.title contains "Subscription" %}
-                    <div class="item" data-product-handle="{{ product.handle }}" data-product-name="{{ product.name }}">
+                    <div class="item" data-product-handle="{{ product.handle }}" data-product-name="{{ product.title }}">
                         <div class="image-wrapper">
                             <a href="{{ product.url }}">
                                 <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}">

@@ -143,14 +143,22 @@ $(document).ready(function(){
       }, 1000);
   })
   $("#add_custom_bottle_to_cart").on("click", function() {
+    var custom_bottle_variant_id = $("#custom_bottle_variant_id").val();
+    var properties = {};
+    $(".recommended-products .products-wrapper .item").each(function(i, e) {
+      if (!$(this).hasClass('arrow')) {
+        if (!$(this).hasClass('hide')) {
+          var product_name = $(this).data("product-name");
+          properties['product-'+ i] = product_name;
+        }
+      }
+    })
     var addData = {
       items: [
         {
           'quantity': 1,
-          'id': quick_product_id,
-          'properties': {
-            'Gift Wrapping Note': 'on'
-          }
+          'id': custom_bottle_variant_id,
+          'properties': properties
         }
       ]
     }
@@ -163,6 +171,9 @@ $(document).ready(function(){
     })
     .then(response => {
       console.log(response);
+      if (response.status == 200) {
+        location.href='/cart';  
+      }
     })
     .catch((error) => {
       console.error('Error:', error);
