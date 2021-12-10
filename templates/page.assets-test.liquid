@@ -11,7 +11,7 @@
     <div class="calculating-announcement-bar desktop-hide">
         <span> Questions Completed</span>
     </div>
-    <div class="sidebar-button-slide collapsed">
+    <div class="sidebar-button-slide collapsed hide">
         <div class="inner">
             <span class="title">Why We Ask?</span>
             <p></p>
@@ -22,12 +22,17 @@
         {% section 'pre-product-recommendation' %}
     </div>
     <div class="recommended-products hide">
-        {% assign collection = collections["frontpage"] %}
+        {% assign collection = collections["quiz"] %}
+        {% assign custom_bottle = all_products['custom-bottle'] %}
+        <script class="kjh">
+            {{ custom_bottle | json }}
+        </script>
+        <input type="hidden" id="custom_bottle_variant_id" value="{{ product.custom_bottle.first.id }}">
         <h2 class="h1">Your Bottle:</h2>
         <div class="products-wrapper">
-            {% for product in collection.products limit: 4 %}
+            {% for product in collection.products %}
                 {% unless product.title contains "Subscription" %}
-                    <div class="item">
+                    <div class="item" data-product-handle="{{ product.handle }}" data-product-name="{{ product.name }}">
                         <div class="image-wrapper">
                             <a href="{{ product.url }}">
                                 <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}">
@@ -49,7 +54,7 @@
                     </div>
                 {% endunless %}
             {% endfor %}
-            <div class="item arrow">
+            <div class="item arrow" id="add_custom_bottle_to_cart">
                 <span class="text mobile-hide">Next </span>
                 <span class="text desktop-hide">Get My Herbs</span>
                 <span class="btn-right-arrow"></span>
@@ -241,7 +246,7 @@
                                 </div>
                                 <div class="calculating-body">
                                     <div class="body-inner">
-                                        <img src="{{ 'Rolling.gif' | asset_img_url:'482x' }}" />
+                                        <img src="{{ 'Rolling-new.gif' | asset_img_url:'482x' }}" />
                                         <div class="center-group">
                                             {% comment %} <img class="" src="{{ 'emoticon-10.png' | asset_img_url }}" /> {% endcomment %}
                                             <span>Calculating Results...</span>
@@ -260,7 +265,6 @@
                     </div>
                 </div>
             </div>
-            
             <div id="devScoreWrapper">
             </div>
         </div>

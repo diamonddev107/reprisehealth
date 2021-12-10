@@ -112,7 +112,7 @@ $(document).ready(function(){
             var scoreWrapper = $('#devScoreWrapper');
 
             productsRow.forEach((item, index)=>{
-                var htmlProduct = `<div class-"product-score-wrapper"><p><span>${item}</span>: <span data-total-score-${item} data-total-score="0">0</span></p></div>`;
+                var htmlProduct = `<div class="product-score-wrapper"><p><span data-product-handle>${item}</span>: <span data-total-score-${item} data-total-score="0">0</span></p></div>`;
                 scoreWrapper.append(htmlProduct);
             })
 
