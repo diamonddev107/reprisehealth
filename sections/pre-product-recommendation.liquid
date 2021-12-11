@@ -5,7 +5,7 @@
     <div class="right-side half-width">
         <span>{{ section.settings.sub_title }}</span>
         <h2 id="created_for_someone" class="h1">{{ section.settings.title }}</h2>
-        <p>{{ section.settings.text }}</p>
+        <p id="goals_for_category_names">{{ section.settings.text }}</p>
         <a id="checkout_our_recommendations" href="javascript:;">{{ section.settings.btn_text }}</a>
         {% comment %} <a id="checkout_our_recommendations" href="{{ section.settings.btn_link }}">{{ section.settings.btn_text }}</a> {% endcomment %}
     </div>
@@ -35,7 +35,7 @@
             "type": "textarea",
             "id": "text",
             "label": "Text",
-            "default": "Your Recommendations are based on your goals for x, y and z. To perfect your routine we recommend you take the following supplements."
+            "default": "Your Recommendations are based on your goals for @category-names. To perfect your routine we recommend you take the following supplements."
         },
         {
             "type": "text",

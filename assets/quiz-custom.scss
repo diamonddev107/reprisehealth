@@ -5,7 +5,7 @@
     display: none;
 }
 .mySwiper {
-    height: 100vh; // As height of slide items is different each other, Need to keep same height of items in 100vh
+    //height: 100vh; // As height of slide items is different each other, Need to keep same height of items in 100vh
 }
 .page.page-default.vh {
     height: 100vh;
@@ -271,6 +271,7 @@
             .text-wrapper {
                 background-color: #92C79D;
                 padding: 35px 20px;
+                padding-bottom: 5px;
                 h3, span, li {
                     font-family: 'DM Sans',sans-serif;
                 }
@@ -318,6 +319,14 @@
                     border-top: 1px solid #FEFFB9;
                     margin-top: 50px;
                     margin-bottom: 10px;
+                    .btn-right-arrow-wrapper {
+                        display: block;
+                        width: 100%;
+                        height: 30px;
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
                     span.text {
                         font-weight: normal;
                         font-size: 11px;
@@ -420,9 +429,15 @@
                 }
                 .bottom {
                     margin-top: 45px;
-                    .learn-more {
-                        font-weight: normal;
-                        font-size: 11px;
+                    .popup-learn-more-link {
+                        padding: 10px 20px;
+                        &:hover {
+                            cursor: pointer;
+                        }
+                        .learn-more {
+                            font-weight: normal;
+                            font-size: 11px;
+                        }
                     }
                 }  
             }
@@ -459,6 +474,18 @@
 }
 .learn-more-popup.popup-open {
     transform: translateX(681px);
+}
+.btn--quiz-back {
+    padding-top: 30px;
+    img {
+        display: none;
+    }
+    span {
+        padding: 10px 20px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
 }
 @media (max-width: 798px) {
     .desktop-hide {
@@ -497,7 +524,10 @@
         display: flex;
         align-items: center;
         img {
-            margin-right: 8px;
+            display: inline-block;
+        }
+        span {
+            padding: 10px;
         }
     }
     .btn--quiz-back.proper {

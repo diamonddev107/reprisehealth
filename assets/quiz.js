@@ -28,15 +28,33 @@ $(document).ready(function(){
         $('.breadcrumbs-progress-wrapper').addClass("hide");
         $(".calculating-announcement-bar").addClass('show');
         $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
-        $(".page.page-default").addClass('vh');
+        // $(".page.page-default").addClass('vh');
         $(".sidebar-button-slide").addClass("hide");
         setTimeout(
           function() 
           {
+            var cat_names = '';
+            var cat_arr = quiz.healthCategories;
+
+            for (var i = 0; i < cat_arr.length; i++) {
+              cat_names += cat_arr[i];
+              if (cat_arr.length > 1) {
+                if (i < cat_arr.length - 1) {
+                  if (cat_arr.length >= 2 && i == cat_arr.length - 2) {
+                    cat_names += " and ";
+                  } else {
+                    cat_names += ", ";
+                  }
+                }
+              }
+            }
+            console.log(cat_names, "++++++++++++++++++");
             $(".pre-product-recommendation").removeClass("hide");
-            $(".pre-product-recommendation #created_for_someone").text("Created Just For " + quiz.name);
+            $("#created_for_someone").text("Created Just For " + quiz.name);
+            $("#goals_for_category_names").text($("#goals_for_category_names").text().replace("@category-names", cat_names));
             $(".page.page-default").addClass("hide");
             $backButton.addClass("proper");
+            $backButton.addClass("desktop-hide");
             $(".calculating-announcement-bar").removeClass('show');
           }, 5000);
       } 
@@ -48,29 +66,16 @@ $(document).ready(function(){
   });
 
   function checkForAutomaticTransition(swiper) {
-    // temp start
-    // var indexBeforeLast = slideLen - 1;
-    // var currentSlide = $(swiper.slides[indexBeforeLast]);
-    // swiper.slideNext();
-    // temp end
-    var currentSlide = $(swiper.slides[swiper.realIndex]);
-    var currentSection = currentSlide.data('slide-section');
-    var whyWeAsk = currentSlide.data('why-we-ask');
-    $(".sidebar-button-slide .inner p").text(whyWeAsk);
-    setBreadCrumbsProgress(currentSection);
-    if ( currentSlide.data('transition-time') ) {
-      var transitionTime = currentSlide.data('transition-time') * 1000;
-      setTimeout(
-        function() 
-        {
-          swiper.slideNext(300);
-        }, transitionTime);
+    if (swiper.realIndex == 0) {
+      $backButton.addClass("hide");
+    } else {
+      $backButton.removeClass("hide");
     }
-  }
-  swiper.on('slideChange', function () {
+
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var whyWeAsk = currentSlide.data('why-we-ask');
     var offset = currentSlide.find(".slide-bottom").offset();
+
     if (whyWeAsk == '' || whyWeAsk == undefined) {
       $(".sidebar-button-slide").addClass("hide");
     } else {
@@ -80,8 +85,27 @@ $(document).ready(function(){
         $(".sidebar-button-slide").css('top', offset.top);
       }
     }
+    // temp start
+    // var indexBeforeLast = slideLen - 1;
+    // var currentSlide = $(swiper.slides[indexBeforeLast]);
+    // swiper.slideNext();
+    // temp end
+    var currentSlide = $(swiper.slides[swiper.realIndex]);
+    var currentSection = currentSlide.data('slide-section');
+    var whyWeAsk = currentSlide.data('why-we-ask');
+    $(".sidebar-button-slide .inner p").text(whyWeAsk);
+
+    setBreadCrumbsProgress(currentSection);
     
-  });
+    if ( currentSlide.data('transition-time') ) {
+      var transitionTime = currentSlide.data('transition-time') * 1000;
+      setTimeout(
+        function() 
+        {
+          swiper.slideNext(300);
+        }, transitionTime);
+    }
+  }
   $(".left-arrow-button").on("click", function(e) {
     $(".sidebar-button-slide").addClass("collapsed");
   })
@@ -95,6 +119,13 @@ $(document).ready(function(){
   })
   $(".learn-more-popup .close").on("click", function() {
     $(".learn-more-popup").removeClass("popup-open");
+  })
+  $(".btn-right-arrow-wrapper").on("click", function() {
+    var product_title = $(this).closest(".item").find(".product-title").text();
+    var product_url = $(this).closest(".item").find(".product-title").data("url");
+    $(".learn-more-popup .product-title").text(product_title);
+    $(".learn-more-popup .popup-learn-more-link").attr("href", product_url);
+    $(".learn-more-popup").addClass("popup-open");
   })
   $("#checkout_our_recommendations").on("click", function() {
     // Select top 3 products from quiz result - start.
@@ -135,7 +166,8 @@ $(document).ready(function(){
     $(".pre-product-recommendation").addClass("hide");
     $(".recommended-products").removeClass("hide");
     $(".calculating-announcement-bar").addClass("show");
-    $(".btn--quiz-back").removeClass("proper");
+    $backButton.removeClass("proper");
+
     setTimeout(
       function() 
       {
@@ -179,7 +211,10 @@ $(document).ready(function(){
       console.error('Error:', error);
     });
   })
-  $backButton.on('click', function() {
+  $backButton.on('click', 'span', function() {
+    swiper.slidePrev();
+  })
+  $backButton.on('click', 'img', function() {
     swiper.slidePrev();
   })
   $rangeAnswer.on('click',function(e){
@@ -335,7 +370,7 @@ $(document).ready(function(){
         //console.log('looping through slides', i, {targetSlideState}, {nextSlideIndex}, {numberOfSlides});
         if ( targetSlideState ) {
           quiz.questions.push(thisQuestionDataObject);
-          //submitToKlaviyo(quiz); 
+          //submitToKlaviyo(quiz);
           //console.log(quiz);
           swiper.slideTo(i,10);
           break;
