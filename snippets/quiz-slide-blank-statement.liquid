@@ -1,10 +1,24 @@
-<div class="slide-inner">
-  <div class="slide-top">
-    <div class="slide-header">
-      <div class="question-heading slide-question slide-question-small text-center">{{ item["question_text"] }}</div>
-      <div class="slide-question slide-question-small text-center">{{ item["subtext"] }}</div>
+{% assign section_order = '' %}
+{% assign section_button = '' %}
+{% if item['question_section'] == "Opening" %}
+  {% assign section_order = "01" %}
+  {% assign section_button = 'Take The Quiz' %}
+{% elsif item['question_section'] == "Lifestyle" %}
+  {% assign section_order = "02" %}
+  {% assign section_button = 'Let’s Go!' %}
+{% endif %}
+<div class="slide-inner" {% if item["slide_main_image"] != blank %} style="background-image: url('{{ item['slide_main_image'] }}')" {% endif %}>
+  <span class="section-heading desktop-hide">Section/{{ section_order }}</span>
+  <div class="slide-wrapper">
+    <div class="slide-top">
+      <span class="section-heading mobile-hide">Section/{{ section_order }}</span>
+      <div class="slide-header">
+        <div class="question-heading slide-question slide-question-small text-center">{{ item["question_text"] }}</div>
+        <div class="question-text slide-question slide-question-small text-center">{{ item["subtext"] }}</div>
+      </div>
     </div>
-  </div>
-  <div class="slide-bottom">
+    <div class="slide-bottom">
+      <a class="btn-section-cover">{{ section_button }}</a>
+    </div>
   </div>
 </div>

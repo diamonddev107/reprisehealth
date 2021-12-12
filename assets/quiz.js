@@ -6,6 +6,7 @@ $(document).ready(function(){
   var quiz = {};
   var questionsArray = [];
   quiz.questions = questionsArray;
+  var $sectionCoverButton = $('.btn-section-cover');
   var $continueButton = $('.btn--quiz-continue');
   var $backButton = $('.btn--quiz-back');
   var $answerSelector = $('.btn--answer');
@@ -25,38 +26,7 @@ $(document).ready(function(){
         checkForAutomaticTransition(swiper);
       },
       reachEnd: function(swiper) {
-        $('.breadcrumbs-progress-wrapper').addClass("hide");
-        $(".calculating-announcement-bar").addClass('show');
-        $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
-        // $(".page.page-default").addClass('vh');
-        $(".sidebar-button-slide").addClass("hide");
-        setTimeout(
-          function() 
-          {
-            var cat_names = '';
-            var cat_arr = quiz.healthCategories;
-
-            for (var i = 0; i < cat_arr.length; i++) {
-              cat_names += cat_arr[i];
-              if (cat_arr.length > 1) {
-                if (i < cat_arr.length - 1) {
-                  if (cat_arr.length >= 2 && i == cat_arr.length - 2) {
-                    cat_names += " and ";
-                  } else {
-                    cat_names += ", ";
-                  }
-                }
-              }
-            }
-            console.log(cat_names, "++++++++++++++++++");
-            $(".pre-product-recommendation").removeClass("hide");
-            $("#created_for_someone").text("Created Just For " + quiz.name);
-            $("#goals_for_category_names").text($("#goals_for_category_names").text().replace("@category-names", cat_names));
-            $(".page.page-default").addClass("hide");
-            $backButton.addClass("proper");
-            $backButton.addClass("desktop-hide");
-            $(".calculating-announcement-bar").removeClass('show');
-          }, 5000);
+        reachSlideEnd();
       } 
     }
   });
@@ -98,13 +68,54 @@ $(document).ready(function(){
     setBreadCrumbsProgress(currentSection);
     
     if ( currentSlide.data('transition-time') ) {
+      $('.breadcrumbs-progress-wrapper').addClass("hide");
+      $('#MainContent .container').addClass("section-cover");
+      $(".sidebar-button-slide").addClass("hide");
       var transitionTime = currentSlide.data('transition-time') * 1000;
       setTimeout(
         function() 
         {
           swiper.slideNext(300);
         }, transitionTime);
+    } else {
+      $('.breadcrumbs-progress-wrapper').removeClass("hide");
+      $('#MainContent .container').removeClass("section-cover");
     }
+  }
+  function reachSlideEnd() {
+    $('.breadcrumbs-progress-wrapper').addClass("hide");
+    $(".calculating-announcement-bar").addClass('show');
+    $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
+    // $(".page.page-default").addClass('vh');
+    $(".sidebar-button-slide").addClass("hide");
+    setTimeout(
+      function() 
+      {
+        var cat_names = '';
+        var cat_arr = quiz.healthCategories;
+
+        for (var i = 0; i < cat_arr.length; i++) {
+          cat_names += cat_arr[i];
+          if (cat_arr.length > 1) {
+            if (i < cat_arr.length - 1) {
+              if (cat_arr.length >= 2 && i == cat_arr.length - 2) {
+                cat_names += " and ";
+              } else {
+                cat_names += ", ";
+              }
+            }
+          }
+        }
+
+        $(".pre-product-recommendation").removeClass("hide");
+        $("#created_for_someone").text("Created Just For " + quiz.name);
+        $("#goals_for_category_names").text($("#goals_for_category_names").text().replace("@category-names", cat_names));
+        $(".page.page-default").addClass("hide");
+        $backButton.addClass("proper");
+        $backButton.addClass("desktop-hide");
+        $(".calculating-announcement-bar").removeClass('show');
+      }, 5000
+    );
   }
   $(".left-arrow-button").on("click", function(e) {
     $(".sidebar-button-slide").addClass("collapsed");
@@ -167,12 +178,6 @@ $(document).ready(function(){
     $(".recommended-products").removeClass("hide");
     $(".calculating-announcement-bar").addClass("show");
     $backButton.removeClass("proper");
-
-    setTimeout(
-      function() 
-      {
-        $(".learn-more-popup").addClass("popup-open");
-      }, 1000);
   })
   $("#add_custom_bottle_to_cart").on("click", function() {
     var custom_bottle_variant_id = $("#custom_bottle_variant_id").val();
@@ -328,7 +333,9 @@ $(document).ready(function(){
       console.log(quiz);
     }
   });
-
+  $sectionCoverButton.on('click',function(){
+    swiper.slideNext();
+  });
   $continueButton.on('click',function(){
     var thisSlide = $(this).closest('.swiper-slide');
     

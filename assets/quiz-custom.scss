@@ -1,3 +1,77 @@
+.container.section-cover {
+    padding: 0;
+    .page.page-default {
+        padding: 0;
+        .asset-wrapper.swiper-wrapper {
+            margin: 0;
+            max-width: 100%;
+            .swiper-wrapper {
+                max-width: 100%;
+                height: 100vh;
+                .swiper-slide-active .slide-inner {
+                    width: 100%;
+                    background-size: cover;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-wrap: wrap;
+                    flex-direction: column;
+                    .slide-wrapper {
+                        background: white;
+                        max-width: 705px;
+                        width: 100%;
+                        border-radius: 10px;
+                        padding: 30px;
+                        .section-heading {
+                            font-family: 'NewYork';
+                            font-size: 44px;
+                            line-height: 1;
+                            text-align: center;
+                            color: #92C79D;
+                            display: block;
+                        }
+                        .question-heading {
+                            font-family: 'NewYork';
+                            text-transform: capitalize;
+                            color: #272C2F;
+                            margin-top: 30px;
+                            margin-bottom: 50px;
+                        }
+                        .question-text {
+                            font-family: 'DM Sans', sans-serif;
+                            font-size: 20px;
+                            line-height: 24px;
+                            color: #272C2F;
+                        }
+                        .slide-bottom {
+                            margin-top: 30px;
+                            padding: 18px 80px;
+                            .btn-section-cover {
+                                &:hover {
+                                    cursor: pointer;
+                                }
+                                background: #272C2F;
+                                border-radius: 10px;
+                                color: white;
+                                border: none;
+                                font-family: 'DM Sans', sans-serif;
+                                font-size: 20px;
+                                line-height: 1;
+                                text-align: center;
+                                color: #FFFFFF;
+                                text-transform: capitalize;
+                                padding: 18px 80px;
+                                height: auto;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 #devScoreWrapper {
     display: none;
 }
@@ -488,6 +562,42 @@
     }
 }
 @media (max-width: 798px) {
+    .container.section-cover {
+        .page.page-default .asset-wrapper.swiper-wrapper .swiper-wrapper .swiper-slide-active .slide-inner {
+            background-position: left;
+            .slide-wrapper {
+                padding: 20px;
+                margin: 0 auto;
+                width: 85%;
+                .question-heading {
+                    font-size: 24px;
+                    margin-bottom: 15px;
+                }
+                .question-text {
+                    font-size: 12px;
+                }
+                .section-heading.mobile-hide {
+                    display: none;
+                }
+                .slide-bottom {
+                    padding: 10px 50px;
+                    margin-top: 15px;
+                    .btn-section-cover {
+                        font-size: 14px;
+                        padding: 10px 50px;
+                    }
+                }
+            }
+            .section-heading.desktop-hide {
+                font-family: 'NewYork';
+                font-style: normal;
+                font-size: 24px;
+                line-height: 1;
+                color: #272C2F;
+                margin: 30px 0px;
+            }
+        }
+    }
     .desktop-hide {
         display: block;
     }
