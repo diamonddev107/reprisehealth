@@ -78,7 +78,9 @@ $(document).ready(function(){
           swiper.slideNext(300);
         }, transitionTime);
     } else {
-      $('.breadcrumbs-progress-wrapper').removeClass("hide");
+      if (!currentSlide.hasClass('calculating-slide')) {
+        $('.breadcrumbs-progress-wrapper').removeClass("hide");  
+      }
       $('#MainContent .container').removeClass("section-cover");
     }
   }
