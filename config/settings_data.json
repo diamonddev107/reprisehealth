@@ -1483,7 +1483,7 @@
         "type": "pre-product-recommendation",
         "settings": {
           "image": "shopify:\/\/shop_images\/pexels-maria-orlova-4947151_1.png",
-          "title": "Created Just For Emma",
+          "title": "Created Just For @name",
           "sub_title": "Your Results Are Ready!",
           "text": "Your Recommendations are based on your goals for @category-names. To perfect your routine we recommend you take the following supplements.",
           "btn_text": "Check Out Our Recommendations",

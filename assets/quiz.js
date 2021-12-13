@@ -1,7 +1,10 @@
 
 
 $(document).ready(function(){
-  
+  $("#MainContent .container").children().each(function() {
+    $(this).html($(this).html().replace(/@name/g,'<span class="dynamic-name"></span>'));
+  });
+
   var timestamp = new Date().getTime();
   var quiz = {};
   var questionsArray = [];
@@ -110,7 +113,7 @@ $(document).ready(function(){
         }
 
         $(".pre-product-recommendation").removeClass("hide");
-        $("#created_for_someone").text("Created Just For " + quiz.name);
+        // $("#created_for_someone").text("Created Just For " + quiz.name);
         $("#goals_for_category_names").text($("#goals_for_category_names").text().replace("@category-names", cat_names));
         $(".page.page-default").addClass("hide");
         $backButton.addClass("proper");
@@ -329,7 +332,7 @@ $(document).ready(function(){
         var uniqueSessionEmail = singleInput + "_" + timestamp + "@klevahealthquiz.com";
         quiz.email = uniqueSessionEmail;
         quiz.name = singleInput;
-        $(nameFields).html(singleInput);
+        // $(nameFields).html(singleInput);
       }
       swiper.slideNext();
       console.log(quiz);
