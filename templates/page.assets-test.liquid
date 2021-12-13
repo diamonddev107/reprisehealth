@@ -146,7 +146,8 @@
                                         data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-question-text="Health Topics" 
                                         data-slide-category="">
-                                    {% render 'quiz-slide-categories' %} </div>
+                                    {% render 'quiz-slide-categories', item: item %} 
+                                </div>
                             {% elsif item["question_type"] == "Name of User" %}
                                 <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
                                         data-slide-section="{{ slideSection }}"

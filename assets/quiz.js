@@ -74,12 +74,12 @@ $(document).ready(function(){
       $('.breadcrumbs-progress-wrapper').addClass("hide");
       $('#MainContent .container').addClass("section-cover");
       $(".sidebar-button-slide").addClass("hide");
-      var transitionTime = currentSlide.data('transition-time') * 1000;
-      setTimeout(
-        function() 
-        {
-          swiper.slideNext(300);
-        }, transitionTime);
+      // var transitionTime = currentSlide.data('transition-time') * 1000;
+      // setTimeout(
+      //   function() 
+      //   {
+      //     swiper.slideNext(300);
+      //   }, transitionTime);
     } else {
       if (!currentSlide.hasClass('calculating-slide')) {
         $('.breadcrumbs-progress-wrapper').removeClass("hide");  
@@ -136,7 +136,7 @@ $(document).ready(function(){
   $(".learn-more-popup .close").on("click", function() {
     $(".learn-more-popup").removeClass("popup-open");
   })
-  $(".btn-right-arrow-wrapper").on("click", function() {
+  $(".btn-right-arrow-wrapper").closest(".bottom").on("click", function() {
     var product_title = $(this).closest(".item").find(".product-title").text();
     var product_url = $(this).closest(".item").find(".product-title").data("url");
     $(".learn-more-popup .product-title").text(product_title);
@@ -279,7 +279,7 @@ $(document).ready(function(){
 
     $button.toggleClass('btn--quiz-active');
     checkQuizContinue(1, thisQuestionAnswersWrapper, thisQuestionWrapper);
-    checkQuizMax(3, thisQuestionAnswersWrapper);
+    checkQuizMax($(this).closest(".slide-answer-wrapper-categories").data("max-choices-allowed"), thisQuestionAnswersWrapper);
     setActiveCategorySlides(thisQuestionAnswersWrapper);
   });
 
@@ -343,9 +343,11 @@ $(document).ready(function(){
   });
   $continueButton.on('click',function(){
     var thisSlide = $(this).closest('.swiper-slide');
-    
-    slideContinueFromThisSlide(thisSlide);
-    
+    if (!$(this).hasClass("btn--quiz-continue-inactive")) {
+      slideContinueFromThisSlide(thisSlide);  
+    } else {
+      $(this).closest(".slide-continue-wrapper").find(".nothing-selected").slideDown();
+    }
   });
 
   function slideContinueFromThisSlide(thisSlide) {

@@ -1,61 +1,63 @@
 
-
-<div class="number-range">
-  <div class="range-emoticon">
-      <img class="" src="{{ 'emoticon-01.png' | asset_img_url }}" />
-      <img class="" src="{{ 'emoticon-02.png' | asset_img_url }}" />
-      <img class="" src="{{ 'emoticon-03.png' | asset_img_url }}" />
-      <img class="active" src="{{ 'emoticon-04.png' | asset_img_url }}" />
-      <img class="" src="{{ 'emoticon-05.png' | asset_img_url }}" />
-      <img class="" src="{{ 'emoticon-06.png' | asset_img_url }}" />
-      <img class="" src="{{ 'emoticon-07.png' | asset_img_url }}" />
-      <img class="" src="{{ 'emoticon-08.png' | asset_img_url }}" />
-      <img class="" src="{{ 'emoticon-09.png' | asset_img_url }}" />
-      <img class="" src="{{ 'emoticon-10.png' | asset_img_url }}" />
-  </div>
-  <div class="range-message">
-    <p class="">Worst It Could Be</p>
-    <p class="">It’s Okay, Definetly room to improve. </p>
-    <p class="">Its Awesome!</p>
-    <p class="active">Worst It Could Be</p>
-    <p class="">It’s Okay, Definetly room to improve. </p>
-    <p class="">Its Awesome!</p>
-    <p class="">Worst It Could Be</p>
-    <p class="">It’s Okay, Definetly room to improve. </p>
-    <p class="">Its Awesome!</p>
-    <p class="">Its Awesome!</p>
-  </div>
-  <div class="range-bar">
-    <div class="range-bar-inner">
-      {% for i in (min..max) %}
-        {% if i == active %}
-          <div class="range-bar-item range-bar-item-active range-bar-item-selected"><span class="mobile-top-line"></span></div>
-        {% elsif i < active %}
-          <div class="range-bar-item range-bar-item-active"><span class="mobile-top-line"></span></div>
-        {% else %}
-          <div class="range-bar-item range-bar-item-inactive"><span class="mobile-top-line"></span></div>
+{% if item != blank %}
+  {% assign active = 1 %}
+  <div class="number-range">
+    <div class="range-emoticon">
+      {% for answer_choices_item in item %}
+        {% if answer_choices_item["emoticon"] != blank %}
+          {% assign active_str = '' %}
+          {% if answer_choices_item['active'] == 1 %}
+            {% assign active = forloop.index %}
+            {% assign active_str = "active" %}
+          {% endif %}
+          <img class="{{ active_str }}" src="{{ answer_choices_item["emoticon"] }}" />
         {% endif %}
       {% endfor %}
     </div>
-  </div>
-  <div class="range-dots">
-    <!-- {{ min }}    {{ max }}    {{ step }}    {{ active }} -->
-    <div class="range-dots-inner">
-      {% for i in (min..max) %}
-        {% if i == active %}
-          <div class="range-dot-wrapper range-dot-wrapper-active" data-range-value="{{ i }}" data-answer="{{ i }}">
-            <span>{{ i }}</span>
-            <img class="dot-image-active" src="{{ 'activeDot.png' | asset_img_url }}" />
-            <img class="dot-image-inactive" src="{{ 'inactiveDot.png' | asset_img_url }}" />
-          </div>
-        {% else %}
-          <div class="range-dot-wrapper range-dot-wrapper-inactive" data-range-value="{{ i }}" data-answer="{{ i }}">
-            <span>{{ i }}</span>
-            <img class="dot-image-active" src="{{ 'activeDot.png' | asset_img_url }}" />
-            <img class="dot-image-inactive" src="{{ 'inactiveDot.png' | asset_img_url }}" />
-          </div>
+    <div class="range-message">
+      {% for answer_choices_item in item %}
+        {% if answer_choices_item["dynamic_range_value_message"] != blank %}
+          {% assign active_str = '' %}
+          {% if answer_choices_item['active'] == 1 %}
+            {% assign active_str = "active" %}
+          {% endif %}
+          <p class="{{ active_str }}">{{ answer_choices_item["dynamic_range_value_message"] }}</p>
         {% endif %}
       {% endfor %}
     </div>
+    <div class="range-bar">
+      <div class="range-bar-inner">
+        {% for i in (1..item.size) %}
+          {% if i == active %}
+            <div class="range-bar-item range-bar-item-active range-bar-item-selected"><span class="mobile-top-line"></span></div>
+          {% elsif i < active %}
+            <div class="range-bar-item range-bar-item-active"><span class="mobile-top-line"></span></div>
+          {% else %}
+            <div class="range-bar-item range-bar-item-inactive"><span class="mobile-top-line"></span></div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class="range-dots">
+      <div class="range-dots-inner">
+        {% for answer_choices_item in item %}
+          {% if answer_choices_item["answer_text"] != blank %}
+            {% if forloop.index == active %}
+              <div class="range-dot-wrapper range-dot-wrapper-active" data-range-value="{{ answer_choices_item["answer_text"] }}" data-answer="{{ answer_choices_item["answer_text"] }}">
+                <span>{{ answer_choices_item["answer_text"] }}</span>
+                <img class="dot-image-active" src="{{ 'activeDot.png' | asset_img_url }}" />
+                <img class="dot-image-inactive" src="{{ 'inactiveDot.png' | asset_img_url }}" />
+              </div>
+            {% else %}
+              <div class="range-dot-wrapper range-dot-wrapper-inactive" data-range-value="{{ answer_choices_item["answer_text"] }}" data-answer="{{ answer_choices_item["answer_text"] }}">
+                <span>{{ answer_choices_item["answer_text"] }}</span>
+                <img class="dot-image-active" src="{{ 'activeDot.png' | asset_img_url }}" />
+                <img class="dot-image-inactive" src="{{ 'inactiveDot.png' | asset_img_url }}" />
+              </div>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
   </div>
-</div>
+{% endif %}
