@@ -48,7 +48,14 @@ $(document).ready(function(){
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var whyWeAsk = currentSlide.data('why-we-ask');
     var offset = currentSlide.find(".slide-bottom").offset();
-
+    var wowSlide = currentSlide.data('question-type');
+    
+    if (wowSlide == "Wow [name]" && quiz.healthCategories.length == 1) {
+        var wowText = currentSlide.find(".question-subheading").text();
+        var singleResult = wowText.replace("Those are some great goals", "That's a great goal");
+        singleResult = singleResult.replace(/goals/g, "goal");
+        currentSlide.find(".question-subheading").text(singleResult);
+    }
     if (whyWeAsk == '' || whyWeAsk == undefined) {
       $(".sidebar-button-slide").addClass("hide");
     } else {
@@ -73,6 +80,7 @@ $(document).ready(function(){
     if ( currentSlide.data('transition-time') ) {
       $('.breadcrumbs-progress-wrapper').addClass("hide");
       $('#MainContent .container').addClass("section-cover");
+      $backButton.addClass("hide");
       $(".sidebar-button-slide").addClass("hide");
       // var transitionTime = currentSlide.data('transition-time') * 1000;
       // setTimeout(
@@ -136,7 +144,7 @@ $(document).ready(function(){
   $(".learn-more-popup .close").on("click", function() {
     $(".learn-more-popup").removeClass("popup-open");
   })
-  $(".btn-right-arrow-wrapper").closest(".bottom").on("click", function() {
+  $(".btn-right-arrow-wrapper").closest(".item").on("click", function() {
     var product_title = $(this).closest(".item").find(".product-title").text();
     var product_url = $(this).closest(".item").find(".product-title").data("url");
     $(".learn-more-popup .product-title").text(product_title);
@@ -227,8 +235,11 @@ $(document).ready(function(){
   $backButton.on('click', 'img', function() {
     swiper.slidePrev();
   })
+  $(".range-bar-item").on("click", function() {
+    var index = $(this).index();
+    $('.range-dot-wrapper[data-range-value="'+index+'"]').trigger("click");
+  })
   $rangeAnswer.on('click',function(e){
-    console.log($(this));
     var thisSlide = $(this).closest('.swiper-slide');
     var thisQuestion = this.closest('.number-range');
     var thisRangeBar = $(thisQuestion).find('.range-bar-inner');
@@ -316,17 +327,45 @@ $(document).ready(function(){
     }
 
   });
-
+  $("input[type='text']").keypress(function(e){
+    if (e.keyCode === 13) {
+      $(this).closest("form").find(".inline-continue").trigger("click");  
+    }
+  });
   $inlineContinues.on('click',function(){
     var thisQuestionWrapper = $(this).closest('.slide-inner');
     var singleInputEl = $(this).parent().find('input');
     var singleInput = singleInputEl.val();
     var nothingSlected = $(thisQuestionWrapper).find('.nothing-selected');
-    var nameFields = $("span[data-user-name]");
+    // var nameFields = $("span[data-user-name]");
 
     if ( singleInput.length === 0 ) {
-      $(nothingSlected).slideDown();
+      $(nothingSlected).text("Please enter your info :)").slideDown();
     } else {
+      if (singleInputEl.attr("name") == "userName") {
+        if (!/^[A-Za-z\s]+$/.test(singleInput)) {
+          $(nothingSlected).text("Invalid Username").slideDown(); 
+          return false;
+        }
+      }
+      if (singleInputEl.attr("name") == "userZip") {
+        if (!/^\d{5}(-\d{4})?$/.test(singleInput)) {
+          $(nothingSlected).text("Invalid Zip Code").slideDown(); 
+          return false;
+        }
+      }
+      if (singleInputEl.attr("name") == "userAge") {
+        if ( !( singleInput > 1 && singleInput < 100 ) ){
+          $(nothingSlected).text("Invalid Age").slideDown();
+          return false;
+        }
+      }
+      if (singleInputEl.attr("name") == "userEmail") {
+        if (!nothingSlected.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+          $(nothingSlected).text("Invalid Email").slideDown();
+          return false;
+        }
+      }
       if (quiz.name == undefined) {
         $('.dynamic-name').html(singleInput);
         var uniqueSessionEmail = singleInput + "_" + timestamp + "@klevahealthquiz.com";

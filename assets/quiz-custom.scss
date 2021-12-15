@@ -8,62 +8,66 @@
             .swiper-wrapper {
                 max-width: 100%;
                 height: 100vh;
-                .swiper-slide-active .slide-inner {
-                    width: 100%;
-                    background-size: cover;
-                    background-position: center center;
-                    background-repeat: no-repeat;
+                .swiper-slide-active {
                     display: flex;
-                    align-items: center;
                     justify-content: center;
-                    flex-wrap: wrap;
-                    flex-direction: column;
-                    .slide-wrapper {
-                        background: white;
-                        max-width: 705px;
+                    .slide-inner {
                         width: 100%;
-                        border-radius: 10px;
-                        padding: 30px;
-                        .section-heading {
-                            font-family: 'NewYork';
-                            font-size: 44px;
-                            line-height: 1;
-                            text-align: center;
-                            color: #92C79D;
-                            display: block;
-                        }
-                        .question-heading {
-                            font-family: 'NewYork';
-                            text-transform: capitalize;
-                            color: #272C2F;
-                            margin-top: 30px;
-                            margin-bottom: 50px;
-                        }
-                        .question-text {
-                            font-family: 'DM Sans', sans-serif;
-                            font-size: 20px;
-                            line-height: 24px;
-                            color: #272C2F;
-                        }
-                        .slide-bottom {
-                            margin-top: 30px;
-                            padding: 18px 80px;
-                            .btn-section-cover {
-                                &:hover {
-                                    cursor: pointer;
-                                }
-                                background: #272C2F;
-                                border-radius: 10px;
-                                color: white;
-                                border: none;
-                                font-family: 'DM Sans', sans-serif;
-                                font-size: 20px;
+                        background-size: cover;
+                        background-position: center center;
+                        background-repeat: no-repeat;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-wrap: wrap;
+                        flex-direction: column;
+                        .slide-wrapper {
+                            background: white;
+                            max-width: 705px;
+                            width: 100%;
+                            border-radius: 10px;
+                            padding: 30px;
+                            .section-heading {
+                                font-family: 'NewYork';
+                                font-size: 44px;
                                 line-height: 1;
                                 text-align: center;
-                                color: #FFFFFF;
+                                color: #92C79D;
+                                display: block;
+                            }
+                            .question-heading {
+                                font-family: 'NewYork';
                                 text-transform: capitalize;
+                                color: #272C2F;
+                                margin-top: 30px;
+                                margin-bottom: 50px;
+                            }
+                            .question-text {
+                                font-family: 'DM Sans', sans-serif;
+                                font-size: 20px;
+                                line-height: 24px;
+                                color: #272C2F;
+                            }
+                            .slide-bottom {
+                                margin-top: 30px;
                                 padding: 18px 80px;
-                                height: auto;
+                                .btn-section-cover {
+                                    &:hover {
+                                        cursor: pointer;
+                                    }
+                                    background: #272C2F;
+                                    border-radius: 10px;
+                                    color: white;
+                                    border: none;
+                                    font-family: 'DM Sans', sans-serif;
+                                    font-size: 20px;
+                                    line-height: 1;
+                                    text-align: center;
+                                    color: #FFFFFF;
+                                    text-transform: capitalize;
+                                    padding: 18px 80px;
+                                    height: auto;
+                                }
                             }
                         }
                     }
@@ -71,6 +75,9 @@
             }
         }
     }
+}
+.swiper-slide {
+    overflow: hidden;
 }
 #devScoreWrapper {
     display: none;
@@ -324,6 +331,9 @@
         .item {
             box-shadow: 0px 4px 34px rgba(0,0,0,0.25);
             margin: 0 20px;
+            &:hover {
+                cursor: pointer;
+            }
             .image-wrapper {
                 position: relative;
                 a {
@@ -390,9 +400,6 @@
                     }
                 }
                 .bottom {
-                    &:hover {
-                        cursor: pointer;
-                    }
                     border-top: 1px solid #FEFFB9;
                     margin-top: 50px;
                     margin-bottom: 10px;

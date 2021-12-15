@@ -1,9 +1,16 @@
 
 
 <form action="javascript:void(0);" class="single-text-input">
-  <input type="text" id="userName" name="username" placeholder="{{ placeholder }}">
+  {% case slide_id %}
+    {% when "UserName" %}
+      <input type="text" id="userName" name="userName" placeholder="{{ placeholder }}">
+    {% when "Basic04" %}
+      <input type="text" id="userName" name="userZip" placeholder="{{ placeholder }}">
+    {% when "Basic05" %}
+      <input type="text" id="userName" name="userAge" placeholder="{{ placeholder }}">
+    {% else %}
+      <input type="text" id="userName" name="userEmail" placeholder="{{ placeholder }}">
+  {% endcase %}
   <a class="inline-continue"></a>
-  {%- comment -%}
-  <input type="submit">
-  {%- endcomment -%}
+  <!-- <input type="submit" class="inline-continue" value=""> -->
 </form>
