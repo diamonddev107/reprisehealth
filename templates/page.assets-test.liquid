@@ -110,7 +110,7 @@
 
                         {% for item in shop.metafields.custom_fields["quiz_questions"] %}
                             {% if item['question_section'] == "Lifestyle" %}
-                                {% assign slideIsActive = false %}
+                                {% assign slideIsActive = true %}
                                 {% assign extraSlideClass = 'swiper-slide-lifestyle-category' %}
                                 {% assign slideSection = 'Lifestyle' %}
                             {% elsif item['question_section'] == "Basic" %}
@@ -126,7 +126,7 @@
                                 {% assign extraSlideClass = 'swiper-slide-values-and-preferences-category' %}
                                 {% assign slideSection = 'Values & Preferences' %}
                             {% else %}
-                                {% assign slideIsActive = false %}
+                                {% assign slideIsActive = true %}
                                 {% assign extraSlideClass = 'swiper-slide-health-category' %}
                                 {% assign slideSection = 'Goals' %}
                             {% endif %}
@@ -244,7 +244,7 @@
                         {% endfor %}
 
                         <div class="swiper-slide calculating-slide" data-show-slide="false" data-slide-category="">
-                            <div class="calculating-wrapper">
+                            <div class="calculating-wrapper slide-inner full-screen">
                                 <div class="calculating-heading mobile-hide">
                                     <span>We’re So Excited To Show You...</span>
                                 </div>

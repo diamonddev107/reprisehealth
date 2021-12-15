@@ -89,10 +89,13 @@ $(document).ready(function(){
       //     swiper.slideNext(300);
       //   }, transitionTime);
     } else {
-      if (!currentSlide.hasClass('calculating-slide')) {
+      if (!currentSlide.find('.slide-inner').hasClass('full-screen')) {
+        $('#MainContent .container').removeClass("section-cover");
         $('.breadcrumbs-progress-wrapper').removeClass("hide");  
+      } else {
+        $backButton.addClass("hide");
+        $('.breadcrumbs-progress-wrapper').addClass("hide");
       }
-      $('#MainContent .container').removeClass("section-cover");
     }
   }
   function reachSlideEnd() {

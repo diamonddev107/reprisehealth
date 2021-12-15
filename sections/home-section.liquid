@@ -1,0 +1,95 @@
+<div class="homepage-section" data-section-id="{{ section.id }}" data-section-type="homepage-section">
+    <div class="container-fluid">
+        <div class="wrapper">
+            <div class="row-block">
+                <h2 class="h1">{{ section.settings.title }}</h2>
+                <p class="desktop-hide">{{ section.settings.sub_title }}</p>
+            </div>
+            <div class="row-block">
+                <h3 class="h3 desktop-hide">{{ section.settings.recommend_text }}</h3>
+                <div class="buttons">
+                    <a href="{{ section.settings.quiz_link }}" class="btn-quiz">{{ section.settings.btn_quiz }}</a>
+                    <a href="{{ section.settings.products_link }}" class="btn-products">{{ section.settings.btn_products }}</a>
+                </div>
+                <h3 class="h3 mobile-hide">{{ section.settings.recommend_text }}</h3>
+                <div class="arrow">
+                    <a href="{{ section.settings.quiz_link }}" class="btn-arrow-quiz"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .homepage-section .container-fluid {
+        background-image: url({{ section.settings.desktop_image | img_url: "master" }});
+    }
+    @media (max-width: 768px) {
+        .homepage-section .container-fluid {
+            background-image: url({{ section.settings.mobile_image | img_url: "master" }});
+        }
+    }
+</style>
+{{ 'homepage-section.scss.css' | asset_url | stylesheet_tag }}
+{% schema %}
+{
+    "name": "Homepage section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "desktop_image",
+            "label": "Desktop Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "mobile_image",
+            "label": "Mobile Image"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Your personalized herbs are just around the corner."
+        },
+        {
+            "type": "text",
+            "id": "sub_title",
+            "label": "Sub Heading",
+            "default": "This 5 min quiz is designed by doctors and herbalists - the same types of questions you would hear during an in-person consultation."
+        },
+        {
+            "type": "text",
+            "id": "recommend_text",
+            "label": "Recommendation",
+            "default": "Recommended herbs to 200 people"
+        },
+        {
+            "type": "text",
+            "id": "btn_quiz",
+            "label": "Quiz Button",
+            "default": "Take The Quiz"
+        },
+        {
+            "type": "url",
+            "id": "quiz_link",
+            "label": "Button-1 Link"
+        },
+        {
+            "type": "text",
+            "id": "btn_products",
+            "label": "Products Button",
+            "default": "Browse All Products"
+        },
+        {
+            "type": "url",
+            "id": "products_link",
+            "label": "Button-2 Link"
+        }
+    ],  
+    "presets": [
+        {
+            "category": "Images",
+            "name":"Homepage section"
+        }
+    ]
+}
+{% endschema %}
