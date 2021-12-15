@@ -2,17 +2,18 @@
   The contents of the cart.liquid template can be found in /sections/cart-template.liquid
 {% endcomment %}
 
-{% if settings.breadcrumb_layout == 'top' %}
+{% comment %} {% if settings.breadcrumb_layout == 'top' %}
     {% render 'breadcrumb' %}
-{% endif %}
+{% endif %} {% endcomment %}
 
 <div class="container">
     <div class="page page-cart">
-		{% section 'cart-template' %}
+      {% section 'cart-simple-template' %}
+      {% comment %} {% section 'cart-template' %} {% endcomment %}
 	</div>
 </div>
-{% section 'list-collections-products-3' %}
+{% comment %} {% section 'list-collections-products-3' %}
 
 {% if settings.breadcrumb_layout == 'bottom' %}
     {% render 'breadcrumb' %}
-{% endif %}
+{% endif %} {% endcomment %}

@@ -200,6 +200,7 @@
   margin-top: 25px;
 }
 .slide-arrow-wrapper {
+  display: none;
   position: absolute;
   bottom: 100px;
   left: 0;
@@ -232,6 +233,10 @@
 }
 .question-heading-image {
   padding-bottom: 30px;
+  @media (max-width: 798px) {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
 }
 .question-subheading {
   font-family: 'DM Sans', sans-serif;
@@ -500,10 +505,11 @@ input#userName {
     max-width: 600px;
     width: 70vw;
     height: 75px;
+    padding-left: 15px;
   }
   @include placeholderName();
   @media (max-width: 798px) {
-    font-size: 19px!important;
+    font-size: 15px!important;
   }
 
   input#userName::-webkit-input-placeholder {/* Chrome/Opera/Safari/Edge */
