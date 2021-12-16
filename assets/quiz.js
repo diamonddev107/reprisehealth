@@ -2,7 +2,7 @@
 
 $(document).ready(function(){
   $("#MainContent .container").children().each(function() {
-    $(this).html($(this).html().replace(/@name/g,'<span class="dynamic-name"></span>'));
+    $(this).html($(this).html().replace(/@name/g,"<span class='dynamic-name'></span>"));
   });
 
   var timestamp = new Date().getTime();
@@ -39,6 +39,7 @@ $(document).ready(function(){
   });
 
   function checkForAutomaticTransition(swiper) {
+    console.log(swiper.realIndex);
     if (swiper.realIndex == 0) {
       $backButton.addClass("hide");
     } else {
@@ -93,6 +94,7 @@ $(document).ready(function(){
         $('#MainContent .container').removeClass("section-cover");
         $('.breadcrumbs-progress-wrapper').removeClass("hide");  
       } else {
+        $('#MainContent .container').addClass("section-cover");
         $backButton.addClass("hide");
         $('.breadcrumbs-progress-wrapper').addClass("hide");
       }
@@ -240,7 +242,7 @@ $(document).ready(function(){
   })
   $(".range-bar-item").on("click", function() {
     var index = $(this).index();
-    $('.range-dot-wrapper[data-range-value="'+index+'"]').trigger("click");
+    $('.range-dot-wrapper[data-index="'+index+'"]').trigger("click");
   })
   $rangeAnswer.on('click',function(e){
     var thisSlide = $(this).closest('.swiper-slide');
@@ -364,7 +366,7 @@ $(document).ready(function(){
         }
       }
       if (singleInputEl.attr("name") == "userEmail") {
-        if (!nothingSlected.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+        if (!singleInput.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
           $(nothingSlected).text("Invalid Email").slideDown();
           return false;
         }

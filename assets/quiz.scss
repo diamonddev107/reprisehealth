@@ -10,8 +10,8 @@
   @media (max-width: 798px) {
     padding-top: 0;
     padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
+    // padding-left: 0;
+    // padding-right: 0;
     min-width: 145px;
     height: 44px;
     display: flex;
@@ -196,6 +196,14 @@
 .slide-bottom {
   text-align: center;
 }
+@media (max-width: 798px) {
+  .swiper-slide[data-question-type="Yes/No"] .slide-bottom {
+    margin-top: 50px;
+  }
+  .swiper-slide[data-question-type="Multiple Choice"] .slide-bottom {
+    margin-top: 50px;
+  }
+}
 .slide-continue-wrapper {
   margin-top: 25px;
 }
@@ -229,6 +237,14 @@
   color: black;
   @media (max-width: 798px) {
     font-family: 'DM Sans', sans-serif;
+    // font-size: 21px;
+  }
+}
+@media (max-width: 798px) {
+  .section-cover .question-heading {
+    font-size: 21px;
+    margin-bottom: 20px;
+    font-family: 'newyork';
   }
 }
 .question-heading-image {

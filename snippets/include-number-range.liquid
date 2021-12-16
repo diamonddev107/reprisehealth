@@ -43,13 +43,13 @@
         {% for answer_choices_item in item %}
           {% if answer_choices_item["answer_text"] != blank %}
             {% if forloop.index == active %}
-              <div class="range-dot-wrapper range-dot-wrapper-active" data-range-value="{{ answer_choices_item["answer_text"] }}" data-answer="{{ answer_choices_item["answer_text"] }}">
+              <div class="range-dot-wrapper range-dot-wrapper-active" data-index="{{ forloop.index }}" data-range-value="{{ answer_choices_item["answer_text"] }}" data-answer="{{ answer_choices_item["answer_text"] }}">
                 <span>{{ answer_choices_item["answer_text"] }}</span>
                 <img class="dot-image-active" src="{{ 'activeDot.png' | asset_img_url }}" />
                 <img class="dot-image-inactive" src="{{ 'inactiveDot.png' | asset_img_url }}" />
               </div>
             {% else %}
-              <div class="range-dot-wrapper range-dot-wrapper-inactive" data-range-value="{{ answer_choices_item["answer_text"] }}" data-answer="{{ answer_choices_item["answer_text"] }}">
+              <div class="range-dot-wrapper range-dot-wrapper-inactive" data-index="{{ forloop.index }}" data-range-value="{{ answer_choices_item["answer_text"] }}" data-answer="{{ answer_choices_item["answer_text"] }}">
                 <span>{{ answer_choices_item["answer_text"] }}</span>
                 <img class="dot-image-active" src="{{ 'activeDot.png' | asset_img_url }}" />
                 <img class="dot-image-inactive" src="{{ 'inactiveDot.png' | asset_img_url }}" />

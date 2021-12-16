@@ -8,8 +8,12 @@
       <input type="text" id="userName" name="userZip" placeholder="{{ placeholder }}">
     {% when "Basic05" %}
       <input type="text" id="userName" name="userAge" placeholder="{{ placeholder }}">
-    {% else %}
+    {% when "Basic06" %}
+      <input type="text" id="userName" name="userZip" placeholder="{{ placeholder }}">
+    {% when "Basic07" %}
       <input type="text" id="userName" name="userEmail" placeholder="{{ placeholder }}">
+    {% else %}
+      <input type="text" id="userName" name="other" placeholder="{{ placeholder }}">
   {% endcase %}
   <a class="inline-continue"></a>
   <!-- <input type="submit" class="inline-continue" value=""> -->

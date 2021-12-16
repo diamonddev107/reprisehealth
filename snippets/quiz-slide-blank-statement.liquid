@@ -6,7 +6,11 @@
 {% elsif item['question_section'] == "Lifestyle" %}
   {% assign section_order = "02" %}
   {% assign section_button = 'Let’s Go!' %}
+{% elsif item['question_section'] == "Values & Preferences" %}
+  {% assign section_order = "03" %}
+  {% assign section_button = 'Let’s Go!' %}
 {% endif %}
+
 <div class="slide-inner" {% if item["slide_main_image"] != blank %} style="background-image: url('{{ item['slide_main_image'] }}')" {% endif %}>
   <span class="section-heading desktop-hide">Section/{{ section_order }}</span>
   <div class="slide-wrapper">
