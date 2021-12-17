@@ -14,6 +14,22 @@
         {% assign button_label = answer_choices_item['answer_text'] %}
         {% render 'quiz-multiple-choice-answer-button', button_text: button_label, skipValues: skipValues %} 
       {% endfor %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: "Other", skipValues: skipValues %}
+    </div>
+    <div class="other-answer-wrapper">
+      <form action="javascript:void(0);" class="single-text-input">
+        <input type="text" id="otherAnswer" class="single-answer-input" name="otherAnswer" placeholder="">
+        <a class="other-answer-continue"></a>
+      </form>
+    </div>
+    <div class="slide-continue-wrapper">
+      <p class="nothing-selected text-center">
+        {% if item['nothing_selected_text'] != blank %}
+          {{ item['nothing_selected_text'] }}
+        {% else %}
+          Please enter your info :)  
+        {% endif %}
+      </p>
     </div>
     {%- comment -%}
     <div class="slide-continue-wrapper">

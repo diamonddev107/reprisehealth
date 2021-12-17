@@ -110,7 +110,7 @@
 
                         {% for item in shop.metafields.custom_fields["quiz_questions"] %}
                             {% if item['question_section'] == "Lifestyle" %}
-                                {% assign slideIsActive = false %}
+                                {% assign slideIsActive = true %}
                                 {% assign extraSlideClass = 'swiper-slide-lifestyle-category' %}
                                 {% assign slideSection = 'Lifestyle' %}
                             {% elsif item['question_section'] == "Basic" %}
@@ -122,7 +122,7 @@
                                 {% assign extraSlideClass = 'swiper-slide-opening-category' %}
                                 {% assign slideSection = 'Opening' %}
                             {% elsif item['question_section'] == "Values & Preferences" %}
-                                {% assign slideIsActive = false %}
+                                {% assign slideIsActive = true %}
                                 {% assign extraSlideClass = 'swiper-slide-values-and-preferences-category' %}
                                 {% assign slideSection = 'Values & Preferences' %}
                             {% else %}
@@ -148,7 +148,7 @@
                                 <div    class="swiper-slide" data-show-slide="false"
                                         data-unique-slide-id="Categories01"
                                         data-why-we-ask="{{ item["why_we_ask_text"] }}"
-                                        data-question-text="Health Topics" 
+                                        data-question-text="Health Topics"
                                         data-slide-category="">
                                     {% render 'quiz-slide-categories', item: item %} 
                                 </div>

@@ -298,9 +298,20 @@ $(document).ready(function(){
     checkQuizMax($(this).closest(".slide-answer-wrapper-categories").data("max-choices-allowed"), thisQuestionAnswersWrapper);
     setActiveCategorySlides(thisQuestionAnswersWrapper);
   });
+  $(".other-answer-continue").on("click", function() {
+    var singleInputEl = $(this).parent().find('input');
+    var singleInput = singleInputEl.val();
+    var nothingSelectedEl = $(this).closest(".slide-inner").find('.nothing-selected');
 
+    if (singleInput.length == 0) {
+      nothingSelectedEl.slideDown();  
+    } else {
+      $(this).closest(".slide-inner").find(".btn--answer[data-answer='Other']").attr("data-answer", singleInput);
+      $(this).closest(".slide-inner").find(".btn--answer[data-answer='"+singleInput+"']").trigger("click");
+    }
+  })
   $answerSelector.on('click',function(e){
-    var answerValue= $(this).data('answer');
+    var answerValue= $(this).attr('data-answer');
     var skipValue= $(this).data('skip-question');
     console.log({answerValue}, {skipValue}, skipValue.length);
 
@@ -325,16 +336,31 @@ $(document).ready(function(){
       checkQuizContinue(1, thisQuestionAnswersWrapper, thisQuestionWrapper);
       checkQuizMax(3, thisQuestionAnswersWrapper);
       var thisSlide = $(this).closest('.swiper-slide');
+      
+      if (answerValue == "Other") {
+        $(this).closest(".slide-inner").find(".other-answer-wrapper").addClass("show");
+        return false;
+      }
+      
       slideContinueFromThisSlide(thisSlide);
     } else {
       checkQuizContinue(1, thisQuestionAnswersWrapper, thisQuestionWrapper);
       checkQuizMax(3, thisQuestionAnswersWrapper);
+
+      if (answerValue == "Other") {
+        $(this).closest(".slide-inner").find(".other-answer-wrapper").addClass("show");
+        return false;
+      }
     }
 
   });
   $("input[type='text']").keypress(function(e){
     if (e.keyCode === 13) {
-      $(this).closest("form").find(".inline-continue").trigger("click");  
+      if ($(this).attr("id") == "otherAnswer") {
+        $(this).closest("form").find(".other-answer-continue").trigger("click");  
+      } else {
+        $(this).closest("form").find(".inline-continue").trigger("click");
+      }
     }
   });
   $inlineContinues.on('click',function(){
@@ -386,7 +412,24 @@ $(document).ready(function(){
     swiper.slideNext();
   });
   $continueButton.on('click',function(){
+    
     var thisSlide = $(this).closest('.swiper-slide');
+
+    var thisQuestionType = thisSlide.data('question-type');
+    if ( thisQuestionType == "Multiple Select" ) {
+      var singleInputEl = thisSlide.find('.single-answer-input');
+      var singleInput = singleInputEl.val();
+      var nothingSelectedEl = thisSlide.find('.nothing-selected');
+  
+      if (singleInput.length == 0) {
+        nothingSelectedEl.slideDown();
+        return false;
+      } else {
+        console.log(thisSlide.find(".btn--answer[data-answer='Other']"));
+        thisSlide.find(".btn--answer[data-answer='Other']").attr("data-answer", singleInput);
+      }
+    }
+
     if (!$(this).hasClass("btn--quiz-continue-inactive")) {
       slideContinueFromThisSlide(thisSlide);  
     } else {
