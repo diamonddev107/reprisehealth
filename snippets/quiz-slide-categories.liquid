@@ -1,10 +1,10 @@
 <div class="slide-inner">
   <div class="slide-top">
     <div class="slide-header">
-      <div class="question-heading slide-question slide-question-small text-center">{{ item['question_text'] }}</div>
+      <div class="question-heading slide-question slide-question-small text-center">{{ item['question_format_text'] }}</div>
       <!-- <span class="dynamic-name"></span> -->
-      {% if item['subtext'] != blank %}
-        <div class="question-subheading slide-question slide-question-small text-center">{{ item["subtext"] }}</div>
+      {% if item['format_subtext'] != blank %}
+        <div class="question-subheading slide-question slide-question-small text-center">{{ item["format_subtext"] }}</div>
       {% endif %}
     </div>
   </div>

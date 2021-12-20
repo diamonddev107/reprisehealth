@@ -10,7 +10,7 @@
             {% assign active = forloop.index %}
             {% assign active_str = "active" %}
           {% endif %}
-          <img class="{{ active_str }}" src="{{ answer_choices_item["emoticon"] }}" />
+          <img class="{{ active_str }}" src="{{ answer_choices_item["emoticon"] }}" {% if answer_choices_item['emoticon_size'] != blank %} style="max-width: {{ answer_choices_item['emoticon_size'] }}px"{% endif %} />
         {% endif %}
       {% endfor %}
     </div>

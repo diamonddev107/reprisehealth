@@ -16,7 +16,6 @@ $(document).ready(function(){
   var $categorySelector = $('.btn--category');
   var $rangeAnswer = $('.range-dot-wrapper');
   var $inlineContinues = $('form .inline-continue');
-  console.log({ timestamp });
   // temp start
   var slideLen = $(".mySwiper").data("len");
   // temp end
@@ -39,7 +38,12 @@ $(document).ready(function(){
   });
 
   function checkForAutomaticTransition(swiper) {
-    console.log(swiper.realIndex);
+    // temp start
+    // var indexBeforeLast = slideLen - 1;
+    // var currentSlide = $(swiper.slides[indexBeforeLast]);
+    // swiper.slideNext();
+    // swiper.slideTo(65,10);
+    // temp end
     if (swiper.realIndex == 0) {
       $backButton.addClass("hide");
     } else {
@@ -51,11 +55,11 @@ $(document).ready(function(){
     var offset = currentSlide.find(".slide-bottom").offset();
     var wowSlide = currentSlide.data('question-type');
     
-    if (wowSlide == "Wow [name]" && quiz.healthCategories.length == 1) {
-        var wowText = currentSlide.find(".question-subheading").text();
-        var singleResult = wowText.replace("Those are some great goals", "That's a great goal");
+    if (wowSlide == "Information Page" && quiz.healthCategories.length == 1) {
+        var wowText = currentSlide.find(".question-heading").text();
+        var singleResult = wowText.replace("those are some great goals", "That's a great goal");
         singleResult = singleResult.replace(/goals/g, "goal");
-        currentSlide.find(".question-subheading").text(singleResult);
+        currentSlide.find(".question-heading").text(singleResult);
     }
     if (whyWeAsk == '' || whyWeAsk == undefined) {
       $(".sidebar-button-slide").addClass("hide");
@@ -66,11 +70,6 @@ $(document).ready(function(){
         $(".sidebar-button-slide").css('top', offset.top);
       }
     }
-    // temp start
-    // var indexBeforeLast = slideLen - 1;
-    // var currentSlide = $(swiper.slides[indexBeforeLast]);
-    // swiper.slideNext();
-    // temp end
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var currentSection = currentSlide.data('slide-section');
     var whyWeAsk = currentSlide.data('why-we-ask');
@@ -99,6 +98,7 @@ $(document).ready(function(){
         $('.breadcrumbs-progress-wrapper').addClass("hide");
       }
     }
+    console.log(quiz);
   }
   function reachSlideEnd() {
     $('.breadcrumbs-progress-wrapper').addClass("hide");
@@ -225,13 +225,11 @@ $(document).ready(function(){
       body: JSON.stringify(addData)
     })
     .then(response => {
-      console.log(response);
       if (response.status == 200) {
         location.href='/cart';  
       }
     })
     .catch((error) => {
-      console.error('Error:', error);
     });
   })
   $backButton.on('click', 'span', function() {
@@ -254,7 +252,6 @@ $(document).ready(function(){
     var emoticonImages = $(thisEmoticonWrapper).find('img');
     var emoticonMessages = $(thisMessageWrapper).find('p');
     var index = $(this).index();
-    //console.log(thisSlide);
     //$(thisSlide).data('answer-value',index);
 
     
@@ -313,14 +310,12 @@ $(document).ready(function(){
   $answerSelector.on('click',function(e){
     var answerValue= $(this).attr('data-answer');
     var skipValue= $(this).data('skip-question');
-    console.log({answerValue}, {skipValue}, skipValue.length);
 
     var $button = $(this);
     var thisQuestionAnswersWrapper = $button.closest('.slide-answer-wrapper');
     var thisQuestionWrapper = $button.closest('.slide-inner');
     var thisSlideWrapper = $button.closest('.swiper-slide');
     var thisQuestionType = $(thisSlideWrapper).data('question-type');
-    console.log({thisQuestionType});
 
     // convert this logic to just check if this is a single or multiple answer question
     if ( thisQuestionType == "Yes/No" || thisQuestionType == "Multiple Choice" ) {
@@ -405,7 +400,6 @@ $(document).ready(function(){
         // $(nameFields).html(singleInput);
       }
       swiper.slideNext();
-      console.log(quiz);
     }
   });
   $sectionCoverButton.on('click',function(){
@@ -416,7 +410,8 @@ $(document).ready(function(){
     var thisSlide = $(this).closest('.swiper-slide');
 
     var thisQuestionType = thisSlide.data('question-type');
-    if ( thisQuestionType == "Multiple Select" ) {
+    var otherOption = thisSlide.find(".btn--answer[data-answer='Other']");
+    if ( thisQuestionType == "Multiple Select" && otherOption.hasClass("btn--quiz-active") ) {
       var singleInputEl = thisSlide.find('.single-answer-input');
       var singleInput = singleInputEl.val();
       var nothingSelectedEl = thisSlide.find('.nothing-selected');
@@ -425,8 +420,7 @@ $(document).ready(function(){
         nothingSelectedEl.slideDown();
         return false;
       } else {
-        console.log(thisSlide.find(".btn--answer[data-answer='Other']"));
-        thisSlide.find(".btn--answer[data-answer='Other']").attr("data-answer", singleInput);
+        otherOption.attr("data-answer", singleInput);
       }
     }
 
@@ -443,9 +437,7 @@ $(document).ready(function(){
     var skipQuestionOfSelectedAnswer = $(selectedAnswersSelector).data('skip-question');
     
     if ( !skipQuestionOfSelectedAnswer || skipQuestionOfSelectedAnswer.length === 0 ) {
-      
     } else {
-      console.log('we better skip a question ******************************************');
       disableSlide(skipQuestionOfSelectedAnswer);
     }
     if ( isScoreableSlide ) {
@@ -457,9 +449,7 @@ $(document).ready(function(){
     var thisContinueWrapper = $(this).closest('.slide-continue-wrapper');
     var nothingSelectedEl = thisContinueWrapper.find('.nothing-selected');
     if ( $(this).hasClass('btn--quiz-continue-inactive') ) {
-      console.log(nothingSelectedEl);
       nothingSelectedEl.slideDown();
-
     } else {
       var numberOfSlides = swiper.slides.length;
       var nextSlideIndex = swiper.realIndex + 1;
@@ -468,11 +458,8 @@ $(document).ready(function(){
       for (var i = nextSlideIndex; i < numberOfSlides; i++) { 
         var targetSlide = $(swiper.slides[i]);
         var targetSlideState = targetSlide.data('show-slide');
-        //console.log('looping through slides', i, {targetSlideState}, {nextSlideIndex}, {numberOfSlides});
         if ( targetSlideState ) {
           quiz.questions.push(thisQuestionDataObject);
-          //submitToKlaviyo(quiz);
-          //console.log(quiz);
           swiper.slideTo(i,10);
           break;
         }
@@ -495,7 +482,6 @@ $(document).ready(function(){
     var name = q.name;
     var healthTopics = q.healthCategories.toString();
     var questionsArr = q.questions;
-    console.log(email, name, healthTopics, _learnq);
 
     _learnq.push(['identify', {
       '$email' : email,
@@ -505,7 +491,6 @@ $(document).ready(function(){
     }]);
 
     questionsArr.forEach((item, index)=>{
-      console.log(index, item)
       var questionID = item.ID;
       var questionText = item.text;
       var questionAnswer = item.answer;
@@ -517,15 +502,12 @@ $(document).ready(function(){
       }]);
     })
 
-
-/*
-    _learnq.push(['identify', {
-      '$email' : 'george.washington@example.com',
-      '$first_name' : 'George',
-      '$last_name' : 'Washington',
-      'Birth Year' : 1732
-    }]);
-*/
+    // _learnq.push(['identify', {
+    //   '$email' : 'george.washington@example.com',
+    //   '$first_name' : 'George',
+    //   '$last_name' : 'Washington',
+    //   'Birth Year' : 1732
+    // }]);
   }
 
   function createDataObject(slide) {
@@ -586,7 +568,6 @@ $(document).ready(function(){
   function updateProductScores(slide) {
 
     var thisQuestionType = slide.data('question-type');
-    // console.log('update product scores', {thisQuestionType});
 
     switch(thisQuestionType) {
       case "Dynamic Range":
@@ -597,11 +578,6 @@ $(document).ready(function(){
         var rhodiolaScore = selectedAnswer.data('score-rhodiola');
         var skinBeansScore = selectedAnswer.data('score-skin-beans');
         var sleepBeansScore = selectedAnswer.data('score-sleep-beans');
-        var alertMessage = "Gastro Bean Adjustment: " + gastroBeanScore;
-        alertMessage += " -- Reishi Adjustment: " + reishiScore;
-        alertMessage += " -- Rhodiola Adjustment: " + rhodiolaScore;
-        alertMessage += " -- Skin Bean Adjustment: " + skinBeansScore;
-        alertMessage += " -- Sleep Bean Adjustment: " + sleepBeansScore;
       
         slide.attr('data-answer-value',$(selectedAnswer).index() + 1);
         break;
@@ -612,12 +588,6 @@ $(document).ready(function(){
         var rhodiolaScore = selectedAnswer.data('score-rhodiola');
         var skinBeansScore = selectedAnswer.data('score-skin-beans');
         var sleepBeansScore = selectedAnswer.data('score-sleep-beans');
-        var alertMessage = "Gastro Bean Adjustment: " + gastroBeanScore;
-        alertMessage += " -- Reishi Adjustment: " + reishiScore;
-        alertMessage += " -- Rhodiola Adjustment: " + rhodiolaScore;
-        alertMessage += " -- Skin Bean Adjustment: " + skinBeansScore;
-        alertMessage += " -- Sleep Bean Adjustment: " + sleepBeansScore;
-        console.log(alertMessage);
         slide.attr('data-answer-value',$(selectedAnswer).data('answer'));
         break;
       case "Multiple Choice":
@@ -627,12 +597,6 @@ $(document).ready(function(){
         var rhodiolaScore = selectedAnswer.data('score-rhodiola') == undefined ? 0 : selectedAnswer.data('score-rhodiola');
         var skinBeansScore = selectedAnswer.data('score-skin-beans') == undefined ? 0 : selectedAnswer.data('score-skin-beans');
         var sleepBeansScore = selectedAnswer.data('score-sleep-beans') == undefined ? 0 : selectedAnswer.data('score-sleep-beans');
-        var alertMessage = "Gastro Bean Adjustment: " + gastroBeanScore;
-        alertMessage += " -- Reishi Adjustment: " + reishiScore;
-        alertMessage += " -- Rhodiola Adjustment: " + rhodiolaScore;
-        alertMessage += " -- Skin Bean Adjustment: " + skinBeansScore;
-        alertMessage += " -- Sleep Bean Adjustment: " + sleepBeansScore;
-        console.log(alertMessage);
         slide.attr('data-answer-value',$(selectedAnswer).data('answer'));
         break;
       case "Multiple Select":
@@ -646,22 +610,32 @@ $(document).ready(function(){
 
         selectedAnswer.each(function( index ) {
           selectedAnswersArray.push($(this).data('answer'));
-          gastroBeanScore += $(this).data('score-gastro-beans');
-          reishiScore += $(this).data('score-reishi');
-          rhodiolaScore += $(this).data('score-rhodiola');
-          skinBeansScore += $(this).data('score-skin-beans');
-          sleepBeansScore += $(this).data('score-sleep-beans');
+          gastroBeanScore += $(this).data('score-gastro-beans') == undefined ? 0 : $(this).data('score-gastro-beans');
+          reishiScore += $(this).data('score-reishi')  == undefined ? 0 : $(this).data('score-reishi');
+          rhodiolaScore += $(this).data('score-rhodiola') == undefined ? 0 : $(this).data('score-rhodiola');
+          skinBeansScore += $(this).data('score-skin-beans') == undefined ? 0 : $(this).data('score-skin-beans');
+          sleepBeansScore += $(this).data('score-sleep-beans') == undefined ? 0 : $(this).data('score-sleep-beans');
         });
-
-        var alertMessage = "Gastro Bean Adjustment: " + gastroBeanScore;
-        alertMessage += " -- Reishi Adjustment: " + reishiScore;
-        alertMessage += " -- Rhodiola Adjustment: " + rhodiolaScore;
-        alertMessage += " -- Skin Bean Adjustment: " + skinBeansScore;
-        alertMessage += " -- Sleep Bean Adjustment: " + sleepBeansScore;
-        console.log(alertMessage);
+        
         var selectedAnswersString = selectedAnswersArray.toString();
         slide.attr('data-answer-value',selectedAnswersString);
         break;
+      case "Health Topics Listing":
+          var selectedAnswersArray = [];
+          var selectedAnswer = $(slide).find('.btn--quiz-active');
+          var gastroBeanScore = 0;
+          var reishiScore = 0;
+          var rhodiolaScore = 0;
+          var skinBeansScore = 0;
+          var sleepBeansScore = 0;
+          
+          selectedAnswer.each(function( index ) {
+            selectedAnswersArray.push($(this).data('category'));
+          });
+          
+          var selectedAnswersString = selectedAnswersArray.toString();
+          slide.attr('data-answer-value',selectedAnswersString);
+          break;
       default:
         var gastroBeanScore = 0;
         var reishiScore = 0;
@@ -672,6 +646,8 @@ $(document).ready(function(){
 
     var currentGastroTotalEl = $('span[data-total-score-gastro-beans]');
     var currentGastroTotal = Math.round(currentGastroTotalEl.data('total-score'));
+    console.log(currentGastroTotal);
+    console.log(gastroBeanScore);
     var newGastroTotal = currentGastroTotal + gastroBeanScore;
     var currentReishiTotalEl = $('span[data-total-score-reishi]');
     var currentReishiTotal = Math.round(currentReishiTotalEl.data('total-score'));
@@ -750,7 +726,6 @@ $(document).ready(function(){
         $(this).attr('data-show-slide',"false");
       });
     }
-    console.log(quiz);
   }
 
 
