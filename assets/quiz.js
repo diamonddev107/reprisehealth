@@ -8,7 +8,9 @@ $(document).ready(function(){
   var timestamp = new Date().getTime();
   var quiz = {};
   var questionsArray = [];
+  var answerObject = {};
   quiz.questions = questionsArray;
+  quiz.answers = answerObject;
   var $sectionCoverButton = $('.btn-section-cover');
   var $continueButton = $('.btn--quiz-continue');
   var $backButton = $('.btn--quiz-back');
@@ -97,8 +99,18 @@ $(document).ready(function(){
         $backButton.addClass("hide");
         $('.breadcrumbs-progress-wrapper').addClass("hide");
       }
-    }
+    };
     console.log(quiz);
+    currentSlide.find(".slide-top").children().each(function() {
+      var that = $(this);
+      for (var key in quiz.answers) {
+        if (that.html().indexOf(key)) {
+          var re = new RegExp(key, "g");
+          var str = AdjustString(quiz.answers[key].split(","));
+          that.html(that.html().replace(re, str));
+        }
+      }
+    });
   }
   function reachSlideEnd() {
     $('.breadcrumbs-progress-wrapper').addClass("hide");
@@ -109,21 +121,8 @@ $(document).ready(function(){
     setTimeout(
       function() 
       {
-        var cat_names = '';
         var cat_arr = quiz.healthCategories;
-
-        for (var i = 0; i < cat_arr.length; i++) {
-          cat_names += cat_arr[i];
-          if (cat_arr.length > 1) {
-            if (i < cat_arr.length - 1) {
-              if (cat_arr.length >= 2 && i == cat_arr.length - 2) {
-                cat_names += " and ";
-              } else {
-                cat_names += ", ";
-              }
-            }
-          }
-        }
+        var cat_names = AdjustString(cat_arr);
 
         $(".pre-product-recommendation").removeClass("hide");
         // $("#created_for_someone").text("Created Just For " + quiz.name);
@@ -134,6 +133,22 @@ $(document).ready(function(){
         $(".calculating-announcement-bar").removeClass('show');
       }, 5000
     );
+  }
+  function AdjustString(arr) {
+    var return_str = '';
+    for (var i = 0; i < arr.length; i++) {
+      return_str += arr[i];
+      if (arr.length > 1) {
+        if (i < arr.length - 1) {
+          if (arr.length >= 2 && i == arr.length - 2) {
+            return_str += " and ";
+          } else {
+            return_str += ", ";
+          }
+        }
+      }
+    }
+    return return_str;
   }
   $(".left-arrow-button").on("click", function(e) {
     $(".sidebar-button-slide").addClass("collapsed");
@@ -460,6 +475,7 @@ $(document).ready(function(){
         var targetSlideState = targetSlide.data('show-slide');
         if ( targetSlideState ) {
           quiz.questions.push(thisQuestionDataObject);
+          quiz.answers['{{ answer from slide '+thisSlide.data('unique-slide-id')+' }}'] = thisSlide.data('answer-value');
           swiper.slideTo(i,10);
           break;
         }
@@ -628,7 +644,7 @@ $(document).ready(function(){
           var rhodiolaScore = 0;
           var skinBeansScore = 0;
           var sleepBeansScore = 0;
-          
+
           selectedAnswer.each(function( index ) {
             selectedAnswersArray.push($(this).data('category'));
           });
