@@ -104,7 +104,7 @@ $(document).ready(function(){
     currentSlide.find(".slide-top").children().each(function() {
       var that = $(this);
       for (var key in quiz.answers) {
-        if (that.html().indexOf(key)) {
+        if (that.html().indexOf(key) > -1) {
           var re = new RegExp(key, "g");
           var str = AdjustString(quiz.answers[key].split(","));
           that.html(that.html().replace(re, str));
@@ -150,6 +150,34 @@ $(document).ready(function(){
     }
     return return_str;
   }
+  // country list vertical slider
+  $('.country-list-vertical-slide').on('wheel', (function(e) {
+    e.preventDefault();
+    if (e.originalEvent.deltaY < 0) {
+      $(this).slick('slickNext');
+    } else {
+      $(this).slick('slickPrev');
+    }
+  }));
+  $(".country-list-inner .single-answer-input").on("click", function() {
+    $(".country-list-vertical-slide").removeClass("hide");
+    $(".country-list-vertical-slide").slick({
+      slidesToScroll: 1,
+      slidesToShow: 3,
+      arrows: false,
+      dots: false,
+      vertical: true,
+      verticalSwiping: true
+    });
+  })
+  $(".btn--quiz-country-item").on("click", function() {
+    $("#countryAnswer").val($(this).data("answer"));
+    $(".btn--quiz-country-item").removeClass("btn--quiz-active");
+    $(this).addClass("btn--quiz-active");
+    $(this).closest(".country-list-inner").find(".btn--quiz-continue").removeClass("btn--quiz-continue-inactive");
+    $(".country-list-vertical-slide").addClass("hide");
+  })
+  // country list vertical slider
   $(".left-arrow-button").on("click", function(e) {
     $(".sidebar-button-slide").addClass("collapsed");
   })
@@ -296,8 +324,6 @@ $(document).ready(function(){
       }
     });
   });
-  
-
   $categorySelector.on('click',function(e){
     var $button = $(this);
     var thisQuestionAnswersWrapper = $button.closest('.slide-answer-wrapper');
@@ -445,13 +471,13 @@ $(document).ready(function(){
       $(this).closest(".slide-continue-wrapper").find(".nothing-selected").slideDown();
     }
   });
-
   function slideContinueFromThisSlide(thisSlide) {
     var isScoreableSlide = thisSlide.data('scoreable-slide');
     var selectedAnswersSelector = $(thisSlide).find('.btn--quiz-active');
     var skipQuestionOfSelectedAnswer = $(selectedAnswersSelector).data('skip-question');
     
     if ( !skipQuestionOfSelectedAnswer || skipQuestionOfSelectedAnswer.length === 0 ) {
+
     } else {
       disableSlide(skipQuestionOfSelectedAnswer);
     }
@@ -483,7 +509,6 @@ $(document).ready(function(){
     }
 
   }
-
   function disableSlide(id) {
     swiper.slides.each(function(e,i){
       var slideId = $(this).data('unique-slide-id');
@@ -492,7 +517,6 @@ $(document).ready(function(){
       }
     });
   }
-
   function submitToKlaviyo(q) {
     var email = q.email;
     var name = q.name;
@@ -525,7 +549,6 @@ $(document).ready(function(){
     //   'Birth Year' : 1732
     // }]);
   }
-
   function createDataObject(slide) {
     var thisSlideText = slide.data('question-text');
     var thisSlideId = slide.data('unique-slide-id');
@@ -538,7 +561,6 @@ $(document).ready(function(){
     thisQuestionObject.answer = thisSlideAnswer;
     return thisQuestionObject;
   }
-
   function setBreadCrumbsProgress(sectionLabel) {
     switch(sectionLabel) {
       case 'Goals':
@@ -580,7 +602,6 @@ $(document).ready(function(){
         //
     }
   }
-
   function updateProductScores(slide) {
 
     var thisQuestionType = slide.data('question-type');
@@ -688,7 +709,6 @@ $(document).ready(function(){
     currentSleepBeanTotalEl.data('total-score',newSleepBeanTotal).html(newSleepBeanTotal);
 
   }
-
   function checkQuizContinue(min, answersWrapper, questionWrapper) {
     var countSelected = answersWrapper.find('.btn--quiz-active').length;
     var thisQuestionContinue = questionWrapper.find('.btn--quiz-continue');
@@ -700,7 +720,6 @@ $(document).ready(function(){
       nothingSelectedEl.slideUp();
     }
   }
-
   function checkQuizMax(max, parent) {
     var countSelected = parent.find('.btn--quiz-active').length;
     var allAnswers = parent.find('.btn--quiz');
@@ -712,11 +731,9 @@ $(document).ready(function(){
       allInactiveAnswers.removeClass('btn--quiz-inactive');
     }
   }
-
   function isNextSlideActive(index,swiper) {
 
   }
-
   function setActiveCategorySlides(slideWrapper) {
     var categoryButtons = slideWrapper.find('.btn--quiz-active');
     var categoriesSelected = [];
@@ -743,6 +760,4 @@ $(document).ready(function(){
       });
     }
   }
-
-
 }); /* ready */

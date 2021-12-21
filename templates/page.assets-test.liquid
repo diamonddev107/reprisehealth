@@ -229,7 +229,11 @@
                                         data-unique-slide-id="{{ item['unique_slide_id'] }}" 
                                         data-show-slide="{{ slideIsActive }}" 
                                         data-slide-category="{{ item['question_section'] }}" >
+                                {% if item['unique_slide_id'] == "Basic05" %}
+                                    {% render 'quiz-slide-blank-country-list', item: item %}
+                                {% else %}
                                     {% render 'quiz-slide-blank-multiple-choice', item: item %}
+                                {% endif %}
                                 </div>
                             {% elsif item["question_type"] == "Multiple Select" %}
                                 <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
@@ -247,7 +251,7 @@
                             {% endif %}
                         {% endfor %}
 
-                        <div class="swiper-slide calculating-slide" data-show-slide="false" data-slide-category="">
+                        <div class="swiper-slide calculating-slide" data-show-slide="true" data-slide-category="">
                             <div class="calculating-wrapper slide-inner full-screen">
                                 <div class="calculating-heading mobile-hide">
                                     <span>We’re So Excited To Show You...</span>

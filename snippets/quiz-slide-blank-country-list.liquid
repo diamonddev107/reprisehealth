@@ -1,0 +1,33 @@
+<div class="slide-inner country-list-inner">
+    <div class="slide-top">
+        <div class="slide-header">
+            <div class="question-heading slide-question slide-question-small text-center">{{ item["question_format_text"] }}</div>
+            <div class="question-subheading slide-question slide-question-small text-center">{{ item["format_subtext"] }}</div>
+        </div>
+    </div>
+    <div class="slide-bottom">
+        <form action="javascript:void(0);" class="single-text-input">
+            <input type="text" id="countryAnswer" class="single-answer-input" name="countryAnswer" placeholder="" readonly>
+            <div class="slide-answer-wrapper country-list-vertical-slide hide">
+                {% for answer_choices_item in item["answer_choices"] %}
+                {% assign skipValues = "" %}
+                {% if answer_choices_item["deactivated_questions"] != blank %}
+                    {% assign skipValues = answer_choices_item["deactivated_questions"] %}
+                {% endif %}
+                {% assign button_label = answer_choices_item['answer_text'] %}
+                <a class="btn--kleva btn--quiz-country-item btn--quiz" data-answer="{{ button_label }}">{{ button_label }}</a>
+                {% endfor %}
+            </div>
+        </form>
+        <div class="slide-continue-wrapper">
+            <p class="nothing-selected text-center">
+            {% if item['nothing_selected_text'] != blank %}
+                {{ item['nothing_selected_text'] }}
+            {% else %}
+                Please enter your info :)
+            {% endif %}
+            </p>
+            <a class="btn--kleva btn--quiz-continue btn--quiz-continue-inactive">Continue</a>
+        </div>
+    </div>
+  </div>

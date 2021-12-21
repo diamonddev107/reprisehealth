@@ -582,6 +582,35 @@
 .range-emoticon {
     margin: 25px auto;
 }
+.country-list-inner {
+    .single-text-input {
+        padding: 100px 0px;
+        .country-list-vertical-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 610px;
+            background: white;
+            border: 3px solid #ccbc9b;
+            border-radius: 10px;
+        }
+        // .slick-active[data-slick-index="2"] {
+        //     border-top: 1px solid #ccbc9b;
+        //     border-bottom: 1px solid #ccbc9b;
+        // }
+        .btn--quiz:not([href]) {
+            margin: 0;
+            border-radius: unset;
+            border: unset;
+            display: flex !important;
+            justify-content: center;
+        }
+    }
+}
+
 @media (max-width: 798px) {
     .page.page-default {
         padding-top: 0;
