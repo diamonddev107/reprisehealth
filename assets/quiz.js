@@ -3,6 +3,7 @@
 $(document).ready(function(){
   $("#MainContent .container").children().each(function() {
     $(this).html($(this).html().replace(/@name/g,"<span class='dynamic-name'></span>"));
+    $(this).html($(this).html().replace(/@Name/g,"<span class='dynamic-name'></span>"));
   });
 
   var timestamp = new Date().getTime();
@@ -151,31 +152,38 @@ $(document).ready(function(){
     return return_str;
   }
   // country list vertical slider
-  $('.country-list-vertical-slide').on('wheel', (function(e) {
+  $('.vertical-slide-item-wrapper .inner-wrapper').on('wheel', (function(e) {
     e.preventDefault();
+    $(".slick-slide.slick-active").removeClass('slick-active-center');
+    var current_index = $(".slick-current.slick-active").attr('data-slick-index');
+    var center_index = parseInt(current_index) + 3;
+    $(".slick-active[data-slick-index='"+center_index+"']").addClass('slick-active-center');
+
     if (e.originalEvent.deltaY < 0) {
-      $(this).slick('slickNext');
-    } else {
       $(this).slick('slickPrev');
+    } else {
+      $(this).slick('slickNext');
     }
   }));
-  $(".country-list-inner .single-answer-input").on("click", function() {
-    $(".country-list-vertical-slide").removeClass("hide");
-    $(".country-list-vertical-slide").slick({
+  $(".vertical-slider-inner .single-answer-input").on("click", function() {
+    $(".vertical-slide-item-wrapper").removeClass("hide");
+    $(".vertical-slide-item-wrapper .inner-wrapper").slick({
       slidesToScroll: 1,
-      slidesToShow: 3,
+      slidesToShow: 8,
       arrows: false,
       dots: false,
       vertical: true,
+      infinite: true,
       verticalSwiping: true
     });
   })
-  $(".btn--quiz-country-item").on("click", function() {
-    $("#countryAnswer").val($(this).data("answer"));
-    $(".btn--quiz-country-item").removeClass("btn--quiz-active");
+  $(".btn--quiz-vertical-slider-item").on("click", function() {
+    // kjh
+    $(this).closest(".vertical-slider-inner").find("#verticalSliderAnswer").val($(this).data("answer"));
+    $(".btn--quiz-vertical-slider-item").removeClass("btn--quiz-active");
     $(this).addClass("btn--quiz-active");
-    $(this).closest(".country-list-inner").find(".btn--quiz-continue").removeClass("btn--quiz-continue-inactive");
-    $(".country-list-vertical-slide").addClass("hide");
+    $(this).closest(".vertical-slider-inner").find(".btn--quiz-continue").removeClass("btn--quiz-continue-inactive");
+    $(".vertical-slide-item-wrapper").addClass("hide");
   })
   // country list vertical slider
   $(".left-arrow-button").on("click", function(e) {
@@ -243,6 +251,7 @@ $(document).ready(function(){
   $("#add_custom_bottle_to_cart").on("click", function() {
     var custom_bottle_variant_id = $("#custom_bottle_variant_id").val();
     var properties = {};
+    properties['_customerName'] = quiz.name;
     $(".recommended-products .products-wrapper .item").each(function(i, e) {
       if (!$(this).hasClass('arrow')) {
         if (!$(this).hasClass('hide')) {
@@ -281,9 +290,13 @@ $(document).ready(function(){
   $backButton.on('click', 'img', function() {
     swiper.slidePrev();
   })
-  $(".range-bar-item").on("click", function() {
-    var index = $(this).index();
-    $('.range-dot-wrapper[data-index="'+index+'"]').trigger("click");
+  // $(".range-bar-item").on("click", function() {
+  //   var index = $(this).index();
+  //   $('.range-dot-wrapper[data-index="'+index+'"]').trigger("click");
+  // })
+  $(".range-slider-bar").on("input", function() {
+    var index = Math.floor($(this).val());
+    $(this).closest(".number-range").find('.range-dot-wrapper[data-index="'+index+'"]').trigger("click");  
   })
   $rangeAnswer.on('click',function(e){
     var thisSlide = $(this).closest('.swiper-slide');
@@ -295,7 +308,7 @@ $(document).ready(function(){
     var emoticonImages = $(thisEmoticonWrapper).find('img');
     var emoticonMessages = $(thisMessageWrapper).find('p');
     var index = $(this).index();
-    //$(thisSlide).data('answer-value',index);
+    $(this).closest(".number-range").find(".range-slider-bar").val(index + 1);
 
     
     $(thisQuestion).find('.range-dot-wrapper').removeClass('range-dot-wrapper-active').addClass('range-dot-wrapper-inactive');
@@ -377,8 +390,11 @@ $(document).ready(function(){
         $(this).closest(".slide-inner").find(".other-answer-wrapper").addClass("show");
         return false;
       }
-      
-      slideContinueFromThisSlide(thisSlide);
+      setTimeout(
+        function() 
+        {
+          slideContinueFromThisSlide(thisSlide);    
+        }, 300);
     } else {
       checkQuizContinue(1, thisQuestionAnswersWrapper, thisQuestionWrapper);
       checkQuizMax(3, thisQuestionAnswersWrapper);

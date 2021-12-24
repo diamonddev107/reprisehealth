@@ -14,7 +14,7 @@
         if item["answer_choices"] != blank
           for answer_choices_item in item['answer_choices']
             if answer_choices_item["answer_text"] != blank
-              render 'quiz-multiple-choice-category-button', button_text: answer_choices_item["answer_text"], active_state: active_state
+              render 'quiz-multiple-choice-category-button', button_text: answer_choices_item["answer_text"], subtext: answer_choices_item["subtext"], active_state: active_state
             endif
           endfor
         endif

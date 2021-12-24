@@ -3,4 +3,9 @@
 {% assign show_product_wishlist = show_product_wishlist | default: settings.show_product_wishlist %} 
 {% if active_state %} btn--quiz-active{% endif %}
 {% endcomment %}
-<a class="btn--kleva btn--category btn--quiz" data-category="{{ button_text }}">{{ button_text }}</a>
+<a class="btn--kleva btn--category btn--quiz" data-category="{{ button_text }}">
+    {{ button_text }}
+    {% if subtext != blank %}
+        <span class="answer-subtext">{{ subtext }}</span>
+    {% endif %}
+</a>

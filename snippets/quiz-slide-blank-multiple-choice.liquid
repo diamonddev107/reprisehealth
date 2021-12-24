@@ -13,7 +13,8 @@
           {% assign skipValues = answer_choices_item["deactivated_questions"] %}
         {% endif %}
         {% assign button_label = answer_choices_item['answer_text'] %}
-        {% render 'quiz-multiple-choice-answer-button', button_text: button_label, skipValues: skipValues %} 
+        {% assign subtext = answer_choices_item['subtext'] %}
+        {% render 'quiz-multiple-choice-answer-button', button_text: button_label, subtext: subtext, skipValues: skipValues %} 
       {% endfor %}
       {% render 'quiz-multiple-choice-answer-button', button_text: "Other", skipValues: skipValues %}
     </div>

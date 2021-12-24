@@ -36,6 +36,7 @@
             <div class="range-bar-item range-bar-item-inactive"><span class="mobile-top-line"></span></div>
           {% endif %}
         {% endfor %}
+        <input type="range" min="1" max="{{ item.size }}" value="{{ active }}" step="1" class="desktop-hide range-slider-bar">
       </div>
     </div>
     <div class="range-dots">
@@ -51,6 +52,9 @@
             {% else %}
               <div class="range-dot-wrapper range-dot-wrapper-inactive" data-index="{{ forloop.index }}" data-range-value="{{ answer_choices_item["answer_text"] }}" data-answer="{{ answer_choices_item["answer_text"] }}">
                 <span>{{ answer_choices_item["answer_text"] }}</span>
+                {% if answer_choices_item['subtext'] != blank %}
+                  <span class="answer-subtext">{{ answer_choices_item['subtext'] }}</span>
+                {% endif %}
                 <img class="dot-image-active" src="{{ 'activeDot.png' | asset_img_url }}" />
                 <img class="dot-image-inactive" src="{{ 'inactiveDot.png' | asset_img_url }}" />
               </div>

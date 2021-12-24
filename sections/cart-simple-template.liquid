@@ -13,7 +13,7 @@
                                     <div class="cart__content-wrapper">
                                         <div class="list-view-item__title">
                                             <a href="{{ item.url }}" class="cart__product-title" data-cart-item-title>
-                                                {{ item.product.title }}
+                                                {{ item.properties['_customerName'] }}'s {{ item.product.title }}
                                             </a>
                                         </div>
 
@@ -34,7 +34,8 @@
                                                 {%- endif -%}
 
                                                 {%- for p in properties -%}
-                                                    {%- unless p.last == blank -%}
+                                                    {% assign first_character_in_key = p.first | truncate: 1, '' %}
+                                                    {%- unless p.last == blank or first_character_in_key == '_' -%}
                                                         <li class="product-details__item product-details__item--property{%if property_size == 0%} hide{% endif %}" data-cart-item-property>
                                                             <!-- <span class="product-details__item-label" data-cart-item-property-name>{{ p.first }}: </span> -->
 
@@ -43,7 +44,6 @@
                                                                     <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
                                                                 {%- else -%}
                                                                     {{ p.last}}
-                                                                    {% if forloop.index != property_size %},{% endif %}
                                                                 {%- endif -%}
                                                             </span>
                                                         </li>
@@ -152,9 +152,7 @@
     span[data-cart-item-regular-price] {
         font-size: 16px;
     }
-    .product-details__item {
-        font-weight: normal;
-    }
+    
     .page-full-width .container {
         width: 100%;
         padding: 0;
@@ -186,9 +184,13 @@
         margin-left: auto;
         margin-right: auto;
     }
-    .product-details__item+.product-details__item:not(.product-details__item--last):before {
-        content: "";
-        padding: 0;
+    .product-details-wrapper .product-details {
+        padding-left: 30px;
+    }
+    .product-details-wrapper .product-details .product-details__item {
+        list-style: disc;
+        font-weight: normal;
+        display: list-item;
     }
     .cart__submit-controls .btn--checkout {
         font-family: 'DM Sans', sans-serif;

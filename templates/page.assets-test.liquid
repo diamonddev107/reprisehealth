@@ -137,7 +137,7 @@
                                         data-slide-section="{{ slideSection }}"
                                         data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
-                                        data-question-text="{{ item['question_format_text'] }}"
+                                        data-question-text="{{ item['question_format_text'] | escape }}"
                                         data-question-type="{{ item['question_type'] }}" 
                                         data-unique-slide-id="{{ item['unique_slide_id'] }}" 
                                         data-show-slide="{{ slideIsActive }}" 
@@ -161,7 +161,7 @@
                                         data-slide-section="{{ slideSection }}"
                                         data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
-                                        data-question-text="{{ item['question_format_text'] }}"
+                                        data-question-text="{{ item['question_format_text'] | escape }}"
                                         data-question-type="{{ item['question_type'] }}" 
                                         data-unique-slide-id="{{ item['unique_slide_id'] }}" 
                                         data-show-slide="{{ slideIsActive }}" 
@@ -173,7 +173,7 @@
                                         data-slide-section="{{ slideSection }}"
                                         data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
-                                        data-question-text="{{ item['question_format_text'] }}"
+                                        data-question-text="{{ item['question_format_text'] | escape }}"
                                         data-question-type="{{ item['question_type'] }}" 
                                         data-unique-slide-id="{{ item['unique_slide_id'] }}" 
                                         data-show-slide="{{ slideIsActive }}" 
@@ -185,7 +185,7 @@
                                         data-slide-section="{{ slideSection }}"
                                         data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
-                                        data-question-text="{{ item['question_format_text'] }}"
+                                        data-question-text="{{ item['question_format_text'] | escape }}"
                                         data-question-type="{{ item['question_type'] }}" 
                                         data-unique-slide-id="{{ item['unique_slide_id'] }}" 
                                         data-show-slide="{{ slideIsActive }}" 
@@ -198,7 +198,7 @@
                                         data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
                                         data-answer-value=""
-                                        data-question-text="{{ item['question_format_text'] }}"
+                                        data-question-text="{{ item['question_format_text'] | escape }}"
                                         data-question-type="{{ item['question_type'] }}" 
                                         data-unique-slide-id="{{ item['unique_slide_id'] }}" 
                                         data-show-slide="{{ slideIsActive }}" 
@@ -210,7 +210,7 @@
                                         data-slide-section="{{ slideSection }}"
                                         data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="false"
-                                        data-question-text="{{ item['question_format_text'] }}"
+                                        data-question-text="{{ item['question_format_text'] | escape }}"
                                         data-question-type="{{ item['question_type'] }}" 
                                         data-unique-slide-id="{{ item['unique_slide_id'] }}" 
                                         data-show-slide="{{ slideIsActive }}" 
@@ -218,22 +218,31 @@
                                         data-slide-category="{{ item['question_section'] }}" >
                                     {% render 'quiz-slide-blank-statement', item: item %}
                                 </div>
+                            {% elsif item["question_type"] == "Vertical Slider" %}
+                                <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
+                                        data-slide-section="{{ slideSection }}"
+                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
+                                        data-scoreable-slide="true"
+                                        data-answer-value=""
+                                        data-question-text="{{ item['question_format_text'] | escape }}"
+                                        data-question-type="Multiple Choice" 
+                                        data-unique-slide-id="{{ item['unique_slide_id'] }}" 
+                                        data-show-slide="{{ slideIsActive }}" 
+                                        data-slide-category="{{ item['question_section'] }}" >
+                                    {% render 'quiz-slide-blank-vertical-slider', item: item %}
+                                </div>
                             {% elsif item["question_type"] == "Multiple Choice" %}
                                 <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
                                         data-slide-section="{{ slideSection }}"
                                         data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
                                         data-answer-value=""
-                                        data-question-text="{{ item['question_format_text'] }}"
+                                        data-question-text="{{ item['question_format_text'] | escape }}"
                                         data-question-type="{{ item['question_type'] }}" 
                                         data-unique-slide-id="{{ item['unique_slide_id'] }}" 
                                         data-show-slide="{{ slideIsActive }}" 
                                         data-slide-category="{{ item['question_section'] }}" >
-                                {% if item['unique_slide_id'] == "Basic05" %}
-                                    {% render 'quiz-slide-blank-country-list', item: item %}
-                                {% else %}
                                     {% render 'quiz-slide-blank-multiple-choice', item: item %}
-                                {% endif %}
                                 </div>
                             {% elsif item["question_type"] == "Multiple Select" %}
                                 <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
@@ -241,7 +250,7 @@
                                         data-why-we-ask="{{ item["why_we_ask_text"] }}"
                                         data-scoreable-slide="true"
                                         data-answer-value=""
-                                        data-question-text="{{ item['question_format_text'] }}"
+                                        data-question-text="{{ item['question_format_text'] | escape }}"
                                         data-question-type="{{ item['question_type'] }}" 
                                         data-unique-slide-id="{{ item['unique_slide_id'] }}" 
                                         data-show-slide="{{ slideIsActive }}" 

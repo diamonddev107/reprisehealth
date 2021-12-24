@@ -7,4 +7,9 @@
   {% endfor %}
 {% endif %}
 
-<a class="btn--kleva btn--answer btn--quiz{% if active_state %} btn--quiz-active{% endif %}" data-skip-question='{{ skipQuestionOutput }}' data-answer="{{ button_text }}">{{ button_text }}</a>
+<a class="btn--kleva btn--answer btn--quiz{% if active_state %} btn--quiz-active{% endif %}" data-skip-question='{{ skipQuestionOutput }}' data-answer="{{ button_text }}">
+  {{ button_text }}
+  {% if subtext != blank %}
+    <span class="answer-subtext">{{ subtext }}</span>
+  {% endif %}
+</a>
