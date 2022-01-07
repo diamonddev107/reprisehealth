@@ -152,12 +152,13 @@ $(document).ready(function(){
     return return_str;
   }
   // country list vertical slider
+  var initial_slick_var = 0;
   $('.vertical-slide-item-wrapper .inner-wrapper').on('wheel', (function(e) {
     e.preventDefault();
-    $(".slick-slide.slick-active").removeClass('slick-active-center');
-    var current_index = $(".slick-current.slick-active").attr('data-slick-index');
-    var center_index = parseInt(current_index) + 3;
-    $(".slick-active[data-slick-index='"+center_index+"']").addClass('slick-active-center');
+    // $(".slick-slide.slick-active").removeClass('slick-active-center');
+    // var current_index = $(".slick-current.slick-active").attr('data-slick-index');
+    // var center_index = parseInt(current_index) + 3;
+    // $(".slick-active[data-slick-index='"+center_index+"']").addClass('slick-active-center');
 
     if (e.originalEvent.deltaY < 0) {
       $(this).slick('slickPrev');
@@ -167,18 +168,22 @@ $(document).ready(function(){
   }));
   $(".vertical-slider-inner .single-answer-input").on("click", function() {
     $(".vertical-slide-item-wrapper").removeClass("hide");
-    $(".vertical-slide-item-wrapper .inner-wrapper").slick({
-      slidesToScroll: 1,
-      slidesToShow: 8,
-      arrows: false,
-      dots: false,
-      vertical: true,
-      infinite: true,
-      verticalSwiping: true
-    });
+    if (initial_slick_var == 0) {
+      $(".vertical-slide-item-wrapper .inner-wrapper").slick({
+        centerMode: true,
+        slidesToShow: 5,
+        arrows: false,
+        dots: false,
+        vertical: true,
+        infinite: true,
+        draggable: false,
+        verticalSwiping: true
+      });
+      $(".vertical-slide-item-wrapper .inner-wrapper").slick('slickNext');
+      initial_slick_var++;
+    }
   })
   $(".btn--quiz-vertical-slider-item").on("click", function() {
-    // kjh
     $(this).closest(".vertical-slider-inner").find("#verticalSliderAnswer").val($(this).data("answer"));
     $(".btn--quiz-vertical-slider-item").removeClass("btn--quiz-active");
     $(this).addClass("btn--quiz-active");

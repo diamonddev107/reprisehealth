@@ -278,6 +278,7 @@
         "blocks": {
           "1581675839196": {
             "type": "style_1",
+            "disabled": true,
             "settings": {
               "megamenu_items_1": "new releases",
               "title_featured_product_1": "Editor’s Picks",
@@ -290,6 +291,7 @@
           },
           "1581908798999": {
             "type": "style_2",
+            "disabled": true,
             "settings": {
               "megamenu_items_2": "mens",
               "custom_text_2": "<p><a href=\"\/collections\" title=\"All Collections\">All Products<\/a><\/p>\n<p><a href=\"\/collections\/accessories\" title=\"Accessories\">Accessories<\/a><\/p>\n<p><a href=\"\/collections\/womens\" title=\"womens\">Gift Card<\/a><\/p>\n<p><a href=\"\/collections\/dinciduntero\" title=\"dinciduntero\">Editor&rsquo;s Picks<\/a><\/p>\n<p><a href=\"\/collections\/new-releases\" title=\"New Releases\">New Releases<\/a><\/p>",
@@ -344,12 +346,14 @@
         "blocks": {
           "1578037112145": {
             "type": "logo",
+            "disabled": true,
             "settings": {
               "logo_footer_content": "<p>Visit the <a href=\"\/blogs\/news\" title=\"News\">Gymuso Journal<\/a>&nbsp;&nbsp; ❯<\/p>"
             }
           },
           "1578040245456": {
             "type": "info_store",
+            "disabled": true,
             "settings": {
               "title": "GYMUSO Store",
               "info_text_1": "9087S Divamus Faucibus Str., City name, CA 90896, United States.",
@@ -359,6 +363,7 @@
           },
           "1578041844868": {
             "type": "navigation_list",
+            "disabled": true,
             "settings": {
               "title": "HELP",
               "navigation": "footer"
@@ -366,6 +371,7 @@
           },
           "1578041869536": {
             "type": "navigation_list",
+            "disabled": true,
             "settings": {
               "title": "ABOUT",
               "navigation": ""
@@ -373,6 +379,7 @@
           },
           "1578041888072": {
             "type": "navigation_list",
+            "disabled": true,
             "settings": {
               "title": "ACCOUNT",
               "navigation": ""
@@ -380,6 +387,7 @@
           },
           "1578042598036": {
             "type": "newsletter",
+            "disabled": true,
             "settings": {
               "title": "Sign Up for our Newsletter"
             }
@@ -414,6 +422,7 @@
       },
       "1578294053456": {
         "type": "product-list",
+        "disabled": true,
         "settings": {
           "background-color": false,
           "border-top": false,
@@ -1489,9 +1498,49 @@
           "btn_text": "Check Out Our Recommendations",
           "btn_link": "shopify:\/\/pages\/quiz"
         }
+      },
+      "1639544619991138bf": {
+        "type": "hero",
+        "disabled": true,
+        "settings": {
+          "hero_layout": "full_width",
+          "hero_size": "medium",
+          "overlay": "dark",
+          "effect": "none",
+          "content_layout": "middle",
+          "text_size": "medium",
+          "sub_title": "",
+          "title": "Banner with text overlay",
+          "countdown": "",
+          "text": "<p>Use overlay text to give your customers insight into your brand. Select image and text that relates to your style and story.<\/p>",
+          "button": "",
+          "button_link": "",
+          "custom_color": false,
+          "color_heading": "",
+          "color_text": "",
+          "color_button": "",
+          "border_button": "",
+          "bg_button": ""
+        }
+      },
+      "163954615855b4c57c": {
+        "type": "home-section",
+        "settings": {
+          "desktop_image": "shopify:\/\/shop_images\/pexels-kenneth-3020635_2_9170b785-def2-4659-8801-eb9aefa5539f.png",
+          "mobile_image": "shopify:\/\/shop_images\/pexels-kenneth-3020635_1_6b865899-179d-4c52-8b1f-f213ea80f91f.png",
+          "title": "Your personalized herbs are just around the corner.",
+          "sub_title": "This 5 min quiz is designed by doctors and herbalists - the same types of questions you would hear during an in-person consultation.",
+          "recommend_text": "Recommended herbs to 200 people",
+          "btn_quiz": "Take The Quiz",
+          "quiz_link": "shopify:\/\/pages\/assets",
+          "btn_products": "Browse All Products",
+          "products_link": "shopify:\/\/collections\/all"
+        }
       }
     },
     "content_for_index": [
+      "163954615855b4c57c",
+      "1639544619991138bf",
       "1578294053456",
       "1578305380427",
       "1578305501771",
