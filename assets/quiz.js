@@ -465,7 +465,9 @@ $(document).ready(function(){
     }
   });
   $sectionCoverButton.on('click',function(){
-    swiper.slideNext();
+    // swiper.slideNext();
+    var thisSlide = $(this).closest('.swiper-slide');
+    slideContinueFromThisSlide(thisSlide); 
   });
   $continueButton.on('click',function(){
     
@@ -772,7 +774,6 @@ $(document).ready(function(){
               $(this).attr('data-show-slide',"false");
             }
           }
-
         });
       });
     } else {
