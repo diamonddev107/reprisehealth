@@ -605,7 +605,7 @@ $(document).ready(function(){
         $('#crumbValues').removeClass('current').removeClass('visited');
         $('#crumbResults').removeClass('current').removeClass('visited');
         break;
-      case 'Values':
+      case 'Values & Preferences':
         $('#crumbGoals').removeClass('visited').addClass('visited');
         $('#crumbLifestyle').removeClass('current').addClass('visited');
         $('#crumbBasics').removeClass('current').addClass('visited');
