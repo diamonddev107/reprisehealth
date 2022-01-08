@@ -303,7 +303,8 @@ body {
         line-height: 65px;
         text-align: center;
         color: #000000;
-        margin-bottom: 50px;
+        margin-bottom: 25px;
+        margin-top: 25px;
     }
     .products-wrapper {
         display: flex;
@@ -824,9 +825,9 @@ body {
     }
     .recommended-products {
         height: auto;
-        .h1 {
-            display: none;
-        }
+        // .h1 {
+        //     display: none;
+        // }
         .products-wrapper {
             display: block;
             .item {

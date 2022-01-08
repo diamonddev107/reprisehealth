@@ -238,25 +238,14 @@ $(document).ready(function(){
 
     var topArr = allArr.slice(0, 3);
     var topHandleArr= topArr.map(function(value,index) { return value[1]; });
-
-    $(".recommended-products .products-wrapper .item").each(function() {
-      if (!$(this).hasClass('arrow')) {
-        var product_handle = $(this).data("product-handle");
-        if (topHandleArr.indexOf(product_handle) < 0) {
-          $(this).addClass('hide');
-        }
-      }
-    })
+    localStorage.setItem('recommend_product_handles', topHandleArr);
+    localStorage.setItem('user_name',  quiz.name);
     // Select top 3 products from quiz result - end.
-    $(".pre-product-recommendation").addClass("hide");
-    $(".recommended-products").removeClass("hide");
-    $(".calculating-announcement-bar").addClass("show");
-    $backButton.removeClass("proper");
   })
   $("#add_custom_bottle_to_cart").on("click", function() {
     var custom_bottle_variant_id = $("#custom_bottle_variant_id").val();
     var properties = {};
-    properties['_customerName'] = quiz.name;
+    properties['_customerName'] = localStorage.getItem('user_name');
     $(".recommended-products .products-wrapper .item").each(function(i, e) {
       if (!$(this).hasClass('arrow')) {
         if (!$(this).hasClass('hide')) {

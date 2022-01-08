@@ -1,0 +1,92 @@
+<div class="recommended-products">
+    {% assign collection = collections["quiz"] %}
+    {% assign custom_bottle = all_products['custom-bottle'] %}
+    <input type="hidden" id="custom_bottle_variant_id" value="{{ custom_bottle.variants.first.id }}">
+    <h2 class="h1">Your Bottle:</h2>
+    <div class="products-wrapper">
+        {% for product in collection.products %}
+            {% unless product.title contains "Subscription" %}
+                <div class="item" data-product-handle="{{ product.handle }}" data-product-name="{{ product.title }}">
+                    <div class="image-wrapper">
+                        <a href="javascript:;">
+                            <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}">
+                        </a>
+                    </div>
+                    <div class="text-wrapper">
+                        <h3>You Don’t Sleep Well.. </h3>
+                        <span class="sub-heading">So We’re Recommending....</span>
+                        <h3 class="product-title" data-url="{{ product.url }}">{{ product.title | escape }}</h3>
+                        <ul>
+                            <li>You dont sleep well<span>Ashwaganda has vitamin d to help people who dont sleep well. </span></li>
+                            <li>You dont sleep well<span>Ashwaganda has vitamin d to help people who dont sleep well. </span></li>
+                        </ul>
+                        <div class="bottom">
+                            <span class="text">Learn More</span>
+                            <div class="btn-right-arrow-wrapper">
+                                <span class="btn-right-arrow"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endunless %}
+        {% endfor %}
+        <div class="item arrow" id="add_custom_bottle_to_cart">
+            <span class="text mobile-hide">Next </span>
+            <span class="text desktop-hide">Get My Herbs</span>
+            <span class="btn-right-arrow"></span>
+        </div>
+    </div>
+</div>
+<div class="learn-more-popup">
+    {% assign handle = 'sleep-beans' %}
+    {% assign product = all_products[handle] %}
+    <div class="item">
+        <div class="image-wrapper">
+            <a href="{{ product.url }}">
+                {{ product.metafields.custom_fields["recommend_image"] }}
+            </a>
+        </div>
+        <div class="text-wrapper">
+            <div class="close-wrapper">
+                <div class="close"></div>
+            </div>
+            <div class="inner-wrapper">
+                <h3 class="recommend_label desktop-hide">{{ product.metafields.custom_fields["recommend_label"] }}</h3>
+                <span class="recommend_short_text desktop-hide">{{ product.metafields.custom_fields["recommend_short_text"] }}</span>
+                <h3 class="product-title">{{ product.title | escape }}</h3>
+                <h3 class="recommend_label mobile-hide">{{ product.metafields.custom_fields["recommend_label"] }}</h3>
+                <span class="recommend_short_text mobile-hide">{{ product.metafields.custom_fields["recommend_short_text"] }}</span>
+                {{ product.metafields.custom_fields["recommend_content"] }}
+                <div class="bottom">
+                    <a href="{{ product.url }}" class="popup-learn-more-link"><span class="learn-more">Learn More</span></a>
+                    <span class="btn-right-arrow desktop-hide"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        overflow: unset;
+    }
+    div#shopify-section-footer {
+        display: none;
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        var topHandleArr = localStorage.getItem('recommend_product_handles');
+
+        if (topHandleArr != null) {
+            $(".recommended-products .products-wrapper .item").each(function() {
+                if (!$(this).hasClass('arrow')) {
+                    var product_handle = $(this).data("product-handle");
+                    if (topHandleArr.indexOf(product_handle) < 0) {
+                    $(this).addClass('hide');
+                    }
+                }
+            })
+        }
+    })
+</script>
