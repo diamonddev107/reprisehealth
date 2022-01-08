@@ -385,6 +385,11 @@ $(document).ready(function(){
     }
     $button.toggleClass('btn--quiz-active');
 
+    if (thisQuestionType == "Yes/No") {
+      console.log(skipValue);
+      disableSlide(skipValue);
+    }
+    
     // yes/no questions should automatically continue
     if ( thisQuestionType == "Yes/No" || thisQuestionType == "Multiple Choice" ) {
       checkQuizContinue(1, thisQuestionAnswersWrapper, thisQuestionWrapper);

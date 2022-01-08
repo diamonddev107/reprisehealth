@@ -8,7 +8,8 @@
   <div class="slide-bottom">
     <div class="slide-answer-wrapper">
       {% assign button_label = "Yes" %}
-      {% render 'quiz-multiple-choice-answer-button', button_text: button_label, question_type: "yes-no" %} 
+      {% assign skipValues = item["answer_choices"][0]["deactivated_questions"] %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label, question_type: "yes-no", skipValues: skipValues %} 
       {% assign button_label = "No" %}
       {% render 'quiz-multiple-choice-answer-button', button_text: button_label, question_type: "yes-no" %}
     </div>
