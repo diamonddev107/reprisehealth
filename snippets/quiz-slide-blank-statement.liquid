@@ -1,41 +1,14 @@
-{% assign section_order = '' %}
 {% assign section_button = '' %}
-{% case item['unique_slide_id'] %}
-  {% when "Informational01" %}
-    {% assign section_order = "01" %}
-    {% assign section_button = 'Take The Quiz' %}
-  {% when "Informational02" %}
-    {% assign section_order = "02" %}
-    {% assign section_button = 'Let’s Go!' %}
-  {% when "Stress03" %}
-    {% assign section_order = "03" %}
-    {% assign section_button = 'Let’s Go!' %}
-  {% when "Gut04" %}
-    {% assign section_order = "03" %}
-    {% assign section_button = 'Let’s Go!' %}
-  {% when "Immunity04" %}
-    {% assign section_order = "03" %}
-    {% assign section_button = 'Let’s Go!' %}
-  {% when "Lifestyle00" %}
-    {% assign section_order = "03" %}
-    {% assign section_button = 'Let’s Go!' %}
-  {% when "Sleep05" %}
-    {% assign section_order = "04" %}
-    {% assign section_button = 'Let’s Go!' %}
-  {% when "Basic00" %}
-    {% assign section_order = "04" %}
-    {% assign section_button = 'Let’s Go!' %}
-  {% when "Values00" %}
-    {% assign section_order = "05" %}
-    {% assign section_button = 'Let’s Go!' %}
-  {% else %}
-{% endcase %}
+
+{% if item['unique_slide_id'] == "Informational01" %}
+  {% assign section_button = 'Take The Quiz' %}
+{% else %}
+  {% assign section_button = 'Let’s Go!' %}
+{% endif %}
 
 <div class="slide-inner" {% if item["slide_main_image"] != blank %} style="background-image: url('{{ item['slide_main_image'] }}')" {% endif %}>
-  <span class="section-heading desktop-hide">Section/{{ section_order }}</span>
   <div class="slide-wrapper">
     <div class="slide-top">
-      <span class="section-heading mobile-hide">Section/{{ section_order }}</span>
       <div class="slide-header">
         <div class="question-heading slide-question slide-question-small text-center">{{ item["question_format_text"] }}</div>
         <div class="question-text slide-question slide-question-small text-center">{{ item["format_subtext"] }}</div>
