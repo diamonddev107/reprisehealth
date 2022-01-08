@@ -368,10 +368,13 @@ $(document).ready(function(){
     // convert this logic to just check if this is a single or multiple answer question
     if ( thisQuestionType == "Yes/No" || thisQuestionType == "Multiple Choice" ) {
       var thisQuestionAnswers = thisQuestionWrapper.find('.btn--quiz');
-      $(thisQuestionAnswers).removeClass('btn--quiz-active');
+      if (answerValue != "Other") {
+        $(thisQuestionAnswers).removeClass('btn--quiz-active');  
+      }
     } else {
       //
     }
+
     $button.toggleClass('btn--quiz-active');
 
     if (thisQuestionType == "Yes/No") {
@@ -383,12 +386,13 @@ $(document).ready(function(){
     if ( thisQuestionType == "Yes/No" || thisQuestionType == "Multiple Choice" ) {
       checkQuizContinue(1, thisQuestionAnswersWrapper, thisQuestionWrapper);
       checkQuizMax(3, thisQuestionAnswersWrapper);
-      var thisSlide = $(this).closest('.swiper-slide');
+      var thisSlide = $button.closest('.swiper-slide');
       
       if (answerValue == "Other") {
-        $(this).closest(".slide-inner").find(".other-answer-wrapper").addClass("show");
+        $button.closest(".slide-inner").find(".other-answer-wrapper").toggleClass("show");
         return false;
       }
+
       setTimeout(
         function() 
         {
@@ -399,7 +403,7 @@ $(document).ready(function(){
       checkQuizMax(3, thisQuestionAnswersWrapper);
 
       if (answerValue == "Other") {
-        $(this).closest(".slide-inner").find(".other-answer-wrapper").addClass("show");
+        $button.closest(".slide-inner").find(".other-answer-wrapper").toggleClass("show");
         return false;
       }
     }

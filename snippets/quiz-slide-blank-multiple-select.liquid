@@ -12,7 +12,9 @@
         {% assign subtext = answer_choices_item['subtext'] %}
         {% render 'quiz-multiple-choice-answer-button', button_text: button_label, subtext: subtext %} 
       {% endfor %}
-      {% render 'quiz-multiple-choice-answer-button', button_text: "Other" %}
+      {% if item["other_option"] == 1 %}
+        {% render 'quiz-multiple-choice-answer-button', button_text: "Other" %}
+      {% endif %}
     </div>
     <div class="other-answer-wrapper">
       <form action="javascript:void(0);" class="single-text-input">

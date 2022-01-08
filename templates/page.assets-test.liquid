@@ -65,157 +65,177 @@
                             {% endif %}
 
                             {% if item["question_type"] == "Dynamic Range" %}
-                                <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
-                                        data-answer-value=""
-                                        data-slide-section="{{ slideSection }}"
-                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
-                                        data-scoreable-slide="true"
-                                        data-question-text="{{ item['question_format_text'] | escape }}"
-                                        data-question-type="{{ item['question_type'] }}" 
-                                        data-unique-slide-id="{{ item['unique_slide_id'] }}" 
-                                        data-show-slide="{{ slideIsActive }}" 
-                                        data-slide-category="{{ item['question_section'] }}" >
-                                    {% render 'quiz-slide-blank-dynamic-range', item: item %}
-                                </div>
+                                
+                                    <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
+                                            data-answer-value=""
+                                            data-slide-section="{{ slideSection }}"
+                                            data-why-we-ask="{{ item["why_we_ask_text"] }}"
+                                            data-scoreable-slide="true"
+                                            data-question-text="{{ item['question_format_text'] | escape }}"
+                                            data-question-type="{{ item['question_type'] }}" 
+                                            data-unique-slide-id="{{ item['unique_slide_id'] }}" 
+                                            data-show-slide="{{ slideIsActive }}" 
+                                            data-slide-category="{{ item['question_section'] }}" >
+                                        {% render 'quiz-slide-blank-dynamic-range', item: item %}
+                                    </section>
+                                
                             {% elsif item["question_type"] == "Health Topics Listing" %}
-                                <div    class="swiper-slide" 
-                                        data-show-slide="false"
-                                        data-answer-value=""
-                                        data-scoreable-slide="true"
-                                        data-question-type="{{ item['question_type'] }}"
-                                        data-unique-slide-id="{{ item['unique_slide_id'] }}"
-                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
-                                        data-question-text="Health Topics"
-                                        data-slide-category="">
-                                    {% render 'quiz-slide-categories', item: item %} 
-                                </div>
+                                
+                                    <section id="{{ item['unique_slide_id'] }}" class="swiper-slide" 
+                                            data-show-slide="false"
+                                            data-answer-value=""
+                                            data-scoreable-slide="true"
+                                            data-question-type="{{ item['question_type'] }}"
+                                            data-unique-slide-id="{{ item['unique_slide_id'] }}"
+                                            data-why-we-ask="{{ item["why_we_ask_text"] }}"
+                                            data-question-text="Health Topics"
+                                            data-slide-category="">
+                                        {% render 'quiz-slide-categories', item: item %} 
+                                    </section>
+                                
                             {% elsif item["question_type"] == "Name of User" %}
-                                <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
-                                        data-slide-section="{{ slideSection }}"
-                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
-                                        data-scoreable-slide="true"
-                                        data-question-text="{{ item['question_format_text'] | escape }}"
-                                        data-question-type="{{ item['question_type'] }}" 
-                                        data-unique-slide-id="{{ item['unique_slide_id'] }}" 
-                                        data-show-slide="{{ slideIsActive }}" 
-                                        data-slide-category="{{ item['question_section'] }}" >
-                                    {% render 'quiz-slide-blank-text-input', item: item %}
-                                </div>
+                                
+                                    <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
+                                            data-slide-section="{{ slideSection }}"
+                                            data-why-we-ask="{{ item["why_we_ask_text"] }}"
+                                            data-scoreable-slide="true"
+                                            data-question-text="{{ item['question_format_text'] | escape }}"
+                                            data-question-type="{{ item['question_type'] }}" 
+                                            data-unique-slide-id="{{ item['unique_slide_id'] }}" 
+                                            data-show-slide="{{ slideIsActive }}" 
+                                            data-slide-category="{{ item['question_section'] }}" >
+                                        {% render 'quiz-slide-blank-text-input', item: item %}
+                                    </section>
+                                
                             {% elsif item["question_type"] contains "Wow" %}
-                                <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
-                                        data-slide-section="{{ slideSection }}"
-                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
-                                        data-scoreable-slide="true"
-                                        data-question-text="{{ item['question_format_text'] | escape }}"
-                                        data-question-type="{{ item['question_type'] }}" 
-                                        data-unique-slide-id="{{ item['unique_slide_id'] }}" 
-                                        data-show-slide="{{ slideIsActive }}" 
-                                        data-slide-category="{{ item['question_section'] }}" >
-                                    {% render 'quiz-slide-blank-informational', item: item %}
-                                </div>
+                                   
+                                    <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
+                                            data-slide-section="{{ slideSection }}"
+                                            data-why-we-ask="{{ item["why_we_ask_text"] }}"
+                                            data-scoreable-slide="true"
+                                            data-question-text="{{ item['question_format_text'] | escape }}"
+                                            data-question-type="{{ item['question_type'] }}" 
+                                            data-unique-slide-id="{{ item['unique_slide_id'] }}" 
+                                            data-show-slide="{{ slideIsActive }}" 
+                                            data-slide-category="{{ item['question_section'] }}" >
+                                        {% render 'quiz-slide-blank-informational', item: item %}
+                                    </section>
+                                 
                             {% elsif item["question_type"] == "Short Answer" %}
-                                <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
-                                        data-slide-section="{{ slideSection }}"
-                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
-                                        data-scoreable-slide="true"
-                                        data-question-text="{{ item['question_format_text'] | escape }}"
-                                        data-question-type="{{ item['question_type'] }}" 
-                                        data-unique-slide-id="{{ item['unique_slide_id'] }}" 
-                                        data-show-slide="{{ slideIsActive }}" 
-                                        data-slide-category="{{ item['question_section'] }}" >
-                                    {% render 'quiz-slide-blank-text-input', item: item %}
-                                </div>
+                                
+                                    <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
+                                            data-slide-section="{{ slideSection }}"
+                                            data-why-we-ask="{{ item["why_we_ask_text"] }}"
+                                            data-scoreable-slide="true"
+                                            data-question-text="{{ item['question_format_text'] | escape }}"
+                                            data-question-type="{{ item['question_type'] }}" 
+                                            data-unique-slide-id="{{ item['unique_slide_id'] }}" 
+                                            data-show-slide="{{ slideIsActive }}" 
+                                            data-slide-category="{{ item['question_section'] }}" >
+                                        {% render 'quiz-slide-blank-text-input', item: item %}
+                                    </section>
+                                
                             {% elsif item["question_type"] == "Yes/No" %}
-                                <div    class="swiper-slide swiper-slide-yes-no swiper-slide-dynamic {{ extraSlideClass }}" 
-                                        data-slide-section="{{ slideSection }}"
-                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
-                                        data-scoreable-slide="true"
-                                        data-answer-value=""
-                                        data-question-text="{{ item['question_format_text'] | escape }}"
-                                        data-question-type="{{ item['question_type'] }}" 
-                                        data-unique-slide-id="{{ item['unique_slide_id'] }}" 
-                                        data-show-slide="{{ slideIsActive }}" 
-                                        data-slide-category="{{ item['question_section'] }}" >
-                                    {% render 'quiz-slide-blank-yes-no', item: item %}
-                                </div>
+                                
+                                    <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-yes-no swiper-slide-dynamic {{ extraSlideClass }}" 
+                                            data-slide-section="{{ slideSection }}"
+                                            data-why-we-ask="{{ item["why_we_ask_text"] }}"
+                                            data-scoreable-slide="true"
+                                            data-answer-value=""
+                                            data-question-text="{{ item['question_format_text'] | escape }}"
+                                            data-question-type="{{ item['question_type'] }}" 
+                                            data-unique-slide-id="{{ item['unique_slide_id'] }}" 
+                                            data-show-slide="{{ slideIsActive }}" 
+                                            data-slide-category="{{ item['question_section'] }}" >
+                                        {% render 'quiz-slide-blank-yes-no', item: item %}
+                                    </section>
+                                
                             {% elsif item["question_type"] == "" or item["question_type"] == "Information Page" %}
-                                <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
-                                        data-slide-section="{{ slideSection }}"
-                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
-                                        data-scoreable-slide="false"
-                                        data-question-text="{{ item['question_format_text'] | escape }}"
-                                        data-question-type="{{ item['question_type'] }}" 
-                                        data-unique-slide-id="{{ item['unique_slide_id'] }}" 
-                                        data-show-slide="{{ slideIsActive }}" 
-                                        data-transition-time="{{ item['automatic_transition_time'] }}"
-                                        data-slide-category="{{ item['question_section'] }}" >
-                                    {% render 'quiz-slide-blank-statement', item: item %}
-                                </div>
+                                
+                                    <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
+                                            data-slide-section="{{ slideSection }}"
+                                            data-why-we-ask="{{ item["why_we_ask_text"] }}"
+                                            data-scoreable-slide="false"
+                                            data-question-text="{{ item['question_format_text'] | escape }}"
+                                            data-question-type="{{ item['question_type'] }}" 
+                                            data-unique-slide-id="{{ item['unique_slide_id'] }}" 
+                                            data-show-slide="{{ slideIsActive }}" 
+                                            data-transition-time="{{ item['automatic_transition_time'] }}"
+                                            data-slide-category="{{ item['question_section'] }}" >
+                                        {% render 'quiz-slide-blank-statement', item: item %}
+                                    </section>
+                                
                             {% elsif item["question_type"] == "Vertical Slider" %}
-                                <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
-                                        data-slide-section="{{ slideSection }}"
-                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
-                                        data-scoreable-slide="true"
-                                        data-answer-value=""
-                                        data-question-text="{{ item['question_format_text'] | escape }}"
-                                        data-question-type="Multiple Choice" 
-                                        data-unique-slide-id="{{ item['unique_slide_id'] }}" 
-                                        data-show-slide="{{ slideIsActive }}" 
-                                        data-slide-category="{{ item['question_section'] }}" >
-                                    {% render 'quiz-slide-blank-vertical-slider', item: item %}
-                                </div>
+                                
+                                    <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
+                                            data-slide-section="{{ slideSection }}"
+                                            data-why-we-ask="{{ item["why_we_ask_text"] }}"
+                                            data-scoreable-slide="true"
+                                            data-answer-value=""
+                                            data-question-text="{{ item['question_format_text'] | escape }}"
+                                            data-question-type="Multiple Choice" 
+                                            data-unique-slide-id="{{ item['unique_slide_id'] }}" 
+                                            data-show-slide="{{ slideIsActive }}" 
+                                            data-slide-category="{{ item['question_section'] }}" >
+                                        {% render 'quiz-slide-blank-vertical-slider', item: item %}
+                                    </section>
+                                
                             {% elsif item["question_type"] == "Multiple Choice" %}
-                                <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
-                                        data-slide-section="{{ slideSection }}"
-                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
-                                        data-scoreable-slide="true"
-                                        data-answer-value=""
-                                        data-question-text="{{ item['question_format_text'] | escape }}"
-                                        data-question-type="{{ item['question_type'] }}" 
-                                        data-unique-slide-id="{{ item['unique_slide_id'] }}" 
-                                        data-show-slide="{{ slideIsActive }}" 
-                                        data-slide-category="{{ item['question_section'] }}" >
-                                    {% render 'quiz-slide-blank-multiple-choice', item: item %}
-                                </div>
+                                
+                                    <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
+                                            data-slide-section="{{ slideSection }}"
+                                            data-why-we-ask="{{ item["why_we_ask_text"] }}"
+                                            data-scoreable-slide="true"
+                                            data-answer-value=""
+                                            data-question-text="{{ item['question_format_text'] | escape }}"
+                                            data-question-type="{{ item['question_type'] }}" 
+                                            data-unique-slide-id="{{ item['unique_slide_id'] }}" 
+                                            data-show-slide="{{ slideIsActive }}" 
+                                            data-slide-category="{{ item['question_section'] }}" >
+                                        {% render 'quiz-slide-blank-multiple-choice', item: item %}
+                                    </section>
+                                
                             {% elsif item["question_type"] == "Multiple Select" %}
-                                <div    class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
-                                        data-slide-section="{{ slideSection }}"
-                                        data-why-we-ask="{{ item["why_we_ask_text"] }}"
-                                        data-scoreable-slide="true"
-                                        data-answer-value=""
-                                        data-question-text="{{ item['question_format_text'] | escape }}"
-                                        data-question-type="{{ item['question_type'] }}" 
-                                        data-unique-slide-id="{{ item['unique_slide_id'] }}" 
-                                        data-show-slide="{{ slideIsActive }}" 
-                                        data-slide-category="{{ item['question_section'] }}" >
-                                    {% render 'quiz-slide-blank-multiple-select', item: item %}
-                                </div>
+                                
+                                    <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
+                                            data-slide-section="{{ slideSection }}"
+                                            data-why-we-ask="{{ item["why_we_ask_text"] }}"
+                                            data-scoreable-slide="true"
+                                            data-answer-value=""
+                                            data-question-text="{{ item['question_format_text'] | escape }}"
+                                            data-question-type="{{ item['question_type'] }}" 
+                                            data-unique-slide-id="{{ item['unique_slide_id'] }}" 
+                                            data-show-slide="{{ slideIsActive }}" 
+                                            data-slide-category="{{ item['question_section'] }}" >
+                                        {% render 'quiz-slide-blank-multiple-select', item: item %}
+                                    </section>
+                                
                             {% endif %}
                         {% endfor %}
-
-                        <div class="swiper-slide calculating-slide" data-show-slide="true" data-slide-category="">
-                            <div class="calculating-wrapper slide-inner full-screen">
-                                <div class="calculating-heading mobile-hide">
-                                    <span>We’re So Excited To Show You...</span>
-                                </div>
-                                <div class="calculating-body">
-                                    <div class="body-inner">
-                                        <img src="{{ 'Rolling-new.gif' | asset_img_url:'482x' }}" />
-                                        <div class="center-group">
-                                            {% comment %} <img class="" src="{{ 'emoticon-10.png' | asset_img_url }}" /> {% endcomment %}
-                                            <span>Calculating Results...</span>
+                        
+                            <section id="calculating_slide" class="swiper-slide calculating-slide" data-show-slide="true" data-slide-category="">
+                                <div class="calculating-wrapper slide-inner full-screen">
+                                    <div class="calculating-heading mobile-hide">
+                                        <span>We’re So Excited To Show You...</span>
+                                    </div>
+                                    <div class="calculating-body">
+                                        <div class="body-inner">
+                                            <img src="{{ 'Rolling-new.gif' | asset_img_url:'482x' }}" />
+                                            <div class="center-group">
+                                                {% comment %} <img class="" src="{{ 'emoticon-10.png' | asset_img_url }}" /> {% endcomment %}
+                                                <span>Calculating Results...</span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="calculating-heading desktop-hide">
+                                        <span>We’re So Excited To Show You...</span>
+                                    </div>
+                                    <div class="calculating-sidebar">
+                                        <span>Just One Second</span>
+                                    </div>
                                 </div>
-                                <div class="calculating-heading desktop-hide">
-                                    <span>We’re So Excited To Show You...</span>
-                                </div>
-                                <div class="calculating-sidebar">
-                                    <span>Just One Second</span>
-                                </div>
-                            </div>
-                        </div>
-
+                            </section>
+                        
                     </div>
                 </div>
             </div>
