@@ -37,7 +37,7 @@
   padding: .5em 1em;
   margin: 1em auto;
   li {
-    width: 60px;
+    width: 80px;
     text-align: center;
     position: relative;
     float: none;
@@ -68,6 +68,15 @@
         background-color: #ffffff;
         top: 0;
       }
+    }
+    .subProgressBar {
+      position: absolute;
+      height: 4px;
+      background: rgba(0,0,0,0.14);
+      margin: 0;
+      left: 50%;
+      width: calc(100% + 50px);
+      top: 8px;
     }
     &::after {
       position: absolute;

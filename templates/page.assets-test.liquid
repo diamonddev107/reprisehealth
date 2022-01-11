@@ -39,14 +39,19 @@
             <div class="asset-wrapper swiper-wrapper" >
                 <div class="swiper mySwiper" data-len='{{ shop.metafields.custom_fields["quiz_questions"].size }}'>
                     <div class="swiper-wrapper">
-                    
+                        {% assign goals_number = 0 %}
+                        {% assign lifestyle_number = 0 %}
+                        {% assign basics_number = 0 %}
+                        {% assign values_number = 0 %}
 
                         {% for item in shop.metafields.custom_fields["quiz_questions"] %}
                             {% if item['question_section'] == "Lifestyle" %}
+                                {% assign lifestyle_number = lifestyle_number | plus: 1 %}
                                 {% assign slideIsActive = true %}
                                 {% assign extraSlideClass = 'swiper-slide-lifestyle-category' %}
                                 {% assign slideSection = 'Lifestyle' %}
                             {% elsif item['question_section'] == "Basic" %}
+                                {% assign basics_number = basics_number | plus: 1 %}
                                 {% assign slideIsActive = true %}
                                 {% assign extraSlideClass = 'swiper-slide-basic-category' %}
                                 {% assign slideSection = 'Basic' %}
@@ -55,10 +60,12 @@
                                 {% assign extraSlideClass = 'swiper-slide-opening-category' %}
                                 {% assign slideSection = 'Opening' %}
                             {% elsif item['question_section'] == "Values & Preferences" %}
+                                {% assign values_number = values_number | plus: 1 %}
                                 {% assign slideIsActive = true %}
                                 {% assign extraSlideClass = 'swiper-slide-values-and-preferences-category' %}
                                 {% assign slideSection = 'Values & Preferences' %}
                             {% else %}
+                                {% assign goals_number = goals_number | plus: 1 %}
                                 {% assign slideIsActive = true %}
                                 {% assign extraSlideClass = 'swiper-slide-health-category' %}
                                 {% assign slideSection = 'Goals' %}
@@ -241,6 +248,7 @@
             </div>
             <div id="devScoreWrapper">
             </div>
+            <div id="questionSectionNumbers" class="hide" data-goals-number="{{ goals_number }}" data-lifestyle-number="{{ lifestyle_number }}" data-basics-number="{{ basics_number }}" data-values-number="{{ values_number }}"></div>
         </div>
     </div>
 </div>

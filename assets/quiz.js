@@ -5,7 +5,14 @@ $(document).ready(function(){
     $(this).html($(this).html().replace(/@name/g,"<span class='dynamic-name'></span>"));
     $(this).html($(this).html().replace(/@Name/g,"<span class='dynamic-name'></span>"));
   });
-
+  var total_goals = 0;
+  var total_lifestyle = 0;
+  var total_basics = 0;
+  var total_values = 0;
+  var current_goals = 0;
+  var current_lifestyle = 0;
+  var current_basics = 0;
+  var current_values = 0;
   var timestamp = new Date().getTime();
   var quiz = {};
   var questionsArray = [];
@@ -590,6 +597,10 @@ $(document).ready(function(){
         $('#crumbBasics').removeClass('current').removeClass('visited');
         $('#crumbValues').removeClass('current').removeClass('visited');
         $('#crumbResults').removeClass('current').removeClass('visited');
+        current_goals++;
+        total_goals = total_goals == 0 ? $("#questionSectionNumbers").attr("data-goals-number") : total_goals;
+        $("#quizProgressBar #crumbGoals .subProgressBar").css("background", "#000");
+        $("#quizProgressBar #crumbGoals .subProgressBar").css("width", "calc((100% + 50px) * "+ current_goals +" / "+ total_goals +")");
         break;
       case 'Lifestyle':
         $('#crumbGoals').removeClass('current').addClass('visited');
@@ -597,6 +608,10 @@ $(document).ready(function(){
         $('#crumbBasics').removeClass('current').removeClass('visited');
         $('#crumbValues').removeClass('current').removeClass('visited');
         $('#crumbResults').removeClass('current').removeClass('visited');
+        current_lifestyle++;
+        total_lifestyle = total_lifestyle == 0 ? $("#questionSectionNumbers").attr("data-lifestyle-number") : total_lifestyle;
+        $("#quizProgressBar #crumbLifestyle .subProgressBar").css("background", "#000");
+        $("#quizProgressBar #crumbLifestyle .subProgressBar").css("width", "calc((100% + 50px) * "+ current_lifestyle +" / "+ total_lifestyle +")");
         break;
       case 'Basic':
         $('#crumbGoals').removeClass('current').addClass('visited');
@@ -604,6 +619,10 @@ $(document).ready(function(){
         $('#crumbBasics').addClass('current').removeClass('visited');
         $('#crumbValues').removeClass('current').removeClass('visited');
         $('#crumbResults').removeClass('current').removeClass('visited');
+        current_basics++;
+        total_basics = total_basics == 0 ? $("#questionSectionNumbers").attr("data-basics-number") : total_basics;
+        $("#quizProgressBar #crumbBasics .subProgressBar").css("background", "#000");
+        $("#quizProgressBar #crumbBasics .subProgressBar").css("width", "calc((100% + 50px) * "+ current_basics +" / "+ total_basics +")");
         break;
       case 'Values & Preferences':
         $('#crumbGoals').removeClass('visited').addClass('visited');
@@ -611,6 +630,10 @@ $(document).ready(function(){
         $('#crumbBasics').removeClass('current').addClass('visited');
         $('#crumbValues').addClass('current').removeClass('visited');
         $('#crumbResults').removeClass('current').removeClass('visited');
+        current_values++;
+        total_values = total_values == 0 ? $("#questionSectionNumbers").attr("data-values-number") : total_values;
+        $("#quizProgressBar #crumbValues .subProgressBar").css("background", "#000");
+        $("#quizProgressBar #crumbValues .subProgressBar").css("width", "calc((100% + 50px) * "+ current_values +" / "+ total_values +")");
         break;
       case 'Results':
         $('#crumbGoals').removeClass('current').addClass('visited');
@@ -763,21 +786,56 @@ $(document).ready(function(){
         var buttonCategory = $(this).data('category');
         categoriesSelected.push(buttonCategory);
         quiz.healthCategories = categoriesSelected;
-        swiper.slides.each(function(e,i){
-          if ( $(this).hasClass('swiper-slide-health-category') ) {
-            var slideCategory = $(this).data('slide-category');
-            if ( categoriesSelected.includes(slideCategory) ) {
-              $(this).attr('data-show-slide',"true");
-            } else {
-              $(this).attr('data-show-slide',"false");
-            }
+      });
+      swiper.slides.each(function(e,i){
+        if ( $(this).hasClass('swiper-slide-health-category') ) {
+          var slideCategory = $(this).data('slide-category');
+          if ( categoriesSelected.includes(slideCategory) ) {
+            $(this).attr('data-show-slide',"true");
+            adjustQuestionNumber($(this), true);
+          } else {
+            $(this).attr('data-show-slide',"false");
           }
-        });
+        }
       });
     } else {
       swiper.slides.each(function(e,i){
         $(this).attr('data-show-slide',"false");
       });
+    }
+  }
+  function adjustQuestionNumber(currentSection, flag) {
+    var section_type = currentSection.data("slide-section");
+    switch(section_type) {
+      case 'Goals':
+        if (flag) {
+            total_goals = total_goals + 1;
+            $("#questionSectionNumbers").attr("data-goals-number", total_goals);
+        }
+        break;
+      case 'Lifestyle':
+        if (flag) {
+          total_lifestyle = total_lifestyle + 1;
+          $("#questionSectionNumbers").attr("data-lifestyle-number", total_lifestyle);
+        }
+        break;
+      case 'Basic':
+        if (flag) {
+          total_basics = total_basics + 1;
+          $("#questionSectionNumbers").attr("data-basics-number", total_basics);
+        }
+        break;
+      case 'Values & Preferences':
+        if (flag) {
+          total_values = total_values + 1;
+          $("#questionSectionNumbers").attr("data-values-number", total_values);
+        }
+        break;
+      case 'Results':
+        
+        break;
+      default:
+        //
     }
   }
 }); /* ready */
