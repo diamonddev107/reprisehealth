@@ -126,6 +126,7 @@ $(document).ready(function(){
     $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
     // $(".page.page-default").addClass('vh');
     $(".sidebar-button-slide").addClass("hide");
+    submitToKlaviyo(quiz);
     setTimeout(
       function() 
       {
@@ -162,10 +163,6 @@ $(document).ready(function(){
   var initial_slick_var = 0;
   $('.vertical-slide-item-wrapper .inner-wrapper').on('wheel', (function(e) {
     e.preventDefault();
-    // $(".slick-slide.slick-active").removeClass('slick-active-center');
-    // var current_index = $(".slick-current.slick-active").attr('data-slick-index');
-    // var center_index = parseInt(current_index) + 3;
-    // $(".slick-active[data-slick-index='"+center_index+"']").addClass('slick-active-center');
 
     if (e.originalEvent.deltaY < 0) {
       $(this).slick('slickPrev');
@@ -291,10 +288,6 @@ $(document).ready(function(){
   $backButton.on('click', 'img', function() {
     swiper.slidePrev();
   })
-  // $(".range-bar-item").on("click", function() {
-  //   var index = $(this).index();
-  //   $('.range-dot-wrapper[data-index="'+index+'"]').trigger("click");
-  // })
   $(".range-slider-bar").on("input", function() {
     var index = Math.floor($(this).val());
     $(this).closest(".number-range").find('.range-dot-wrapper[data-index="'+index+'"]').trigger("click");  
@@ -404,7 +397,7 @@ $(document).ready(function(){
         function() 
         {
           slideContinueFromThisSlide(thisSlide);    
-        }, 300);
+        }, 100);
     } else {
       checkQuizContinue(1, thisQuestionAnswersWrapper, thisQuestionWrapper);
       checkQuizMax(3, thisQuestionAnswersWrapper);
@@ -458,6 +451,7 @@ $(document).ready(function(){
           $(nothingSlected).text("Invalid Email").slideDown();
           return false;
         }
+        quiz.email = singleInput;
       }
       if (quiz.name == undefined) {
         $('.dynamic-name').html(singleInput);
@@ -566,16 +560,9 @@ $(document).ready(function(){
 
       _learnq.push(['identify', {
         '$email' : email,
-        [questionID] : qA
+        [questionText] : questionAnswer
       }]);
     })
-
-    // _learnq.push(['identify', {
-    //   '$email' : 'george.washington@example.com',
-    //   '$first_name' : 'George',
-    //   '$last_name' : 'Washington',
-    //   'Birth Year' : 1732
-    // }]);
   }
   function createDataObject(slide) {
     var thisSlideText = slide.data('question-text');
@@ -585,7 +572,7 @@ $(document).ready(function(){
     var thisQuestionObject = {};
     thisQuestionObject.ID = thisSlideId;
     thisQuestionObject.type = thisSlideType;
-    thisQuestionObject.text = thisSlideText;
+    thisQuestionObject.text = thisSlideText.replace( /(<([^>]+)>)/ig, '');
     thisQuestionObject.answer = thisSlideAnswer;
     return thisQuestionObject;
   }

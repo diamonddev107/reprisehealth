@@ -11,7 +11,8 @@
       {% assign skipValues = item["answer_choices"][0]["deactivated_questions"] %}
       {% render 'quiz-multiple-choice-answer-button', button_text: button_label, question_type: "yes-no", skipValues: skipValues %} 
       {% assign button_label = "No" %}
-      {% render 'quiz-multiple-choice-answer-button', button_text: button_label, question_type: "yes-no" %}
+      {% assign skipValues = item["answer_choices"][1]["deactivated_questions"] %}
+      {% render 'quiz-multiple-choice-answer-button', button_text: button_label, question_type: "yes-no", skipValues: skipValues %}
     </div>
     {%- comment -%}
     <div class="slide-continue-wrapper">
