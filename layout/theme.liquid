@@ -119,18 +119,18 @@ $(document).ready(function(){
                 var thisAnswer = item[2];
 
                 var dynamicClassAdd = "found-question-" + thisQuestion;
-                var questionElement = $(`div[data-unique-slide-id=${thisQuestion}]`);
+                var questionElement = $(`section[data-unique-slide-id=${thisQuestion}]`);
                 questionElement.addClass(dynamicClassAdd);
 
                 var dynamicAnswerClassAdd = "found-answer-" + thisAnswer;
-                var answerElement = questionElement.find(`[data-answer='${thisAnswer}']`);
+                var answerElement = questionElement.find(`[data-answer="${thisAnswer}"]`);
                 answerElement.addClass(dynamicAnswerClassAdd);
 
                 productsRow.forEach((pitem, pindex)=>{
                     var productIndex = pindex + 3;
                     var productAnswerScoreValue = item[productIndex];
                     
-                    //console.log(thisQuestion, thisAnswer, pitem, productAnswerScoreValue);
+                    // console.log(thisQuestion, thisAnswer, pitem, productAnswerScoreValue);
                     var dataLabel = "data-score-" + pitem;
                     answerElement.attr(dataLabel,productAnswerScoreValue); 
                 })

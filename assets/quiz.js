@@ -283,7 +283,20 @@ $(document).ready(function(){
     });
   })
   $backButton.on('click', 'span', function() {
-    swiper.slidePrev();
+    var preSlideIndex = swiper.realIndex - 1;
+    var prevSlide = $(swiper.slides[preSlideIndex]);
+
+    for (var i = preSlideIndex; i >= 0; i--) { 
+      var targetSlide = $(swiper.slides[i]);
+      var targetSlideState = targetSlide.data('show-slide');
+      if ( targetSlideState ) {
+        quiz.questions.pop();
+        delete quiz.answers['{{ answer from slide '+prevSlide.data('unique-slide-id')+' }}'];
+        swiper.slideTo(i,10);
+        break;
+      }
+    }
+
   })
   $backButton.on('click', 'img', function() {
     swiper.slidePrev();
@@ -378,7 +391,6 @@ $(document).ready(function(){
     $button.toggleClass('btn--quiz-active');
 
     if (thisQuestionType == "Yes/No") {
-      console.log(skipValue);
       disableSlide(skipValue);
     }
     
@@ -714,8 +726,6 @@ $(document).ready(function(){
 
     var currentGastroTotalEl = $('span[data-total-score-gastro-beans]');
     var currentGastroTotal = Math.round(currentGastroTotalEl.data('total-score'));
-    console.log(currentGastroTotal);
-    console.log(gastroBeanScore);
     var newGastroTotal = currentGastroTotal + gastroBeanScore;
     var currentReishiTotalEl = $('span[data-total-score-reishi]');
     var currentReishiTotal = Math.round(currentReishiTotalEl.data('total-score'));
@@ -730,7 +740,6 @@ $(document).ready(function(){
     var currentSleepBeanTotal = Math.round(currentSleepBeanTotalEl.data('total-score'));
     var newSleepBeanTotal = currentSleepBeanTotal + sleepBeansScore;
 
-    
     console.log(newGastroTotal, newReishiotal, newRhodiolaTotal, newSkinBeansTotal, newSleepBeanTotal);
 
     currentGastroTotalEl.data('total-score',newGastroTotal).html(newGastroTotal);
