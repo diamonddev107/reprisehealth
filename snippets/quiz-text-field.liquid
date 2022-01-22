@@ -1,20 +1,17 @@
 
 
 <form action="javascript:void(0);" class="single-text-input">
-  {% case slide_id %}
-    {% when "UserName" %}
+  {% case validation %}
+    {% when "string" %}
       <input type="text" id="userName" class="single-answer-input" name="userName" placeholder="{{ placeholder }}">
-    {% when "Basic04" %}
+    {% when "zipcode" %}
       <input type="text" id="userZip" class="single-answer-input" name="userZip" placeholder="{{ placeholder }}">
-    {% when "Basic02" %}
+    {% when "number" %}
       <input type="text" id="userAge" class="single-answer-input" name="userAge" placeholder="{{ placeholder }}">
-    {% when "Basic06" %}
-      <input type="text" id="userZip" class="single-answer-input" name="userZip" placeholder="{{ placeholder }}">
-    {% when "Basic07" %}
+    {% when "email" %}
       <input type="text" id="userEmail" class="single-answer-input" name="userEmail" placeholder="{{ placeholder }}">
     {% else %}
       <input type="text" id="other" class="single-answer-input" name="other" placeholder="{{ placeholder }}">
   {% endcase %}
   <a class="inline-continue"></a>
-  <!-- <input type="submit" class="inline-continue" value=""> -->
 </form>

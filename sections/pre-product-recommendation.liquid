@@ -6,7 +6,10 @@
         <span>{{ section.settings.sub_title }}</span>
         <h2 id="created_for_someone" class="h1">{{ section.settings.title | escape }}</h2>
         <p id="goals_for_category_names">{{ section.settings.text }}</p>
-        <a id="checkout_our_recommendations" href="{{ section.settings.btn_link }}">{{ section.settings.btn_text }}</a>
+        <div class="btn-flex">
+            <a id="checkout_our_recommendations" href="{{ section.settings.btn_link }}">{{ section.settings.btn_text }}</a>
+            <img src="{{ 'arrow.png' | asset_img_url:'40x' }}" />
+        </div>
     </div>
 </section>
 {% schema %}

@@ -2,7 +2,6 @@
   <div class="slide-top">
     <div class="slide-header">
       <div class="question-heading slide-question slide-question-small text-center">{{ item['question_format_text'] }}</div>
-      <!-- <span class="dynamic-name"></span> -->
       {% if item['format_subtext'] != blank %}
         <div class="question-subheading slide-question slide-question-small text-center">{{ item["format_subtext"] }}</div>
       {% endif %}
@@ -11,10 +10,14 @@
   <div class="slide-bottom">
     <div class="slide-answer-wrapper slide-answer-wrapper-categories" data-max-choices-allowed="{{ item["maximum_choices_allowed"] }}">
       {%- liquid 
+        assign active_number = 0
         if item["answer_choices"] != blank
           for answer_choices_item in item['answer_choices']
             if answer_choices_item["answer_text"] != blank
-              render 'quiz-multiple-choice-category-button', button_text: answer_choices_item["answer_text"], subtext: answer_choices_item["subtext"], active_state: active_state
+              if answer_choices_item["active"] == 1
+                assign active_number = active_number | plus: 1
+              endif
+              render 'quiz-multiple-choice-category-button', button_text: answer_choices_item["answer_text"], subtext: answer_choices_item["subtext"], active_state: answer_choices_item["active"]
             endif
           endfor
         endif
@@ -22,7 +25,7 @@
     </div>
     <div class="slide-continue-wrapper">
       <p class="nothing-selected text-center">{{ item['nothing_selected_text'] }}</p>
-      <a class="btn--kleva btn--quiz-continue btn--quiz-continue-inactive">Continue</a>
+      <a class="btn--kleva btn--quiz-continue {% if active_number == 0 %}btn--quiz-continue-inactive{% endif %}">Continue</a>
     </div>
   </div>
 </div> 

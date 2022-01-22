@@ -6,11 +6,15 @@
     </div>
   </div>
   <div class="slide-bottom">
-    <div class="slide-answer-wrapper">
+    <div class="slide-answer-wrapper" data-max-choices-allowed="{{ item["maximum_choices_allowed"] }}">
+      {% assign active_number = 0 %}
       {% for answer_choices_item in item["answer_choices"] %}
         {% assign button_label = answer_choices_item['answer_text'] %}
         {% assign subtext = answer_choices_item['subtext'] %}
-        {% render 'quiz-multiple-choice-answer-button', button_text: button_label, subtext: subtext %} 
+        {% if answer_choices_item["active"] == 1 %}
+          {% assign active_number = active_number | plus: 1 %}
+        {% endif %}
+        {% render 'quiz-multiple-choice-answer-button', button_text: button_label, subtext: subtext, active_state: answer_choices_item["active"] %} 
       {% endfor %}
       {% if item["other_option"] == 1 %}
         {% render 'quiz-multiple-choice-answer-button', button_text: "Other" %}
@@ -29,7 +33,7 @@
           Please select at least 1 area of interest before continuing :)
         {% endif %}
       </p>
-      <a class="btn--kleva btn--quiz-continue btn--quiz-continue-inactive">Continue</a>
+      <a class="btn--kleva btn--quiz-continue {% if active_number == 0 %} btn--quiz-continue-inactive {% endif %}">Continue</a>
     </div>
   </div>
 </div>

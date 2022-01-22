@@ -10,6 +10,11 @@
                         <tr class="cart__row" data-cart-item data-cart-item-key="{{ item.key }}" data-cart-item-url="{{ item.url }}" data-cart-item-title="{{ item.title }}" data-cart-item-index="{{ forloop.index }}" data-cart-item-quantity="{{ item.quantity }}">
                             <td class="cart__meta small--text-left" data-cart-table-cell>
                                 <div class="cart__product-information">
+                                    {% if section.settings.id %}
+                                    <div class="cart__image-wrapper">
+                                        <img class="cart__image{% if section.settings.image == null %} hide{% endif %}" src="{{ section.settings.image | img_url: 'x190' }}" alt="{{ section.settings.image.alt | escape }}" data-cart-item-image>
+                                    </div>
+                                    {% endif %}
                                     <div class="cart__content-wrapper">
                                         <div class="list-view-item__title">
                                             <a href="{{ item.url }}" class="cart__product-title" data-cart-item-title>
@@ -263,3 +268,22 @@
         }
     }
 </style>
+
+{% schema %}
+{
+    "name": "Cart page",
+   "settings": [
+        {
+            "type": "checkbox",
+            "id": "id",
+            "label": "Enable",
+            "default": true
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        }
+   ]
+}
+{% endschema %}

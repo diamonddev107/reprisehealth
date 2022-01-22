@@ -137,7 +137,7 @@ $(document).ready(function(){
         // $("#created_for_someone").text("Created Just For " + quiz.name);
         $("#goals_for_category_names").text($("#goals_for_category_names").text().replace("@category-names", cat_names));
         $(".page.page-default").addClass("hide");
-        $backButton.addClass("proper");
+        // $backButton.addClass("proper");
         $backButton.addClass("desktop-hide");
         $(".calculating-announcement-bar").removeClass('show');
       }, 5000
@@ -296,7 +296,9 @@ $(document).ready(function(){
         break;
       }
     }
-
+    if (prevSlide.data('scoreable-slide')) {
+      updateProductScores(prevSlide, "minus");  
+    }
   })
   $backButton.on('click', 'img', function() {
     swiper.slidePrev();
@@ -412,7 +414,7 @@ $(document).ready(function(){
         }, 100);
     } else {
       checkQuizContinue(1, thisQuestionAnswersWrapper, thisQuestionWrapper);
-      checkQuizMax(3, thisQuestionAnswersWrapper);
+      checkQuizMax($(this).closest(".slide-answer-wrapper").data("max-choices-allowed"), thisQuestionAnswersWrapper);
 
       if (answerValue == "Other") {
         $button.closest(".slide-inner").find(".other-answer-wrapper").toggleClass("show");
@@ -442,25 +444,25 @@ $(document).ready(function(){
     } else {
       if (singleInputEl.attr("name") == "userName") {
         if (!/^[A-Za-z\s]+$/.test(singleInput)) {
-          $(nothingSlected).text("Invalid Username").slideDown(); 
+          $(nothingSlected).slideDown();
           return false;
         }
       }
       if (singleInputEl.attr("name") == "userZip") {
         if (!/^\d{5}(-\d{4})?$/.test(singleInput)) {
-          $(nothingSlected).text("Invalid Zip Code").slideDown(); 
+          $(nothingSlected).slideDown(); 
           return false;
         }
       }
       if (singleInputEl.attr("name") == "userAge") {
-        if ( !( singleInput > 1 && singleInput < 100 ) ){
-          $(nothingSlected).text("Invalid Age").slideDown();
+        if ( !( singleInput > 1 && singleInput < 1000 ) ){
+          $(nothingSlected).slideDown();
           return false;
         }
       }
       if (singleInputEl.attr("name") == "userEmail") {
         if (!singleInput.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
-          $(nothingSlected).text("Invalid Email").slideDown();
+          $(nothingSlected).slideDown();
           return false;
         }
         quiz.email = singleInput;
@@ -516,7 +518,7 @@ $(document).ready(function(){
       disableSlide(skipQuestionOfSelectedAnswer);
     }
     if ( isScoreableSlide ) {
-      updateProductScores(thisSlide);
+      updateProductScores(thisSlide, "plus");
     }
 
     var thisQuestionDataObject = createDataObject(thisSlide);
@@ -645,109 +647,83 @@ $(document).ready(function(){
         //
     }
   }
-  function updateProductScores(slide) {
+  function getProductScores(answer) {
+    var scores = [];
+    $("#devScoreWrapper .product-score-wrapper").each(function() {
+      var handle = $(this).find("span[data-product-handle]").text();
+      var subArr = [];
+      var score = 0;
 
+      answer.each(function() {
+        var scoreFilter = $(this).data('score-'+handle) == undefined ? 0 : $(this).data('score-'+handle);
+        score += scoreFilter;
+      })
+
+      subArr.push(score);
+      subArr.push(handle);
+
+      scores.push(subArr);
+    })
+    return scores;
+  }
+  function calcTotalScores(arr, flag) {
+    if (arr.length > 0) {
+      for (var i = 0; i < arr.length; i++) {
+        var item = arr[i];
+        var currentTotalEl = $('span[data-total-score-'+item[1]+']');
+        var currentTotal = Math.round(currentTotalEl.attr('data-total-score'));
+        var newTotal = flag == "plus" ? (currentTotal + item[0]) : (currentTotal - item[0]);
+        console.log(currentTotal, item[0], newTotal);
+        currentTotalEl.attr('data-total-score',newTotal).html(newTotal);
+      }
+    }
+  }
+  function updateProductScores(slide, flag="plus") {
     var thisQuestionType = slide.data('question-type');
 
     switch(thisQuestionType) {
       case "Dynamic Range":
         var selectedAnswer = $(slide).find('.range-dot-wrapper-active');
-
-        var gastroBeanScore = selectedAnswer.data('score-gastro-beans');
-        var reishiScore = selectedAnswer.data('score-reishi');
-        var rhodiolaScore = selectedAnswer.data('score-rhodiola');
-        var skinBeansScore = selectedAnswer.data('score-skin-beans');
-        var sleepBeansScore = selectedAnswer.data('score-sleep-beans');
-      
+        var scoresArr = getProductScores(selectedAnswer);
         slide.attr('data-answer-value',$(selectedAnswer).index() + 1);
         break;
       case "Yes/No":
         var selectedAnswer = $(slide).find('.btn--quiz-active');
-        var gastroBeanScore = selectedAnswer.data('score-gastro-beans');
-        var reishiScore = selectedAnswer.data('score-reishi');
-        var rhodiolaScore = selectedAnswer.data('score-rhodiola');
-        var skinBeansScore = selectedAnswer.data('score-skin-beans');
-        var sleepBeansScore = selectedAnswer.data('score-sleep-beans');
+        var scoresArr = getProductScores(selectedAnswer);
         slide.attr('data-answer-value',$(selectedAnswer).data('answer'));
         break;
       case "Multiple Choice":
         var selectedAnswer = $(slide).find('.btn--quiz-active');
-        var gastroBeanScore = selectedAnswer.data('score-gastro-beans') == undefined ? 0 : selectedAnswer.data('score-gastro-beans');
-        var reishiScore = selectedAnswer.data('score-reishi') == undefined ? 0 : selectedAnswer.data('score-reishi');
-        var rhodiolaScore = selectedAnswer.data('score-rhodiola') == undefined ? 0 : selectedAnswer.data('score-rhodiola');
-        var skinBeansScore = selectedAnswer.data('score-skin-beans') == undefined ? 0 : selectedAnswer.data('score-skin-beans');
-        var sleepBeansScore = selectedAnswer.data('score-sleep-beans') == undefined ? 0 : selectedAnswer.data('score-sleep-beans');
+        var scoresArr = getProductScores(selectedAnswer);
         slide.attr('data-answer-value',$(selectedAnswer).data('answer'));
         break;
       case "Multiple Select":
         var selectedAnswersArray = [];
         var selectedAnswer = $(slide).find('.btn--quiz-active');
-        var gastroBeanScore = 0;
-        var reishiScore = 0;
-        var rhodiolaScore = 0;
-        var skinBeansScore = 0;
-        var sleepBeansScore = 0;
+        var scoresArr = getProductScores(selectedAnswer);
 
         selectedAnswer.each(function( index ) {
           selectedAnswersArray.push($(this).data('answer'));
-          gastroBeanScore += $(this).data('score-gastro-beans') == undefined ? 0 : $(this).data('score-gastro-beans');
-          reishiScore += $(this).data('score-reishi')  == undefined ? 0 : $(this).data('score-reishi');
-          rhodiolaScore += $(this).data('score-rhodiola') == undefined ? 0 : $(this).data('score-rhodiola');
-          skinBeansScore += $(this).data('score-skin-beans') == undefined ? 0 : $(this).data('score-skin-beans');
-          sleepBeansScore += $(this).data('score-sleep-beans') == undefined ? 0 : $(this).data('score-sleep-beans');
         });
         
-        var selectedAnswersString = selectedAnswersArray.toString();
-        slide.attr('data-answer-value',selectedAnswersString);
+        slide.attr('data-answer-value',selectedAnswersArray.toString());
         break;
       case "Health Topics Listing":
           var selectedAnswersArray = [];
           var selectedAnswer = $(slide).find('.btn--quiz-active');
-          var gastroBeanScore = 0;
-          var reishiScore = 0;
-          var rhodiolaScore = 0;
-          var skinBeansScore = 0;
-          var sleepBeansScore = 0;
+          var scoresArr = [];
 
           selectedAnswer.each(function( index ) {
             selectedAnswersArray.push($(this).data('category'));
           });
           
-          var selectedAnswersString = selectedAnswersArray.toString();
-          slide.attr('data-answer-value',selectedAnswersString);
+          slide.attr('data-answer-value',selectedAnswersArray.toString());
           break;
       default:
-        var gastroBeanScore = 0;
-        var reishiScore = 0;
-        var rhodiolaScore = 0;
-        var skinBeansScore = 0;
-        var sleepBeansScore = 0;
+        var scoresArr = [];
     }
-
-    var currentGastroTotalEl = $('span[data-total-score-gastro-beans]');
-    var currentGastroTotal = Math.round(currentGastroTotalEl.data('total-score'));
-    var newGastroTotal = currentGastroTotal + gastroBeanScore;
-    var currentReishiTotalEl = $('span[data-total-score-reishi]');
-    var currentReishiTotal = Math.round(currentReishiTotalEl.data('total-score'));
-    var newReishiotal = currentReishiTotal + reishiScore;
-    var currentRhodiolaTotalEl = $('span[data-total-score-rhodiola]');
-    var currentRhodiolaTotal = Math.round(currentRhodiolaTotalEl.data('total-score'));
-    var newRhodiolaTotal = currentRhodiolaTotal + rhodiolaScore;
-    var currentSkinBeansTotalEl = $('span[data-total-score-skin-beans]');
-    var currentSkinBeansTotal = Math.round(currentSkinBeansTotalEl.data('total-score'));
-    var newSkinBeansTotal = currentSkinBeansTotal + skinBeansScore;
-    var currentSleepBeanTotalEl = $('span[data-total-score-sleep-beans]');
-    var currentSleepBeanTotal = Math.round(currentSleepBeanTotalEl.data('total-score'));
-    var newSleepBeanTotal = currentSleepBeanTotal + sleepBeansScore;
-
-    console.log(newGastroTotal, newReishiotal, newRhodiolaTotal, newSkinBeansTotal, newSleepBeanTotal);
-
-    currentGastroTotalEl.data('total-score',newGastroTotal).html(newGastroTotal);
-    currentReishiTotalEl.data('total-score',newReishiotal).html(newReishiotal);
-    currentRhodiolaTotalEl.data('total-score',newRhodiolaTotal).html(newRhodiolaTotal);
-    currentSkinBeansTotalEl.data('total-score',newSkinBeansTotal).html(newSkinBeansTotal);
-    currentSleepBeanTotalEl.data('total-score',newSleepBeanTotal).html(newSleepBeanTotal);
-
+    
+    calcTotalScores(scoresArr, flag);
   }
   function checkQuizContinue(min, answersWrapper, questionWrapper) {
     var countSelected = answersWrapper.find('.btn--quiz-active').length;
@@ -761,6 +737,7 @@ $(document).ready(function(){
     }
   }
   function checkQuizMax(max, parent) {
+    max = max == '' ? 1 : max;
     var countSelected = parent.find('.btn--quiz-active').length;
     var allAnswers = parent.find('.btn--quiz');
     var allInactiveAnswers = parent.find('.btn--quiz-inactive');
@@ -834,4 +811,11 @@ $(document).ready(function(){
         //
     }
   }
+  // var header_height = $( "#shopify-section-header .site-header .header-mobile" ).height();
+  // $(".btn--quiz-back").css("top", header_height+"px");
+
+  // $( window ).resize(function() {
+  //   var header_height = $( "#shopify-section-header .site-header .header-mobile" ).height();
+  //   $(".btn--quiz-back").css("top", header_height+"px");
+  // });
 }); /* ready */

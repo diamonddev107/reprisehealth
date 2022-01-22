@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="btn--quiz-back hide">
-        <img src="{{ 'back-button.png' | asset_img_url:'482x' }}" />
+        <img src="{{ 'back-arrow.png' | asset_img_url:'15x' }}" />
         <span>Back</span>
     </div>
     <div class="calculating-announcement-bar desktop-hide">
@@ -256,6 +256,16 @@
 <style>
     div#shopify-section-header {
         display: none;
+    }
+    div#shopify-section-header .site-header {
+        width: 100%;
+        top: 0;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+    }
+    div#shopify-section-header .site-header, div#shopify-section-header .site-header .header-mobile, div#shopify-section-header .site-header .header-middle {
+        background: transparent;
     }
     div#shopify-section-footer {
         display: none;

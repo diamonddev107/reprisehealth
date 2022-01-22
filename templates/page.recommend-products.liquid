@@ -76,14 +76,14 @@
 </style>
 <script>
     $(document).ready(function() {
-        var topHandleArr = localStorage.getItem('recommend_product_handles');
-
-        if (topHandleArr != null) {
+        var topHandleStr = localStorage.getItem('recommend_product_handles');
+        if (topHandleStr != null) {
+            var topHandleArr = topHandleStr.split(",");
             $(".recommended-products .products-wrapper .item").each(function() {
                 if (!$(this).hasClass('arrow')) {
                     var product_handle = $(this).data("product-handle");
-                    if (topHandleArr.indexOf(product_handle) < 0) {
-                    $(this).addClass('hide');
+                    if (!topHandleArr.includes(product_handle)) {
+                        $(this).addClass('hide');
                     }
                 }
             })

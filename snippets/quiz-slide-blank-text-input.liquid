@@ -12,7 +12,7 @@
   </div>
   <div class="slide-bottom">
     <div class="slide-answer-wrapper">
-      {% render 'quiz-text-field', slide_id: item['unique_slide_id'], placeholder: item['placeholder'] %}
+      {% render 'quiz-text-field', slide_id: item['unique_slide_id'], placeholder: item['placeholder'], validation: item["data_validation"] %}
     </div>
     <div class="slide-continue-wrapper">
       <p class="nothing-selected text-center">{{ item['nothing_selected_text'] }}</p>

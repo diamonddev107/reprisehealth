@@ -1,6 +1,6 @@
 
 body {
-    overflow: hidden;
+    // overflow: hidden;
 }
 .container.section-cover {
     padding: 0;
@@ -11,7 +11,7 @@ body {
             max-width: 100%;
             .swiper-wrapper {
                 max-width: 100%;
-                height: 100vh;
+                // height: 100vh;
                 .swiper-slide-active {
                     display: flex;
                     justify-content: center;
@@ -80,8 +80,9 @@ body {
         }
     }
 }
-.swiper-slide {
+#PageContainer .swiper-slide {
     overflow: hidden;
+    height: 100vh;
 }
 #devScoreWrapper {
     display: none;
@@ -93,7 +94,7 @@ body {
     //height: 100vh;
 // }
 .page.page-default.vh {
-    height: 100vh;
+    // height: 100vh;
     padding: 0;
 }
 .page.page-default.hide {
@@ -111,6 +112,9 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: row !important;
+    .calculating-heading.mobile-hide {
+        padding-right: 30px;
+    }
     .calculating-heading {
         width: 25%;
         span {
@@ -236,8 +240,8 @@ body {
     display: none;
 }
 .pre-product-recommendation {
-    margin-left: -30px;
-    margin-right: -30px;
+    // margin-left: -30px;
+    // margin-right: -30px;
     // height: 100vh;
     .section-wrapper.flex {
         background: #92C79D;
@@ -287,6 +291,9 @@ body {
                 font-size: 20px;
                 line-height: 14px;
                 color: #FFFFFF;
+            }
+            .btn-flex:hover {
+                cursor: pointer;
             }
         }
     }
@@ -398,7 +405,7 @@ body {
                         margin-bottom: 20px;
                         span {
                             font-weight: normal;
-                            font-size: 9px;
+                            font-size: 11px;
                             line-height: 14px;
                             display: block;
                             margin-top: 6px;
@@ -573,15 +580,30 @@ body {
     display: flex;
 }
 .btn--quiz-back {
-    padding-top: 30px;
+    width: 100px;
+    background: #272C2F;
+    border-radius: 60px;
+    // position: absolute;
+    // display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    // margin: 0 auto;
+    left: 22px;
+    // padding-top: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    &:hover {
+        cursor: pointer;
+    }
     img {
-        display: none;
+        // display: none;
     }
     span {
-        padding: 10px 20px;
-        &:hover {
-            cursor: pointer;
-        }
+        color: white;
+        margin-left: 10px;
+        // padding: 10px 20px;
+        
     }
 }
 .range-emoticon {
@@ -672,6 +694,22 @@ body {
     background: none;
     cursor: pointer;
 }
+.slide-header {
+    p {
+        text-align: left;
+    }
+    p.text-align-right {
+        text-align: right;
+    }
+    p.text-align-center {
+        text-align: center;
+    }
+    a {
+        text-decoration: underline;
+        color: blue;
+    }
+}
+
 @media (max-width: 798px) {
     .page.page-default {
         padding-top: 0;
@@ -681,13 +719,13 @@ body {
         margin: 0;
         padding: 0;
     }
-    .question-heading, .question-subheading {
+    .question-subheading { //.question-heading, 
         font-size: 12px;
         color: #272C2F;
     }
-    .question-subheading {
-        margin-top: -20px;
-    }
+    // .question-subheading {
+    //     margin-top: -20px;
+    // }
     .btn--quiz {
         margin: 6px;
     }
@@ -707,6 +745,7 @@ body {
                 }
                 .question-text {
                     font-size: 12px;
+                    line-height: 1.4;
                 }
                 .section-heading.mobile-hide {
                     display: none;
@@ -769,7 +808,7 @@ body {
             display: inline-block;
         }
         span {
-            padding: 10px;
+            // padding: 10px;
         }
     }
     .btn--quiz-back.proper {
@@ -799,14 +838,14 @@ body {
         }
     }
     .sidebar-button-slide.collapsed {
-        width: 40px;
+        width: 30px;
         .inner span.title {
-            margin-left: 10px;
+            margin-left: 5px;
         }
     }
     .pre-product-recommendation {
-        margin-left: -15px;
-        margin-right: -15px;
+        // margin-left: 0px;
+        // margin-right: 0px;
         .section-wrapper.flex {
             // align-items: normal;
             // padding-top: 50px;
@@ -816,6 +855,21 @@ body {
                 padding-left: 22px;
                 padding-right: 22px;
                 margin: 0;
+                p, a {
+                    font-size: 12px;
+                    font-weight: normal;
+                    line-height: 1.5;
+                }
+                .btn-flex {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                    background: #272C2F;
+                    border-radius: 10px;
+                    padding: 15px;
+                    max-width: 320px;
+                    margin: 0 auto;
+                }
             }
             .left-side {
                 display: none;

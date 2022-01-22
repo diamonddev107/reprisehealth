@@ -40,8 +40,14 @@
             <div class="header-middle__center">
                 <div class="logo-wrapper" itemscope itemtype="http://schema.org/Organization">
                     <meta itemprop="url" content="{{ shop.url }}">
+                    
                     {% if section.settings.logo != blank %}
-                        {% assign img_url = section.settings.logo | img_url: 'master' %}
+                        {% if template == 'index' %}
+                            {% assign img_url = section.settings.logo | img_url: 'master' %}
+                        {% else %}
+                            {% assign img_url = section.settings.second_logo | img_url: 'master' %}
+                        {% endif %}
+                        
                         <a href="{{ routes.root_url }}" class="site-header__logo-image" aria-label="logo" style="width: {{ section.settings.logo_max_width }}px; max-width: {{ section.settings.logo_max_width }}px">
                             {% capture logo_alt %}{{ section.settings.logo.alt | default: shop.name }}{% endcapture %}
                             <img itemprop="logo" src="{{ img_url }}" alt="{{ logo_alt | escape }}">
