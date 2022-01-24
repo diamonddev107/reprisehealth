@@ -1,20 +1,91 @@
 
-body {
-    // overflow: hidden;
+html, body {
+    height: 100%;
 }
-.container.section-cover {
+#PageContainer {
+    min-height: 100%;
+    height: 100%;
     padding: 0;
-    .page.page-default {
+    margin: 0;
+    vertical-align: baseline;
+    .main-content {
+        // inset: 0px;
+        // height: 100%;
+        // position: absolute;
+        // overflow-y: scroll;
         padding: 0;
-        .asset-wrapper.swiper-wrapper {
+        margin: 0;
+        max-width: 100%;
+        height: 100%;
+        .container {
+            padding: 0;
             margin: 0;
             max-width: 100%;
+            height: 100%;
+            .page.page-default {
+                padding: 0;
+                margin: 0;
+                height: 100%;
+                .assets-test-area {
+                    margin: 0;
+                    padding: 0;
+                    height: 100%;
+                    width: 100%;
+                    .asset-wrapper.swiper-wrapper {
+                        margin: 0;
+                        padding: 0;
+                        width: 100%;
+                        max-width: 100%;
+                        height: 100%;
+                        .swiper {
+                            padding: 0;
+                            margin: 0;
+                            width: 100%;
+                            height: 100%;
+                            .swiper-wrapper {
+                                margin: 0;
+                                padding: 0;
+                                width: 100%;
+                                max-width: 100%;
+                                height: 100%;
+                                // align-items: flex-start;
+                                .swiper-slide {
+                                    padding: 0;
+                                    margin: 0;
+                                    height: 100%;
+                                    width: 100%;
+                                    overflow-x: hidden;
+                                    .slide-inner {
+                                        padding: 22px;
+                                    }
+                                    // .slide-inner.full-screen {
+                                    //     padding: 0;
+                                    // }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+} 
+.container.section-cover {
+    // padding: 0;
+    .page.page-default {
+        // padding: 0;
+        .asset-wrapper.swiper-wrapper {
+            // margin: 0;
+            // max-width: 100%;
             .swiper-wrapper {
-                max-width: 100%;
+                // max-width: 100%;
                 // height: 100vh;
                 .swiper-slide-active {
                     display: flex;
                     justify-content: center;
+                    .btn--quiz-back {
+                        position: absolute;
+                    }
                     .slide-inner {
                         width: 100%;
                         background-size: cover;
@@ -80,12 +151,20 @@ body {
         }
     }
 }
-#PageContainer .swiper-slide {
-    overflow: hidden;
-    height: 100vh;
-}
 #devScoreWrapper {
     display: none;
+}
+#calculating_slide {
+    flex-direction: column;
+    .calculating-announcement-bar {
+        width: 100%;
+        margin: 0;
+    }
+    .calculating-body img {
+        @media (max-width: 798px) {
+            width: 80%;
+        }
+    }
 }
 .breadcrumbs-progress-wrapper.hide {
     display: none;
@@ -589,10 +668,11 @@ body {
     text-align: center;
     justify-content: center;
     // margin: 0 auto;
-    left: 22px;
+    left: 0;
     // padding-top: 30px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 90px;
+    margin-bottom: 22px;
+    margin-left: 22px;
     &:hover {
         cursor: pointer;
     }
@@ -668,14 +748,14 @@ body {
 .range-slider-bar {
     position: absolute;
     -webkit-appearance: none;
-    width: 100%;
+    width: calc(100% - 44px);
     height: 7px;
     background: transparent;
     outline: none !important;
     -webkit-transition: 2s;
     transition: opacity 2s;
     border: none;
-    padding: 0 28px;
+    padding: 0 8%;
 }
 .range-slider-bar::-webkit-slider-thumb {
     -webkit-appearance: none;
@@ -715,7 +795,7 @@ body {
         padding-top: 0;
         padding-bottom: 0;
     }
-    #quizProgressBar {
+    .quizProgressBar {
         margin: 0;
         padding: 0;
     }
@@ -772,12 +852,12 @@ body {
     .desktop-hide {
         display: block;
     }
-    .calculating-announcement-bar.desktop-hide {
-        display: none;
-    }
-    .calculating-announcement-bar.desktop-hide.show {
-        display: block;
-    }
+    // .calculating-announcement-bar.desktop-hide {
+    //     display: none;
+    // }
+    // .calculating-announcement-bar.desktop-hide.show {
+    //     display: block;
+    // }
     .mobile-hide {
         display: none;
     }
@@ -804,6 +884,7 @@ body {
         font-size: 11px;
         display: flex;
         align-items: center;
+        margin-top: 70px;
         img {
             display: inline-block;
         }
@@ -811,13 +892,15 @@ body {
             // padding: 10px;
         }
     }
-    .btn--quiz-back.proper {
-        background: #92c79d;
-        margin-left: -15px;
-        margin-right: -15px;
-        padding: 0 22px;
-    }
+    // .btn--quiz-back.proper {
+    //     background: #92c79d;
+    //     margin-left: -15px;
+    //     margin-right: -15px;
+    //     padding: 0 22px;
+    // }
     .sidebar-button-slide {
+        left: 13px;
+        width: calc(100% - 26px);
         .inner {
             span.title {
                 font-size: 9px;

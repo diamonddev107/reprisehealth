@@ -90,7 +90,8 @@ $(document).ready(function(){
     if ( currentSlide.data('transition-time') ) {
       $('.breadcrumbs-progress-wrapper').addClass("hide");
       $('#MainContent .container').addClass("section-cover");
-      $backButton.addClass("hide");
+      $('body').addClass("header-transparent");
+      // $backButton.addClass("hide");
       $(".sidebar-button-slide").addClass("hide");
       // var transitionTime = currentSlide.data('transition-time') * 1000;
       // setTimeout(
@@ -101,10 +102,12 @@ $(document).ready(function(){
     } else {
       if (!currentSlide.find('.slide-inner').hasClass('full-screen')) {
         $('#MainContent .container').removeClass("section-cover");
+        $('body').removeClass("header-transparent");
         $('.breadcrumbs-progress-wrapper').removeClass("hide");  
       } else {
         $('#MainContent .container').addClass("section-cover");
-        $backButton.addClass("hide");
+        $('body').addClass("header-transparent");
+        // $backButton.addClass("hide");
         $('.breadcrumbs-progress-wrapper').addClass("hide");
       }
     };
@@ -122,7 +125,7 @@ $(document).ready(function(){
   }
   function reachSlideEnd() {
     $('.breadcrumbs-progress-wrapper').addClass("hide");
-    $(".calculating-announcement-bar").addClass('show');
+    $(".calculating-announcement-bar").removeClass('hide');
     $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
     // $(".page.page-default").addClass('vh');
     $(".sidebar-button-slide").addClass("hide");
@@ -138,7 +141,7 @@ $(document).ready(function(){
         $("#goals_for_category_names").text($("#goals_for_category_names").text().replace("@category-names", cat_names));
         $(".page.page-default").addClass("hide");
         // $backButton.addClass("proper");
-        $backButton.addClass("desktop-hide");
+        // $backButton.addClass("desktop-hide");
         $(".calculating-announcement-bar").removeClass('show');
       }, 5000
     );
@@ -282,7 +285,7 @@ $(document).ready(function(){
     .catch((error) => {
     });
   })
-  $backButton.on('click', 'span', function() {
+  $backButton.on('click', function() {
     var preSlideIndex = swiper.realIndex - 1;
     var prevSlide = $(swiper.slides[preSlideIndex]);
 
@@ -299,9 +302,6 @@ $(document).ready(function(){
     if (prevSlide.data('scoreable-slide')) {
       updateProductScores(prevSlide, "minus");  
     }
-  })
-  $backButton.on('click', 'img', function() {
-    swiper.slidePrev();
   })
   $(".range-slider-bar").on("input", function() {
     var index = Math.floor($(this).val());
@@ -600,8 +600,8 @@ $(document).ready(function(){
         $('#crumbResults').removeClass('current').removeClass('visited');
         current_goals++;
         total_goals = total_goals == 0 ? $("#questionSectionNumbers").attr("data-goals-number") : total_goals;
-        $("#quizProgressBar #crumbGoals .subProgressBar").css("background", "#000");
-        $("#quizProgressBar #crumbGoals .subProgressBar").css("width", "calc((100% + 50px) * "+ current_goals +" / "+ total_goals +")");
+        $(".quizProgressBar #crumbGoals .subProgressBar").css("background", "#000");
+        $(".quizProgressBar #crumbGoals .subProgressBar").css("width", "calc((100% + 50px) * "+ current_goals +" / "+ total_goals +")");
         break;
       case 'Lifestyle':
         $('#crumbGoals').removeClass('current').addClass('visited');
@@ -611,8 +611,8 @@ $(document).ready(function(){
         $('#crumbResults').removeClass('current').removeClass('visited');
         current_lifestyle++;
         total_lifestyle = total_lifestyle == 0 ? $("#questionSectionNumbers").attr("data-lifestyle-number") : total_lifestyle;
-        $("#quizProgressBar #crumbLifestyle .subProgressBar").css("background", "#000");
-        $("#quizProgressBar #crumbLifestyle .subProgressBar").css("width", "calc((100% + 50px) * "+ current_lifestyle +" / "+ total_lifestyle +")");
+        $(".quizProgressBar #crumbLifestyle .subProgressBar").css("background", "#000");
+        $(".quizProgressBar #crumbLifestyle .subProgressBar").css("width", "calc((100% + 50px) * "+ current_lifestyle +" / "+ total_lifestyle +")");
         break;
       case 'Basic':
         $('#crumbGoals').removeClass('current').addClass('visited');
@@ -622,8 +622,8 @@ $(document).ready(function(){
         $('#crumbResults').removeClass('current').removeClass('visited');
         current_basics++;
         total_basics = total_basics == 0 ? $("#questionSectionNumbers").attr("data-basics-number") : total_basics;
-        $("#quizProgressBar #crumbBasics .subProgressBar").css("background", "#000");
-        $("#quizProgressBar #crumbBasics .subProgressBar").css("width", "calc((100% + 50px) * "+ current_basics +" / "+ total_basics +")");
+        $(".quizProgressBar #crumbBasics .subProgressBar").css("background", "#000");
+        $(".quizProgressBar #crumbBasics .subProgressBar").css("width", "calc((100% + 50px) * "+ current_basics +" / "+ total_basics +")");
         break;
       case 'Values & Preferences':
         $('#crumbGoals').removeClass('visited').addClass('visited');
@@ -633,8 +633,8 @@ $(document).ready(function(){
         $('#crumbResults').removeClass('current').removeClass('visited');
         current_values++;
         total_values = total_values == 0 ? $("#questionSectionNumbers").attr("data-values-number") : total_values;
-        $("#quizProgressBar #crumbValues .subProgressBar").css("background", "#000");
-        $("#quizProgressBar #crumbValues .subProgressBar").css("width", "calc((100% + 50px) * "+ current_values +" / "+ total_values +")");
+        $(".quizProgressBar #crumbValues .subProgressBar").css("background", "#000");
+        $(".quizProgressBar #crumbValues .subProgressBar").css("width", "calc((100% + 50px) * "+ current_values +" / "+ total_values +")");
         break;
       case 'Results':
         $('#crumbGoals').removeClass('current').addClass('visited');
