@@ -60,7 +60,12 @@ html, body {
                                     }
                                     // .slide-inner.full-screen {
                                     //     padding: 0;
-                                    // }
+                                    // }Multiple Choice
+                                }
+                                .swiper-slide[data-question-type="Yes/No"], .swiper-slide[data-question-type="Multiple Choice"] {
+                                    .slide-inner {
+                                        padding-top: 50px;
+                                    }
                                 }
                             }
                         }

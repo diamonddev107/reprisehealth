@@ -29,6 +29,12 @@
       },
       {
         "type": "color",
+        "id": "quiz_start_background",
+        "label": "Start question background",
+        "default": "#92C79D"
+      },
+      {
+        "type": "color",
         "id": "question_heading",
         "label": "Question heading",
         "default": "#5a5a5a"

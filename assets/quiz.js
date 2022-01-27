@@ -538,11 +538,10 @@ $(document).ready(function(){
       var numberOfSlides = swiper.slides.length;
       var nextSlideIndex = swiper.realIndex + 1;
       var nextSlide = $(swiper.slides[nextSlideIndex]);
-      
-      for (var i = nextSlideIndex; i < numberOfSlides; i++) { 
+      for (var i = nextSlideIndex; i < numberOfSlides; i++) {
         var targetSlide = $(swiper.slides[i]);
-        var targetSlideState = targetSlide.data('show-slide');
-        if ( targetSlideState ) {
+        var targetSlideState = targetSlide.attr('data-show-slide');
+        if ( targetSlideState == "true" ) {
           quiz.questions.push(thisQuestionDataObject);
           quiz.answers['{{ answer from slide '+thisSlide.data('unique-slide-id')+' }}'] = thisSlide.data('answer-value');
           swiper.slideTo(i,10);

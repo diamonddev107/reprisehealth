@@ -44,7 +44,7 @@
                 {% endif %}
             </div>
         {% endif %}
-        {% if section.settings.enable-header-cart %}
+        {% if section.settings.enable-header-cart and cart.item_count > 0 %}
         <div class="item__mobile item__mobile--cart">
             {% if pagename == 'cart' %}
                 <a class="navUser-action" href="{{ routes.cart_url }}" aria-label="cart">
