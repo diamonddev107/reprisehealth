@@ -25,6 +25,40 @@
       },
       {
         "type": "header",
+        "content": "Quiz Texts"
+      },
+      {
+        "type": "color",
+        "id": "question_heading",
+        "label": "Question heading",
+        "default": "#5a5a5a"
+      },
+      {
+        "type": "color",
+        "id": "question_subheading",
+        "label": "Question sub heading",
+        "default": "#5a5a5a"
+      },
+      {
+        "type": "color",
+        "id": "question_text",
+        "label": "Question text",
+        "default": "#5a5a5a"
+      },
+      {
+        "type": "color",
+        "id": "range_dots_text",
+        "label": "Range dots text",
+        "default": "#5a5a5a"
+      },
+      {
+        "type": "color",
+        "id": "progress_bar_text",
+        "label": "Progress bar text",
+        "default": "#2c3f4c"
+      },
+      {
+        "type": "header",
         "content": "Quiz Buttons"
       },
       {
@@ -62,6 +96,24 @@
         "id": "quiz_button_border_active",
         "label": "Quiz Button Active Border",
         "default": "#CCBC9B"
+      },
+      {
+        "type": "color",
+        "id": "next_button_background",
+        "label": "Next button background",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "next_button_text",
+        "label": "Next button text",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "next_button_color",
+        "label": "Next button color",
+        "default": "#000"
       },
       {
         "type": "range",

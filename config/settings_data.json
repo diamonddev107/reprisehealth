@@ -1260,7 +1260,7 @@
       "pre-product-recommendation": {
         "type": "pre-product-recommendation",
         "settings": {
-          "image": "shopify:\/\/shop_images\/pexels-maria-orlova-4947151_1.png",
+          "image": "shopify:\/\/shop_images\/debashis-rc-biswas-ezAE9WHvipg-unsplash_2.jpg",
           "title": "Created Just For @name",
           "sub_title": "Your Results Are Ready!",
           "text": "Your Recommendations are based on your goals for @category-names. To perfect your routine we recommend you take the following supplements.",
@@ -1275,7 +1275,7 @@
           "mobile_image": "shopify:\/\/shop_images\/mobile_debashis-rc-biswas-ezAE9WHvipg-unsplash_1.png",
           "title": "Your personalized herbs are just around the corner.",
           "sub_title": "This 5 min quiz is designed by doctors and herbalists - the same types of questions you would hear during an in-person consultation.",
-          "recommend_text": "Recommended herbs to 200 people",
+          "recommend_text": "Recommended herbs to @people_number people",
           "btn_quiz": "Take The Quiz",
           "quiz_link": "shopify:\/\/pages\/assets",
           "btn_products": "Browse All Products",

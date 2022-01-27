@@ -1,0 +1,8 @@
+{% if shop.metafields.custom_fields["people_number"] != blank %}
+  <div class="custom-field custom-field__people-number custom-field__type--number">
+    <h3 class="custom-field--title">People number</h3>
+    <div class="custom-field--value">
+      {{ shop.metafields.custom_fields["people_number"] }}
+    </div>
+  </div>
+{% endif %}

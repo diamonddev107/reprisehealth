@@ -26,13 +26,41 @@ $medium-below: 767px;
   }
 }
 .question-heading {
+  color: {{ settings.question_heading }};
   font-size: {{ settings.quiz_desktop_heading }}px;
   @media (max-width: $large-below) {
     font-size: {{ settings.quiz_mobile_heading }}px;
   }
 }
+.question-heading p {
+  color: {{ settings.question_heading }};
+}
+.question-text, .question-text p {
+  color: {{ settings.question_text }};
+}
 .slide-answer-wrapper {
   max-width: {{ settings.quiz_answers_wrapper_width }}px;
+}
+a:not([href]).btn-section-cover {
+  background: {{ settings.next_button_background }};
+  color: {{ settings.next_button_text }};
+}
+a:not([href]).btn-section-cover:hover {
+  color: {{ settings.next_button_text }};
+}
+a.btn--quiz-continue:not([href]) {
+  background: {{ settings.next_button_background }};
+  color: {{ settings.next_button_text }} !important;
+  border-color: {{ settings.next_button_color }};
+}
+.quizProgressBar li>span {
+  color: {{ settings.progress_bar_text }};
+}
+.question-subheading, .question-subheading p {
+  color: {{ settings.question_subheading }};
+}
+.range-dot-wrapper span {
+  color: {{ settings.range_dots_text }}
 }
 .btn--kleva {
   font-size: {{ settings.quiz_desktop_answer }}px;

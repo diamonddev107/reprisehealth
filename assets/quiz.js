@@ -41,21 +41,23 @@ $(document).ready(function(){
       },
       reachEnd: function(swiper) {
         reachSlideEnd();
-      } 
+      }
     }
   });
 
   swiper.on('slideChangeTransitionEnd',function(){
     checkForAutomaticTransition(swiper);
   });
-
+  
+  if (window.history && window.history.pushState) {
+    $(window).on('popstate', function(e) {
+      var queryString = window.location.search;
+      var section_id = queryString.replace("?question=", "");
+      var section = $("#"+section_id.trim());
+      section.find(".btn--quiz-back").trigger("click");
+    });
+  }
   function checkForAutomaticTransition(swiper) {
-    // temp start
-    // var indexBeforeLast = slideLen - 1;
-    // var currentSlide = $(swiper.slides[indexBeforeLast]);
-    // swiper.slideNext();
-    // swiper.slideTo(65,10);
-    // temp end
     if (swiper.realIndex == 0) {
       $backButton.addClass("hide");
     } else {
@@ -67,6 +69,8 @@ $(document).ready(function(){
     var offset = currentSlide.find(".slide-bottom").offset();
     var wowSlide = currentSlide.data('question-type');
     
+    window.history.pushState(null, null, "?question="+currentSlide.attr("id"));
+
     if (wowSlide == "Information Page" && quiz.healthCategories.length == 1) {
         var wowText = currentSlide.find(".question-heading").text();
         var singleResult = wowText.replace("those are some great goals", "That's a great goal");
