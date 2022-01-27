@@ -1,9 +1,11 @@
 
 
 $(document).ready(function(){
+  var people_number = $("#people_number").text();
   $("#MainContent .container").children().each(function() {
     $(this).html($(this).html().replace(/@name/g,"<span class='dynamic-name'></span>"));
     $(this).html($(this).html().replace(/@Name/g,"<span class='dynamic-name'></span>"));
+    $(this).html($(this).html().replace(/@people_number/g, people_number));
   });
   var total_goals = 0;
   var total_lifestyle = 0;
@@ -210,14 +212,15 @@ $(document).ready(function(){
     }
   })
   $(".learn-more-popup .close").on("click", function() {
-    $(".learn-more-popup").removeClass("popup-open");
+    $(this).closest(".learn-more-popup").removeClass("popup-open");
   })
   $(".btn-right-arrow-wrapper").closest(".item").on("click", function() {
-    var product_title = $(this).closest(".item").find(".product-title").text();
-    var product_url = $(this).closest(".item").find(".product-title").data("url");
-    $(".learn-more-popup .product-title").text(product_title);
-    $(".learn-more-popup .popup-learn-more-link").attr("href", product_url);
-    $(".learn-more-popup").addClass("popup-open");
+    var product_handle = $(this).data("product-handle");
+    // var product_title = $(this).closest(".item").find(".product-title").text();
+    // var product_url = $(this).closest(".item").find(".product-title").data("url");
+    // $(".learn-more-popup .product-title").text(product_title);
+    // $(".learn-more-popup .popup-learn-more-link").attr("href", product_url);
+    $(".learn-more-popup." + product_handle).addClass("popup-open");
   })
   $("#checkout_our_recommendations").on("click", function() {
     // Select top 3 products from quiz result - start.
@@ -593,55 +596,55 @@ $(document).ready(function(){
   function setBreadCrumbsProgress(sectionLabel) {
     switch(sectionLabel) {
       case 'Goals':
-        $('#crumbGoals').addClass('current').removeClass('visited');
-        $('#crumbLifestyle').removeClass('current').removeClass('visited');
-        $('#crumbBasics').removeClass('current').removeClass('visited');
-        $('#crumbValues').removeClass('current').removeClass('visited');
-        $('#crumbResults').removeClass('current').removeClass('visited');
+        $('.crumbGoals').addClass('current').removeClass('visited');
+        $('.crumbLifestyle').removeClass('current').removeClass('visited');
+        $('.crumbBasics').removeClass('current').removeClass('visited');
+        $('.crumbValues').removeClass('current').removeClass('visited');
+        $('.crumbResults').removeClass('current').removeClass('visited');
         current_goals++;
         total_goals = total_goals == 0 ? $("#questionSectionNumbers").attr("data-goals-number") : total_goals;
-        $(".quizProgressBar #crumbGoals .subProgressBar").css("background", "#000");
-        $(".quizProgressBar #crumbGoals .subProgressBar").css("width", "calc((100% + 50px) * "+ current_goals +" / "+ total_goals +")");
+        $(".quizProgressBar .crumbGoals .subProgressBar").css("background", "#000");
+        $(".quizProgressBar .crumbGoals .subProgressBar").css("width", "calc((100% + 50px) * "+ current_goals +" / "+ total_goals +")");
         break;
       case 'Lifestyle':
-        $('#crumbGoals').removeClass('current').addClass('visited');
-        $('#crumbLifestyle').addClass('current').removeClass('visited');
-        $('#crumbBasics').removeClass('current').removeClass('visited');
-        $('#crumbValues').removeClass('current').removeClass('visited');
-        $('#crumbResults').removeClass('current').removeClass('visited');
+        $('.crumbGoals').removeClass('current').addClass('visited');
+        $('.crumbLifestyle').addClass('current').removeClass('visited');
+        $('.crumbBasics').removeClass('current').removeClass('visited');
+        $('.crumbValues').removeClass('current').removeClass('visited');
+        $('.crumbResults').removeClass('current').removeClass('visited');
         current_lifestyle++;
         total_lifestyle = total_lifestyle == 0 ? $("#questionSectionNumbers").attr("data-lifestyle-number") : total_lifestyle;
-        $(".quizProgressBar #crumbLifestyle .subProgressBar").css("background", "#000");
-        $(".quizProgressBar #crumbLifestyle .subProgressBar").css("width", "calc((100% + 50px) * "+ current_lifestyle +" / "+ total_lifestyle +")");
+        $(".quizProgressBar .crumbLifestyle .subProgressBar").css("background", "#000");
+        $(".quizProgressBar .crumbLifestyle .subProgressBar").css("width", "calc((100% + 50px) * "+ current_lifestyle +" / "+ total_lifestyle +")");
         break;
       case 'Basic':
-        $('#crumbGoals').removeClass('current').addClass('visited');
-        $('#crumbLifestyle').removeClass('current').addClass('visited');
-        $('#crumbBasics').addClass('current').removeClass('visited');
-        $('#crumbValues').removeClass('current').removeClass('visited');
-        $('#crumbResults').removeClass('current').removeClass('visited');
+        $('.crumbGoals').removeClass('current').addClass('visited');
+        $('.crumbLifestyle').removeClass('current').addClass('visited');
+        $('.crumbBasics').addClass('current').removeClass('visited');
+        $('.crumbValues').removeClass('current').removeClass('visited');
+        $('.crumbResults').removeClass('current').removeClass('visited');
         current_basics++;
         total_basics = total_basics == 0 ? $("#questionSectionNumbers").attr("data-basics-number") : total_basics;
-        $(".quizProgressBar #crumbBasics .subProgressBar").css("background", "#000");
-        $(".quizProgressBar #crumbBasics .subProgressBar").css("width", "calc((100% + 50px) * "+ current_basics +" / "+ total_basics +")");
+        $(".quizProgressBar .crumbBasics .subProgressBar").css("background", "#000");
+        $(".quizProgressBar .crumbBasics .subProgressBar").css("width", "calc((100% + 50px) * "+ current_basics +" / "+ total_basics +")");
         break;
       case 'Values & Preferences':
-        $('#crumbGoals').removeClass('visited').addClass('visited');
-        $('#crumbLifestyle').removeClass('current').addClass('visited');
-        $('#crumbBasics').removeClass('current').addClass('visited');
-        $('#crumbValues').addClass('current').removeClass('visited');
-        $('#crumbResults').removeClass('current').removeClass('visited');
+        $('.crumbGoals').removeClass('visited').addClass('visited');
+        $('.crumbLifestyle').removeClass('current').addClass('visited');
+        $('.crumbBasics').removeClass('current').addClass('visited');
+        $('.crumbValues').addClass('current').removeClass('visited');
+        $('.crumbResults').removeClass('current').removeClass('visited');
         current_values++;
         total_values = total_values == 0 ? $("#questionSectionNumbers").attr("data-values-number") : total_values;
-        $(".quizProgressBar #crumbValues .subProgressBar").css("background", "#000");
-        $(".quizProgressBar #crumbValues .subProgressBar").css("width", "calc((100% + 50px) * "+ current_values +" / "+ total_values +")");
+        $(".quizProgressBar .crumbValues .subProgressBar").css("background", "#000");
+        $(".quizProgressBar .crumbValues .subProgressBar").css("width", "calc((100% + 50px) * "+ current_values +" / "+ total_values +")");
         break;
       case 'Results':
-        $('#crumbGoals').removeClass('current').addClass('visited');
-        $('#crumbLifestyle').removeClass('current').addClass('visited');
-        $('#crumbBasics').removeClass('current').addClass('visited');
-        $('#crumbValues').removeClass('current').addClass('visited');
-        $('#crumbResults').addClass('current').removeClass('visited');
+        $('.crumbGoals').removeClass('current').addClass('visited');
+        $('.crumbLifestyle').removeClass('current').addClass('visited');
+        $('.crumbBasics').removeClass('current').addClass('visited');
+        $('.crumbValues').removeClass('current').addClass('visited');
+        $('.crumbResults').addClass('current').removeClass('visited');
         break;
       default:
         //

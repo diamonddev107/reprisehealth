@@ -30,6 +30,11 @@
     }
 </style>
 {{ 'homepage-section.scss.css' | asset_url | stylesheet_tag }}
+<script>
+    $(document).ready( function() {
+        $(".homepage-section .row-block h3").html($(".homepage-section .row-block h3").html().replace(/@people_number/g, {{ shop.metafields.custom_fields["people_number"] }}));
+    })
+</script>
 {% schema %}
 {
     "name": "Homepage section",

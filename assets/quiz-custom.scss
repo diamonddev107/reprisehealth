@@ -111,7 +111,8 @@ html, body {
                                 display: block;
                             }
                             .question-heading {
-                                font-family: 'NewYork';
+                                // font-family: 'NewYork';
+                                font-family: 'DM Sans', sans-serif;
                                 // text-transform: capitalize;
                                 color: #272C2F;
                                 margin-top: 30px;
@@ -956,6 +957,11 @@ html, body {
             }
             .left-side {
                 display: none;
+            }
+            .right-side {
+                span, p {
+                    color: white;
+                }
             }
         }
         

@@ -12,6 +12,16 @@
         </div>
     </div>
 </section>
+<style>
+    @media (max-width: 798px) {
+        .pre-product-recommendation .section-wrapper.flex {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-image: url({{ section.settings.image | img_url: "master" }});
+        }
+    }
+</style>
 {% schema %}
 {
     "name": "Pre recommendation",

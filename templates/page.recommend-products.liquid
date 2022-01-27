@@ -1,6 +1,7 @@
+{% assign collection = collections["quiz"] %}
+{% assign custom_bottle = all_products['custom-bottle'] %}
+
 <div class="recommended-products">
-    {% assign collection = collections["quiz"] %}
-    {% assign custom_bottle = all_products['custom-bottle'] %}
     <input type="hidden" id="custom_bottle_variant_id" value="{{ custom_bottle.variants.first.id }}">
     <h2 class="h1">Your Bottle:</h2>
     <div class="products-wrapper">
@@ -13,13 +14,14 @@
                         </a>
                     </div>
                     <div class="text-wrapper">
-                        <h3>You Don’t Sleep Well.. </h3>
-                        <span class="sub-heading">So We’re Recommending....</span>
+                        <h3>{{ product.metafields.custom_fields["recommend_label"] }}</h3>
+                        <span class="sub-heading">{{ product.metafields.custom_fields["recommend_short_text"] }}</span>
                         <h3 class="product-title" data-url="{{ product.url }}">{{ product.title | escape }}</h3>
                         <ul>
                             <li>You dont sleep well<span>Ashwaganda has vitamin d to help people who dont sleep well. </span></li>
                             <li>You dont sleep well<span>Ashwaganda has vitamin d to help people who dont sleep well. </span></li>
                         </ul>
+                        <!-- {{ product.metafields.custom_fields["recommend_content"] }} -->
                         <div class="bottom">
                             <span class="text">Learn More</span>
                             <div class="btn-right-arrow-wrapper">
@@ -37,35 +39,35 @@
         </div>
     </div>
 </div>
-<div class="learn-more-popup">
-    {% assign handle = 'sleep-beans' %}
-    {% assign product = all_products[handle] %}
-    <div class="item">
-        <div class="image-wrapper">
-            <a href="{{ product.url }}">
-                {{ product.metafields.custom_fields["recommend_image"] }}
-            </a>
-        </div>
-        <div class="text-wrapper">
-            <div class="close-wrapper">
-                <div class="close"></div>
+
+{% for product in collection.products %}
+    <div class="learn-more-popup {{ product.handle }}">
+        <div class="item">
+            <div class="image-wrapper">
+                <a href="{{ product.url }}">
+                    {{ product.metafields.custom_fields["recommend_image"] }}
+                </a>
             </div>
-            <div class="inner-wrapper">
-                <h3 class="recommend_label desktop-hide">{{ product.metafields.custom_fields["recommend_label"] }}</h3>
-                <span class="recommend_short_text desktop-hide">{{ product.metafields.custom_fields["recommend_short_text"] }}</span>
-                <h3 class="product-title">{{ product.title | escape }}</h3>
-                <h3 class="recommend_label mobile-hide">{{ product.metafields.custom_fields["recommend_label"] }}</h3>
-                <span class="recommend_short_text mobile-hide">{{ product.metafields.custom_fields["recommend_short_text"] }}</span>
-                {{ product.metafields.custom_fields["recommend_content"] }}
-                <div class="bottom">
-                    <a href="{{ product.url }}" class="popup-learn-more-link"><span class="learn-more">Learn More</span></a>
-                    <span class="btn-right-arrow desktop-hide"></span>
+            <div class="text-wrapper">
+                <div class="close-wrapper">
+                    <div class="close"></div>
+                </div>
+                <div class="inner-wrapper">
+                    <h3 class="recommend_label desktop-hide">{{ product.metafields.custom_fields["recommend_label"] }}</h3>
+                    <span class="recommend_short_text desktop-hide">{{ product.metafields.custom_fields["recommend_short_text"] }}</span>
+                    <h3 class="product-title">{{ product.title | escape }}</h3>
+                    <h3 class="recommend_label mobile-hide">{{ product.metafields.custom_fields["recommend_label"] }}</h3>
+                    <span class="recommend_short_text mobile-hide">{{ product.metafields.custom_fields["recommend_short_text"] }}</span>
+                    {{ product.metafields.custom_fields["recommend_content"] }}
+                    <div class="bottom">
+                        <a href="{{ product.url }}" class="popup-learn-more-link"><span class="learn-more">Learn More</span></a>
+                        <span class="btn-right-arrow desktop-hide"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+{% endfor %}
 <style>
     body {
         overflow: unset;
