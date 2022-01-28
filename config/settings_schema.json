@@ -29,8 +29,8 @@
       },
       {
         "type": "color",
-        "id": "quiz_start_background",
-        "label": "Start question background",
+        "id": "main_background",
+        "label": "Main background",
         "default": "#92C79D"
       },
       {

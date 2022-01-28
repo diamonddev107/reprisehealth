@@ -211,8 +211,10 @@ $(document).ready(function(){
     var target = $(e.target);
     if (!target.hasClass('left-arrow-button')) {
       if ($(".sidebar-button-slide").hasClass("collapsed")) {
-        $(".sidebar-button-slide").removeClass("collapsed");  
-      }  
+        $(".sidebar-button-slide").removeClass("collapsed");
+      } else {
+        $(".sidebar-button-slide").addClass("collapsed");
+      }
     }
   })
   $(".learn-more-popup .close").on("click", function() {

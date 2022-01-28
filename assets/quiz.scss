@@ -368,6 +368,9 @@ text-align: left;
 .range-bar-item {
   height: 7px;
   flex: 1;
+  @media (min-width: 798px) {
+    transform: unset;
+  }
   transform: translatex(-50%);
   position: relative;
   .mobile-top-line {

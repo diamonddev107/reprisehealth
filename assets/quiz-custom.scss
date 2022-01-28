@@ -57,13 +57,6 @@ html, body {
                                     overflow-x: hidden;
                                     .slide-inner {
                                         padding: 22px;
-                                    }
-                                    // .slide-inner.full-screen {
-                                    //     padding: 0;
-                                    // }Multiple Choice
-                                }
-                                .swiper-slide[data-question-type="Yes/No"], .swiper-slide[data-question-type="Multiple Choice"] {
-                                    .slide-inner {
                                         padding-top: 50px;
                                     }
                                 }
@@ -101,6 +94,7 @@ html, body {
                         justify-content: center;
                         flex-wrap: wrap;
                         flex-direction: column;
+                        padding-top: 22px !important;
                         .slide-wrapper {
                             background: white;
                             max-width: 705px;
@@ -250,6 +244,9 @@ html, body {
     left: 0px;
     top: 200px;
     width: 100%;
+    &:hover {
+        cursor: pointer;
+    }
 
     .inner {
         display: flex;
@@ -329,7 +326,7 @@ html, body {
     // margin-right: -30px;
     // height: 100vh;
     .section-wrapper.flex {
-        background: #92C79D;
+        // background: #92C79D;
         display: flex;
         align-items: center;
         justify-content: space-between;
