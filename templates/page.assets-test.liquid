@@ -13,6 +13,18 @@
     </div>
 {% endcapture %}
 
+{% capture why_we_ask %}
+    <div class="why-we-ask hide">
+        <div class="why-we-ask-content hide">
+            <span class="close-btn"></span>
+            <span class="title">Why We Ask?</span>
+            <p class="text"></p>
+            <a class="ok-btn">Okay, Good To Know</a>
+        </div>
+        <div class="why-we-ask-button"><span class="title">Why We Ask?</span></div>
+    </div>
+{% endcapture %}
+
 {% assign goals_number = 0 %}
 {% assign lifestyle_number = 0 %}
 {% assign basics_number = 0 %}
@@ -78,6 +90,7 @@
                                 data-slide-category="{{ item['question_section'] }}" >
                             {{ back_button_progress_bar }}
                             {% render 'quiz-slide-blank-dynamic-range', item: item %}
+                            {{ why_we_ask }}
                         </section>
                         {% elsif item["question_type"] == "Health Topics Listing" %}
                         <section id="{{ item['unique_slide_id'] }}" class="swiper-slide" 
@@ -90,7 +103,8 @@
                                 data-question-text="Health Topics"
                                 data-slide-category="">
                             {{ back_button_progress_bar }}
-                            {% render 'quiz-slide-categories', item: item %} 
+                            {% render 'quiz-slide-categories', item: item %}
+                            {{ why_we_ask }}
                         </section>
                         {% elsif item["question_type"] == "Name of User" %}
                         <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
@@ -104,6 +118,7 @@
                                 data-slide-category="{{ item['question_section'] }}" >
                             {{ back_button_progress_bar }}
                             {% render 'quiz-slide-blank-text-input', item: item %}
+                            {{ why_we_ask }}
                         </section>
                         {% elsif item["question_type"] contains "Wow" %}
                         <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
@@ -117,6 +132,7 @@
                                 data-slide-category="{{ item['question_section'] }}" >
                             {{ back_button_progress_bar }}
                             {% render 'quiz-slide-blank-informational', item: item %}
+                            {{ why_we_ask }}
                         </section>
                         {% elsif item["question_type"] == "Short Answer" %}
                         <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
@@ -130,6 +146,7 @@
                                 data-slide-category="{{ item['question_section'] }}" >
                             {{ back_button_progress_bar }}
                             {% render 'quiz-slide-blank-text-input', item: item %}
+                            {{ why_we_ask }}
                         </section>
                         {% elsif item["question_type"] == "Yes/No" %}
                         <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-yes-no swiper-slide-dynamic {{ extraSlideClass }}" 
@@ -144,6 +161,7 @@
                                 data-slide-category="{{ item['question_section'] }}" >
                             {{ back_button_progress_bar }}
                             {% render 'quiz-slide-blank-yes-no', item: item %}
+                            {{ why_we_ask }}
                         </section>
                         {% elsif item["question_type"] == "" or item["question_type"] == "Information Page" %}
                         <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
@@ -158,6 +176,7 @@
                                 data-slide-category="{{ item['question_section'] }}" >
                             {{ back_button_progress_bar }}
                             {% render 'quiz-slide-blank-statement', item: item %}
+                            {{ why_we_ask }}
                         </section>
                         {% elsif item["question_type"] == "Vertical Slider" %}
                         <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
@@ -172,6 +191,7 @@
                                 data-slide-category="{{ item['question_section'] }}" >
                             {{ back_button_progress_bar }}
                             {% render 'quiz-slide-blank-vertical-slider', item: item %}
+                            {{ why_we_ask }}
                         </section>
                         {% elsif item["question_type"] == "Multiple Choice" %}
                         <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
@@ -186,6 +206,7 @@
                                 data-slide-category="{{ item['question_section'] }}" >
                             {{ back_button_progress_bar }}
                             {% render 'quiz-slide-blank-multiple-choice', item: item %}
+                            {{ why_we_ask }}
                         </section>
                         {% elsif item["question_type"] == "Multiple Select" %}
                         <section id="{{ item['unique_slide_id'] }}" class="swiper-slide swiper-slide-dynamic {{ extraSlideClass }}" 
@@ -200,6 +221,7 @@
                                 data-slide-category="{{ item['question_section'] }}" >
                             {{ back_button_progress_bar }}
                             {% render 'quiz-slide-blank-multiple-select', item: item %}
+                            {{ why_we_ask }}
                         </section>
                         {% endif %}
                         {% endfor %}

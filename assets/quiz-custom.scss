@@ -2,6 +2,84 @@
 html, body {
     height: 100%;
 }
+.why-we-ask {
+    text-align: center;
+    margin-top: -40px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    &:hover {
+        cursor: pointer;
+    }
+    .why-we-ask-content {
+        position: fixed;
+        bottom: 16px;
+        width: 100%;
+        max-width: 350px;
+        background: #92C79D;
+        color: white;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 10px;
+        padding: 13px 16px;
+        .title {
+            font-size: 15px;
+        }
+        .text {
+            color: black;
+            padding: 13px 50px 50px;
+            margin: 0;
+        }
+        .ok-btn {
+            background: #272C2F;
+            border-radius: 10px;
+            font-size: 14px;
+            padding: 10px 30px;
+            max-width: 200px;
+            display: block;
+            margin: 0 auto;
+            margin-bottom: 12px;
+        }
+        .close-btn {
+            display: block;
+            width: 25px;
+            height: 36px;
+            text-align: right;
+            position: relative;
+            margin-left: 93%;
+            &::before {
+                content: "";
+                position: absolute;
+                width: 32px;
+                height: 1px;
+                background: white;
+                left: -3px;
+                top: 18px;
+                transform: rotate(52deg);
+            }
+            &::after {
+                content: "";
+                position: absolute;
+                width: 32px;
+                height: 1px;
+                background: white;
+                left: -3px;
+                top: 18px;
+                transform: rotate( -52deg);
+            }
+        }
+    }
+    .why-we-ask-button {
+        width: 220px;
+        span {
+            font-size: 10px;
+            padding: 0 10px 5px;
+            border-bottom: 1px solid #000000;
+            color: #92C79D;
+        }
+    }
+}
 #PageContainer {
     min-height: 100%;
     height: 100%;
@@ -55,9 +133,11 @@ html, body {
                                     height: 100%;
                                     width: 100%;
                                     overflow-x: hidden;
+                                    display: flex;
+                                    flex-direction: column;
                                     .slide-inner {
-                                        padding: 22px;
-                                        padding-top: 50px;
+                                        padding: 50px 22px;
+                                        flex-grow: 1;
                                     }
                                 }
                             }
@@ -83,6 +163,7 @@ html, body {
                     justify-content: center;
                     .btn--quiz-back {
                         position: absolute;
+                        top: 0;
                     }
                     .slide-inner {
                         width: 100%;

@@ -66,7 +66,7 @@ $(document).ready(function(){
 
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var whyWeAsk = currentSlide.data('why-we-ask');
-    var offset = currentSlide.find(".slide-bottom").offset();
+    // var offset = currentSlide.find(".slide-bottom").offset();
     var wowSlide = currentSlide.data('question-type');
     
     window.history.pushState(null, null, "?question="+currentSlide.attr("id"));
@@ -78,18 +78,19 @@ $(document).ready(function(){
         currentSlide.find(".question-heading").text(singleResult);
     }
     if (whyWeAsk == '' || whyWeAsk == undefined) {
-      $(".sidebar-button-slide").addClass("hide");
+      // $(".sidebar-button-slide").addClass("hide");
+      $(".why-we-ask").addClass("hide");
     } else {
-      $(".sidebar-button-slide").removeClass("hide");
-      $(".sidebar-button-slide .inner p").text(whyWeAsk);
-      if (offset != undefined) {
-        $(".sidebar-button-slide").css('top', offset.top);
-      }
+      $(".why-we-ask").removeClass("hide");
+      // $(".sidebar-button-slide .inner p").text(whyWeAsk);
+      // if (offset != undefined) {
+      //   $(".sidebar-button-slide").css('top', offset.top);
+      // }
     }
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var currentSection = currentSlide.data('slide-section');
-    var whyWeAsk = currentSlide.data('why-we-ask');
-    $(".sidebar-button-slide .inner p").text(whyWeAsk);
+    // $(".sidebar-button-slide .inner p").text(whyWeAsk);
+    $(".why-we-ask .why-we-ask-content p.text").text(whyWeAsk);
 
     setBreadCrumbsProgress(currentSection);
     
@@ -98,7 +99,8 @@ $(document).ready(function(){
       $('#MainContent .container').addClass("section-cover");
       $('body').addClass("header-transparent");
       // $backButton.addClass("hide");
-      $(".sidebar-button-slide").addClass("hide");
+      // $(".sidebar-button-slide").addClass("hide");
+      $(".why-we-ask").addClass("hide");
       // var transitionTime = currentSlide.data('transition-time') * 1000;
       // setTimeout(
       //   function() 
@@ -134,7 +136,8 @@ $(document).ready(function(){
     $(".calculating-announcement-bar").removeClass('hide');
     $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
     // $(".page.page-default").addClass('vh');
-    $(".sidebar-button-slide").addClass("hide");
+    // $(".sidebar-button-slide").addClass("hide");
+    $(".why-we-ask").addClass("hide");
     submitToKlaviyo(quiz);
     setTimeout(
       function() 
@@ -168,7 +171,7 @@ $(document).ready(function(){
     }
     return return_str;
   }
-  // country list vertical slider
+  // country list vertical slider - start
   var initial_slick_var = 0;
   $('.vertical-slide-item-wrapper .inner-wrapper').on('wheel', (function(e) {
     e.preventDefault();
@@ -203,20 +206,30 @@ $(document).ready(function(){
     $(this).closest(".vertical-slider-inner").find(".btn--quiz-continue").removeClass("btn--quiz-continue-inactive");
     $(".vertical-slide-item-wrapper").addClass("hide");
   })
-  // country list vertical slider
-  $(".left-arrow-button").on("click", function(e) {
-    $(".sidebar-button-slide").addClass("collapsed");
+  // country list vertical slider - end
+  // $(".left-arrow-button").on("click", function(e) {
+  //   $(".sidebar-button-slide").addClass("collapsed");
+  // })
+  // $(".sidebar-button-slide").on("click", function(e) {
+  //   var target = $(e.target);
+  //   if (!target.hasClass('left-arrow-button')) {
+  //     if ($(".sidebar-button-slide").hasClass("collapsed")) {
+  //       $(".sidebar-button-slide").removeClass("collapsed");
+  //     } else {
+  //       $(".sidebar-button-slide").addClass("collapsed");
+  //     }
+  //   }
+  // })
+  $(".why-we-ask-button").on("click", function(e) {
+    $(this).closest(".why-we-ask").find(".why-we-ask-content").removeClass("hide");
   })
-  $(".sidebar-button-slide").on("click", function(e) {
-    var target = $(e.target);
-    if (!target.hasClass('left-arrow-button')) {
-      if ($(".sidebar-button-slide").hasClass("collapsed")) {
-        $(".sidebar-button-slide").removeClass("collapsed");
-      } else {
-        $(".sidebar-button-slide").addClass("collapsed");
-      }
-    }
+  $(".why-we-ask").on("click", ".why-we-ask-content", function() {
+    $(this).addClass("hide");
   })
+
+
+
+
   $(".learn-more-popup .close").on("click", function() {
     $(this).closest(".learn-more-popup").removeClass("popup-open");
   })
