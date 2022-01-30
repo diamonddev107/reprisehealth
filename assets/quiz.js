@@ -66,7 +66,6 @@ $(document).ready(function(){
 
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var whyWeAsk = currentSlide.data('why-we-ask');
-    // var offset = currentSlide.find(".slide-bottom").offset();
     var wowSlide = currentSlide.data('question-type');
     
     window.history.pushState(null, null, "?question="+currentSlide.attr("id"));
@@ -78,18 +77,12 @@ $(document).ready(function(){
         currentSlide.find(".question-heading").text(singleResult);
     }
     if (whyWeAsk == '' || whyWeAsk == undefined) {
-      // $(".sidebar-button-slide").addClass("hide");
       $(".why-we-ask").addClass("hide");
     } else {
       $(".why-we-ask").removeClass("hide");
-      // $(".sidebar-button-slide .inner p").text(whyWeAsk);
-      // if (offset != undefined) {
-      //   $(".sidebar-button-slide").css('top', offset.top);
-      // }
     }
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var currentSection = currentSlide.data('slide-section');
-    // $(".sidebar-button-slide .inner p").text(whyWeAsk);
     $(".why-we-ask .why-we-ask-content p.text").text(whyWeAsk);
 
     setBreadCrumbsProgress(currentSection);
@@ -98,8 +91,7 @@ $(document).ready(function(){
       $('.breadcrumbs-progress-wrapper').addClass("hide");
       $('#MainContent .container').addClass("section-cover");
       $('body').addClass("header-transparent");
-      // $backButton.addClass("hide");
-      // $(".sidebar-button-slide").addClass("hide");
+      
       $(".why-we-ask").addClass("hide");
       // var transitionTime = currentSlide.data('transition-time') * 1000;
       // setTimeout(
@@ -115,7 +107,6 @@ $(document).ready(function(){
       } else {
         $('#MainContent .container').addClass("section-cover");
         $('body').addClass("header-transparent");
-        // $backButton.addClass("hide");
         $('.breadcrumbs-progress-wrapper').addClass("hide");
       }
     };
@@ -135,8 +126,6 @@ $(document).ready(function(){
     $('.breadcrumbs-progress-wrapper').addClass("hide");
     $(".calculating-announcement-bar").removeClass('hide');
     $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
-    // $(".page.page-default").addClass('vh');
-    // $(".sidebar-button-slide").addClass("hide");
     $(".why-we-ask").addClass("hide");
     submitToKlaviyo(quiz);
     setTimeout(
@@ -146,11 +135,8 @@ $(document).ready(function(){
         var cat_names = AdjustString(cat_arr);
 
         $(".pre-product-recommendation").removeClass("hide");
-        // $("#created_for_someone").text("Created Just For " + quiz.name);
         $("#goals_for_category_names").text($("#goals_for_category_names").text().replace("@category-names", cat_names));
         $(".page.page-default").addClass("hide");
-        // $backButton.addClass("proper");
-        // $backButton.addClass("desktop-hide");
         $(".calculating-announcement-bar").removeClass('show');
       }, 5000
     );
@@ -207,40 +193,13 @@ $(document).ready(function(){
     $(".vertical-slide-item-wrapper").addClass("hide");
   })
   // country list vertical slider - end
-  // $(".left-arrow-button").on("click", function(e) {
-  //   $(".sidebar-button-slide").addClass("collapsed");
-  // })
-  // $(".sidebar-button-slide").on("click", function(e) {
-  //   var target = $(e.target);
-  //   if (!target.hasClass('left-arrow-button')) {
-  //     if ($(".sidebar-button-slide").hasClass("collapsed")) {
-  //       $(".sidebar-button-slide").removeClass("collapsed");
-  //     } else {
-  //       $(".sidebar-button-slide").addClass("collapsed");
-  //     }
-  //   }
-  // })
+
   $(".why-we-ask-button").on("click", function(e) {
     $(this).closest(".why-we-ask").find(".why-we-ask-content").removeClass("hide");
   })
   $(".why-we-ask").on("click", ".why-we-ask-content", function() {
     $(this).addClass("hide");
   })
-
-
-
-
-  $(".learn-more-popup .close").on("click", function() {
-    $(this).closest(".learn-more-popup").removeClass("popup-open");
-  })
-  // $(".btn-right-arrow-wrapper").closest(".item").on("click", function() {
-    // var product_handle = $(this).data("product-handle");
-    // var product_title = $(this).closest(".item").find(".product-title").text();
-    // var product_url = $(this).closest(".item").find(".product-title").data("url");
-    // $(".learn-more-popup .product-title").text(product_title);
-    // $(".learn-more-popup .popup-learn-more-link").attr("href", product_url);
-    // $(".learn-more-popup." + product_handle).addClass("popup-open");
-  // })
   $("#checkout_our_recommendations").on("click", function() {
     // Select top 3 products from quiz result - start.
     var allArr = [];
@@ -797,11 +756,4 @@ $(document).ready(function(){
         //
     }
   }
-  // var header_height = $( "#shopify-section-header .site-header .header-mobile" ).height();
-  // $(".btn--quiz-back").css("top", header_height+"px");
-
-  // $( window ).resize(function() {
-  //   var header_height = $( "#shopify-section-header .site-header .header-mobile" ).height();
-  //   $(".btn--quiz-back").css("top", header_height+"px");
-  // });
-}); /* ready */
+});
