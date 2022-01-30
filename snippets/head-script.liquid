@@ -104,14 +104,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     {{ 'theme-page.css' | asset_url | stylesheet_tag }}
     {{ 'quiz-liquid.scss.css' | asset_url | stylesheet_tag }}
-    {{ 'quiz.scss.css' | asset_url | stylesheet_tag }}
-    {{ 'quiz-custom.scss.css' | asset_url | stylesheet_tag }}
-    
+
+    {% if request.path contains "assets"  %} 
+        {{ 'quiz.scss.css' | asset_url | stylesheet_tag }}
+        {{ 'quiz-custom.scss.css' | asset_url | stylesheet_tag }}
+    {% endif %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
      <!-- Swiper JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    {{ 'quiz.js' | asset_url | script_tag }}
-    {{ 'quiz-liquid.js' | asset_url | script_tag }}
+    
+    {% if request.path contains "assets"  %} 
+        {{ 'quiz.js' | asset_url | script_tag }}
+        {{ 'quiz-liquid.js' | asset_url | script_tag }}
+    {% endif %}
 
 {% endif %}
 

@@ -233,14 +233,14 @@ $(document).ready(function(){
   $(".learn-more-popup .close").on("click", function() {
     $(this).closest(".learn-more-popup").removeClass("popup-open");
   })
-  $(".btn-right-arrow-wrapper").closest(".item").on("click", function() {
-    var product_handle = $(this).data("product-handle");
+  // $(".btn-right-arrow-wrapper").closest(".item").on("click", function() {
+    // var product_handle = $(this).data("product-handle");
     // var product_title = $(this).closest(".item").find(".product-title").text();
     // var product_url = $(this).closest(".item").find(".product-title").data("url");
     // $(".learn-more-popup .product-title").text(product_title);
     // $(".learn-more-popup .popup-learn-more-link").attr("href", product_url);
-    $(".learn-more-popup." + product_handle).addClass("popup-open");
-  })
+    // $(".learn-more-popup." + product_handle).addClass("popup-open");
+  // })
   $("#checkout_our_recommendations").on("click", function() {
     // Select top 3 products from quiz result - start.
     var allArr = [];
@@ -271,42 +271,7 @@ $(document).ready(function(){
     localStorage.setItem('user_name',  quiz.name);
     // Select top 3 products from quiz result - end.
   })
-  $("#add_custom_bottle_to_cart").on("click", function() {
-    var custom_bottle_variant_id = $("#custom_bottle_variant_id").val();
-    var properties = {};
-    properties['_customerName'] = localStorage.getItem('user_name');
-    $(".recommended-products .products-wrapper .item").each(function(i, e) {
-      if (!$(this).hasClass('arrow')) {
-        if (!$(this).hasClass('hide')) {
-          var product_name = $(this).data("product-name");
-          properties['product-'+ i] = product_name;
-        }
-      }
-    })
-    var addData = {
-      items: [
-        {
-          'quantity': 1,
-          'id': custom_bottle_variant_id,
-          'properties': properties
-        }
-      ]
-    }
-    fetch('/cart/add.js', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(addData)
-    })
-    .then(response => {
-      if (response.status == 200) {
-        location.href='/cart';  
-      }
-    })
-    .catch((error) => {
-    });
-  })
+  
   $backButton.on('click', function() {
     var preSlideIndex = swiper.realIndex - 1;
     var prevSlide = $(swiper.slides[preSlideIndex]);

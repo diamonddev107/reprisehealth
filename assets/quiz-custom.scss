@@ -73,6 +73,9 @@ html, body {
     .why-we-ask-button {
         width: 220px;
         span {
+            @media (min-width: 799px) {
+                font-size: 13px;
+            }
             font-size: 10px;
             padding: 0 10px 5px;
             border-bottom: 1px solid #000000;
@@ -240,6 +243,7 @@ html, body {
     .calculating-announcement-bar {
         width: 100%;
         margin: 0;
+        margin-top: 85px;
     }
     .calculating-body img {
         @media (max-width: 798px) {
@@ -454,9 +458,18 @@ html, body {
                 font-size: 20px;
                 line-height: 14px;
                 color: #FFFFFF;
+                margin-right: 15px;
+                line-height: 1;
+                @media (min-width: 799px) {
+                    padding: 20px 0px;
+                }
             }
-            .btn-flex:hover {
-                cursor: pointer;
+            .btn-flex {
+                display: flex;
+                align-items: center;
+                &:hover {
+                    cursor: pointer;
+                }
             }
         }
     }
@@ -1028,8 +1041,6 @@ html, body {
                     line-height: 1.5;
                 }
                 .btn-flex {
-                    display: flex;
-                    align-items: center;
                     justify-content: space-around;
                     background: #272C2F;
                     border-radius: 10px;

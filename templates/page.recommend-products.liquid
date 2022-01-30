@@ -79,6 +79,7 @@
 <script>
     $(document).ready(function() {
         var topHandleStr = localStorage.getItem('recommend_product_handles');
+        console.log(topHandleStr);
         if (topHandleStr != null) {
             var topHandleArr = topHandleStr.split(",");
             $(".recommended-products .products-wrapper .item").each(function() {

@@ -1,0 +1,281 @@
+@font-face {
+    font-family: 'Inter';
+    src: url('Inter-Regular.eot');
+    src: url('Inter-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Inter-Regular.woff2') format('woff2'),
+        url('Inter-Regular.woff') format('woff'),
+        url('Inter-Regular.ttf') format('truetype'),
+        url('Inter-Regular.svg#Inter-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+html {
+    scroll-behavior: smooth;
+}
+#shopify-section-footer {
+    display: none;
+}
+.rec-section {
+    background: #F4F2EA;
+}
+.rec-section .wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.rec-section .rec-main-wrapper {
+    padding: 110px 66px 72px;
+}
+.rec-main-content {
+    width: 45%;
+    padding-right: 80px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.rec-main-content .main-heading {
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 44px;
+    color: #000000;
+}
+.rec-main-content .main-text {
+    padding: 50px 0px;
+}
+.rec-main-content .main-text p {
+    font-family: "Inter";
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+.rec-main-content .main-link {
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-decoration-line: underline;
+    color: #161E1D;
+    text-transform: capitalize;
+}
+
+.rec-main-content .arrow {
+    width: 3px;
+    height: 50px;
+    background: black;
+    margin-left: 20px;
+    margin-top: 13px;
+    position: relative;
+}
+.rec-main-content .arrow:before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: black;
+    bottom: 3px;
+    transform: rotate(-45deg);
+}
+.rec-main-content .arrow:after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: black;
+    bottom: 3px;
+    transform: rotate( 45deg);
+    left: -7px;
+}
+.rec-main-image {
+    width: 55%;
+}
+.rec-main-image img {
+    width: 100%;
+}
+
+.rec-section .herb-wrapper {
+    padding: 38px 66px 72px;
+}
+.herb-heading {
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+.herb-text p {
+    font-family: "Inter";
+    font-size: 24px;
+    line-height: 29px;
+    color: #000000;
+}
+.add_custom_bottle_to_cart {
+    font-family: "Inter";
+    font-size: 16px;
+    line-height: 19px;
+    color: #FFFFFF !important;
+    background: #161E1D;
+    border-radius: 8px;
+    padding: 12px 33px;
+}
+.herb-item.herb-desc {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    justify-content: space-between;
+}
+
+.herb-item.product {
+    /* background: #E4B13E; */
+    border-radius: 16px;
+    padding: 30px 15px;
+    width: 23%;
+}
+.rec-section .desktop-hide {
+    display: none;
+}
+.herb-item-heading {
+    font-family: "Inter";
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+}
+.herb-item-text p {
+    font-family: "Inter";
+    font-size: 18px;
+    line-height: 22px;
+    color: #000000;
+}
+.herb-item-content ul {
+    padding-left: 15px;
+}
+.herb-item-content ul li {
+    font-family: "Inter";
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    color: #000000;
+    margin-bottom: 20px;
+    list-style: disc;
+}
+.herb-item-content ul li span {
+    font-weight: normal;
+    display: block;
+}
+.btn-learn-more {
+    font-family: "Inter";
+    font-size: 12px;
+    line-height: 15px;
+    border-bottom: 1px solid black;
+    color: #000000;
+    text-transform: capitalize;
+}
+.herb-item-icons {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px 20px;
+}
+.herb-item-icons .custom-field-icon {
+    max-width: 40px;
+    margin-right: 17px;
+}
+@media (min-width: 768px) {
+    .add_custom_bottle_to_cart {
+        display: block;
+    }
+    .mobile-fixed-button {
+        margin-right: auto;
+    }
+}
+@media (max-width: 960px) {
+    .herb-item.product, .herb-item.herb-desc {
+        width: 45%;
+    }
+    .herb-item {
+        margin-bottom: 22px;
+    }
+}
+@media (max-width: 767px) {
+    .herb-item-icons {
+        padding: 0px 0px 10px;
+    }
+    .herb-item-icons .custom-field-icon {
+        max-width: 25px;
+    }
+    .rec-section .desktop-hide {
+        display: block;
+    }
+    .rec-section .mobile-hide {
+        display: none;
+    }
+    .rec-main-content, .rec-main-image {
+        width: 100%;
+    }
+    .rec-main-content .main-heading {
+        font-size: 24px;
+        line-height: 29px;
+    }
+    .rec-section .rec-main-wrapper {
+        padding: 80px 30px 18px;
+    }
+    .rec-main-content {
+        padding: 0;
+        text-align: center;
+    }
+    .rec-main-content .main-text {
+        padding: 10px 0 50px;
+    }
+    .rec-main-image {
+        margin-top: 22px;
+    }
+    .rec-main-content .arrow {
+        margin: 0 auto;
+        margin-top: 5px;
+    }
+    .rec-main-content .arrow:before {
+        left: 1px;
+        bottom: 5px;
+    }
+    .rec-main-content .arrow:after {
+        bottom: 5px;
+        left: -8px;
+    }
+    .herb-item.herb-desc, .herb-item.product {
+        width: 100%;
+    }
+    .herb-item.product {
+        display: flex;
+        padding: 15px;
+    }
+    .herb-item.herb-desc {
+        text-align: center;
+    }
+    .herb-item.herb-desc .herb-top {
+        padding-bottom: 30px;
+    }
+    .herb-item.product .left, .herb-item.product .right {
+        width: 50%
+    }
+    .rec-section .herb-wrapper {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .herb-item-heading {
+        font-size: 16px;
+    }
+    .herb-item-text p {
+        font-size: 12px;
+        line-height: 15px;
+    }
+    .mobile-fixed-button {
+        position: fixed;
+        bottom: 0;
+        background: white;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        padding: 30px 0px;
+        z-index: 99;
+    }
+}

@@ -1,0 +1,174 @@
+{{ 'section-recommendations.css' | asset_url | stylesheet_tag }}
+{% assign collection = collections[section.settings.quiz_collection] %}
+{% assign custom_bottle_handle = section.settings.custom_bottle %}
+{% assign custom_bottle = all_products[custom_bottle_handle] %}
+
+<div class="hide quiz-rec-products">
+    <input type="hidden" id="custom_bottle_variant_id" value="{{ custom_bottle.variants.first.id }}">
+    {% for product in collection.products %}
+       <div class="herb-item-container" data-product-handle="{{ product.handle }}">
+            <div class="herb-item product" data-product-name="{{ product.title }}">
+                <div class="left">
+                    <h3 class="herb-item-heading mobile-hide">{{ product.title }}</h3>
+                    <div class="herb-item-image">
+                        {{ product.metafields.custom_fields['recommend_image'] }}
+                    </div>
+                </div>
+                <div class="right">
+                    <h3 class="herb-item-heading desktop-hide">{{ product.title }}</h3>
+                    <div class="herb-item-text">
+                        <p>{{ product.metafields.custom_fields['recommend_text'] }}</p>
+                    </div>
+                    <div class="herb-item-icons">
+                        {% for item in product.metafields.custom_fields["recommend_icons"] %}
+                            {% if item["icon"] != blank %}
+                                <div class="custom-field-icon">
+                                    {{ item["icon"] }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="herb-item-content mobile-hide">{{ product.metafields.custom_fields['recommend_content'] }}</div>
+                    <a href="javascript:;" class="btn-learn-more">Learn more</a>
+                </div>
+            </div>
+       </div>
+    {% endfor %}
+</div>
+
+<div class="rec-section">
+    <div class="main-section">
+        <div class="wrapper rec-main-wrapper">
+            <div class="rec-main-content">
+                <h2 class="h1 main-heading">{{ section.settings.heading }}</h2>
+                <div class="main-text">
+                    <p>{{ section.settings.text }}</p>
+                </div>
+                <a href="#herb_section" class="main-link">{{ section.settings.link_text }}</a>
+                <div class="arrow"></div>
+            </div>
+            <div class="rec-main-image">
+                <img src="{{ section.settings.main_image | img_url: 'master' }}" alt="{{ section.settings.main_image.alt | escape }}">
+            </div>
+        </div>
+    </div>
+    <div class="herb-section" id="herb_section">
+        <div class="wrapper herb-wrapper">
+            <div class="herb-item herb-desc">
+                <div class="herb-top">
+                    <h2 class="h1 herb-heading">{{ section.settings.herb_heading }}</h2>
+                    <div class="herb-text">
+                        <p>{{ section.settings.herb_text }}</p>
+                    </div>
+                </div>
+                <div class="mobile-fixed-button">
+                    <a href="javascript:;" class="add_custom_bottle_to_cart">{{ 'products.product.add_to_cart' | t }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        var topHandleStr = localStorage.getItem('recommend_product_handles');
+        var topHandleArr = topHandleStr.split(",");
+
+        for (var i = 0; i < topHandleArr.length; i++) {
+            $(".quiz-rec-products .herb-item-container").each(function() {
+                var product_handle = $(this).data("product-handle");
+                if (product_handle == topHandleArr[i]) {
+                    $("#herb_section .herb-wrapper").append($(this).html());
+                }
+            })
+        }
+
+        $(".add_custom_bottle_to_cart").on("click", function() {
+            var custom_bottle_variant_id = $("#custom_bottle_variant_id").val();
+            var properties = {};
+            properties['_customerName'] = localStorage.getItem('user_name');
+            $("#herb_section .herb-wrapper .herb-item.product").each(function(i, e) {
+            var product_name = $(this).attr("data-product-name");
+            properties['Herb-'+ i] = product_name;
+            })
+            var addData = {
+            items: [
+                {
+                'quantity': 1,
+                'id': custom_bottle_variant_id,
+                'properties': properties
+                }
+            ]
+            }
+            fetch('/cart/add.js', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(addData)
+            })
+            .then(response => {
+                if (response.status == 200) {
+                    location.href='/cart';  
+                }
+            })
+            .catch((error) => {
+            });
+        })
+        
+    });
+</script>
+{% schema %}
+{
+    "name": "Recommendations",
+    "settings": [
+        {
+           "type": "collection",
+            "id": "quiz_collection",
+            "label": "Quiz collection",
+            "info": "This collection has products for recommendations."
+        },
+        {
+            "type": "product",
+            "id": "custom_bottle",
+            "label": "Custom bottle",
+            "info": "Real product to add to cart"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Kai, your results are ready!"
+        },
+        {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>You said you needed help with Sleep, Energy and Stress. These herbal gummies are personalized for your needs.</p>"
+        },
+        {
+            "type": "text",
+            "id": "link_text",
+            "label": "Link text",
+            "default": "View My Formula"
+        },
+        {
+            "type": "image_picker",
+            "id": "main_image",
+            "label": "Main image"
+        },
+        {
+            "type": "text",
+            "id": "herb_heading",
+            "label": "Herb heading",
+            "default": "Herbal Formula"
+        },
+        {
+            "type": "textarea",
+            "id": "herb_text",
+            "label": "Herb text",
+            "default": "Your 30-day supply of personalized herbal gummies formulated by our expert herbalist includes:"
+        }
+    ]
+}
+{% endschema %}
