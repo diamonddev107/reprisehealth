@@ -29,6 +29,12 @@
                         {% endfor %}
                     </div>
                     <div class="herb-item-content mobile-hide">{{ product.metafields.custom_fields['recommend_content'] }}</div>
+                    <div class="specific-sections hide">
+                        <div class="herb-item-history">{{ product.metafields.custom_fields['recommend_history'] }}</div>
+                        <div class="herb-item-science">{{ product.metafields.custom_fields['recommend_science'] }}</div>
+                        <div class="herb-item-sourcing">{{ product.metafields.custom_fields['recommend_sourcing'] }}</div>
+                        <div class="herb-item-ingredients">{{ product.metafields.custom_fields['recommend_ingredients'] }}</div>
+                    </div>
                     <a href="javascript:;" class="btn-learn-more">Learn more</a>
                 </div>
             </div>
@@ -52,7 +58,7 @@
             </div>
         </div>
     </div>
-    <div class="herb-section" id="herb_section">
+    <div id="herb_section">
         <div class="wrapper herb-wrapper">
             <div class="herb-item herb-desc">
                 <div class="herb-top">
@@ -82,6 +88,30 @@
                 }
             })
         }
+        $(".herb-item .btn-learn-more").on("click", function() {
+            var heading = $(this).closest(".herb-item").find(".herb-item-heading.mobile-hide").text();
+            var image = $(this).closest(".herb-item").find(".herb-item-image").html();
+            var content = $(this).closest(".herb-item").find(".herb-item-content").html();
+            var history = $(this).closest(".herb-item").find(".herb-item-history").html();
+            var science = $(this).closest(".herb-item").find(".herb-item-science").html();
+            var sourcing = $(this).closest(".herb-item").find(".herb-item-sourcing").html();
+            var ingredients = $(this).closest(".herb-item").find(".herb-item-ingredients").html();
+            
+            $(".herb-learn-more-modal .herb-heading").text(heading);
+            $(".herb-learn-more-modal .herb-image").html(image);
+            $(".herb-learn-more-modal .herb-content").html(content);
+            $(".herb-learn-more-modal .herb-history").html(history);
+            $(".herb-learn-more-modal .herb-science").html(science);
+            $(".herb-learn-more-modal .herb-sourcing").html(sourcing);
+            $(".herb-learn-more-modal .herb-ingredients").html(ingredients);
+
+            $(".herb-learn-more-modal").removeClass("hide");
+            $("body").addClass("learn-more-popup-opened");
+        })
+        $(".herb-learn-more-modal .btn-close-modal").on("click", function() {
+            $(".herb-learn-more-modal").addClass("hide");
+            $("body").removeClass("learn-more-popup-opened");
+        })
 
         $(".add_custom_bottle_to_cart").on("click", function() {
             var custom_bottle_variant_id = $("#custom_bottle_variant_id").val();

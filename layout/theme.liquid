@@ -91,6 +91,10 @@
     {% endif %}
 
     {% include 'new-currency' %}
+    
+    {% if request.path contains "recommendations"  %} 
+        {% render 'herb-learn-more-popup' %}
+    {% endif %}
 <script>
 
 $(document).ready(function(){

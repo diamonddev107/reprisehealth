@@ -96,7 +96,7 @@ html {
 .rec-section .herb-wrapper {
     padding: 38px 66px 72px;
 }
-.herb-heading {
+.herb-heading, .herb-learn-more-modal h1 {
     font-family: "Inter";
     font-weight: 600;
     font-size: 24px;
@@ -147,10 +147,10 @@ html {
     line-height: 22px;
     color: #000000;
 }
-.herb-item-content ul {
+.herb-item-content ul, .herb-learn-more-modal .herb-content ul {
     padding-left: 15px;
 }
-.herb-item-content ul li {
+.herb-item-content ul li, .herb-learn-more-modal .herb-content ul>li {
     font-family: "Inter";
     font-weight: bold;
     font-size: 16px;
@@ -159,7 +159,7 @@ html {
     margin-bottom: 20px;
     list-style: disc;
 }
-.herb-item-content ul li span {
+.herb-item-content ul li span, .herb-learn-more-modal .herb-content ul>li>span {
     font-weight: normal;
     display: block;
 }
@@ -180,6 +180,107 @@ html {
     max-width: 40px;
     margin-right: 17px;
 }
+/* herb learn more popup */
+.herb-learn-more-modal {
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 30px 0px;
+    position: fixed;
+    overflow-y: scroll;
+}
+.herb-learn-more-modal .modal-wrapper {
+    position: relative;
+    width: 70%;
+    /* height: 100%; */
+    /* background: #E4B13E; */
+    margin: 0 auto;
+    max-width: 800px;
+    align-self: center;
+    border-radius: 16px;
+    padding: 40px;
+}
+.herb-learn-more-modal .btn-close-modal {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 25px;
+    top: 25px;
+}
+.herb-learn-more-modal .btn-close-modal:hover {
+    cursor: pointer;
+}
+.herb-learn-more-modal .btn-close-modal::before, .herb-learn-more-modal .btn-close-modal::after {
+    content: '';
+    width: 2px;
+    height: 20px;
+    background: black;
+    transform: rotate(45deg);
+    position: absolute;
+    right: 8px;
+    top: -2px;
+    border-radius: 10px;
+}
+.herb-learn-more-modal .btn-close-modal::after {
+    transform: rotate(-45deg);
+}
+.herb-learn-more-modal p {
+    font-family: "Inter";
+    font-size: 16px;
+    line-height: 100%;
+    color: #000000;
+}
+.herb-learn-more-modal .herb-section {
+    background: #FFF8F3;
+    box-shadow: 0px 4px 0px rgb(0 0 0 / 25%);
+    padding: 24px 24px 50px;
+    margin-bottom: 30px;
+}
+.herb-learn-more-modal .herb-science ul, .herb-learn-more-modal .herb-science p, .herb-learn-more-modal .herb-science table th {
+    color: #F4F2EA;
+}
+.herb-learn-more-modal .herb-science ul li {
+    background: #E08A51;
+    margin-bottom: 30px;
+    padding: 10px;
+}
+.herb-learn-more-modal .herb-science table + p {
+    margin: 0;
+}
+.herb-learn-more-modal .herb-science table + p + p {
+    display: none;
+    margin: 0;
+}
+.herb-learn-more-modal .herb-science h2 {
+    font-family: "Inter";
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+    color: #F4F2EA;
+    text-transform: capitalize;
+}
+.herb-learn-more-modal .herb-science {
+    padding-bottom: 5px;
+}
+.herb-learn-more-modal .herb-science table th, .herb-learn-more-modal .herb-science table td {
+    font-family: "Inter";
+    font-size: 16px;
+    text-transform: capitalize;
+    line-height: 19px;
+    border: none;
+}
+.herb-learn-more-modal .herb-science table {
+    width: 100% !important;
+    border: none;
+    margin: 0;
+}
+body.learn-more-popup-opened {
+    height: 100vh;
+    overflow: hidden;
+}
+
 @media (min-width: 768px) {
     .add_custom_bottle_to_cart {
         display: block;
@@ -276,6 +377,34 @@ html {
         right: 0;
         margin: 0 auto;
         padding: 30px 0px;
-        z-index: 99;
+        z-index: 999;
+    }
+    /* herb learn more popup */
+    .herb-learn-more-modal {
+        padding-bottom: 82px;
+        padding-top: 0px;
+    }
+    .herb-learn-more-modal .modal-wrapper {
+        width: 95%;
+        padding: 0px 10px 10px;
+    }
+    .herb-learn-more-modal .herb-image {
+        text-align: center;
+    }
+    .herb-learn-more-modal .herb-content ul {
+        padding: 0px 50px;
+    }
+    .herb-learn-more-modal p, .herb-learn-more-modal .herb-science h2 {
+        font-size: 14px;
+    }
+    .herb-learn-more-modal .herb-science p {
+        font-size: 12px;
+    }
+    .herb-learn-more-modal .herb-science table th, .herb-learn-more-modal .herb-science table td {
+        font-size: 12px;
+        padding: 5px;
+    }
+    .herb-learn-more-modal .herb-heading {
+        text-align: center;
     }
 }

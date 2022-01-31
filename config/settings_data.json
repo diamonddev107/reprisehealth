@@ -1,6 +1,8 @@
 {
   "current": {
+    "question_heading": "#5a5a5a",
     "quiz_button_background_active": "#CCBC9B",
+    "next_button_color": "#000000",
     "quiz_button_padding_top": 20,
     "quiz_button_width": 220,
     "quiz_answers_wrapper_width": 1330,
@@ -77,7 +79,7 @@
     "currency_9_unit": "",
     "currency_10_unit": "",
     "enable_ajax": false,
-    "enable_products_cart_sidebar": true,
+    "enable_products_cart_sidebar": false,
     "products_cart_sidebar_title": "You May Also Like",
     "products_cart_sidebar": "shop-outlet",
     "enable-search-form": true,
@@ -240,6 +242,7 @@
     "checkout_accent_color": "#3fbde1",
     "checkout_button_color": "#e13f3f",
     "checkout_error_color": "#e32c2b",
+    "quiz_start_background": "#92c79d",
     "enable_currency": true,
     "lange_1": "",
     "lange_1_icon": "",
@@ -323,7 +326,7 @@
           "logo_max_width": 175,
           "enable-header-search": false,
           "header-search-position": "right",
-          "enable-header-cart": false,
+          "enable-header-cart": true,
           "header-cart-position": "right",
           "enable-header-account": false,
           "header-account-position": "right",
@@ -1287,6 +1290,19 @@
         "settings": {
           "id": true,
           "image": "shopify:\/\/shop_images\/1_PaperBag_OP1_jelly.jpg"
+        }
+      },
+      "recommendations": {
+        "type": "recommendations",
+        "settings": {
+          "quiz_collection": "quiz",
+          "custom_bottle": "custom-bottle",
+          "heading": "Kai, your results are ready!",
+          "text": "<p>You said you needed help with <strong>Sleep<\/strong>, <strong>Energy<\/strong> and <strong>Stress<\/strong>. These herbal gummies are personalized for your needs.<\/p>",
+          "link_text": "View My Formula",
+          "main_image": "shopify:\/\/shop_images\/rec-page-image.png",
+          "herb_heading": "Herbal Formula",
+          "herb_text": "Your 30-day supply of personalized herbal gummies formulated by our expert herbalist includes:"
         }
       }
     },
