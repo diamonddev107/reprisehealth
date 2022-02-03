@@ -83,7 +83,7 @@
         <script src="{{ 'sticky-sidebar.min.js' | asset_url }}" defer="defer"></script>
     {% endif %}
     <script src="{{ 'theme.min.js' | asset_url }}" defer="defer"></script>
-
+    <!-- <script src="{{ 'matchHeight.js' | asset_url }}" defer="defer"></script> -->
     {% render 'recently-viewed-product-popup'%}
 
     {% if settings.enable_language %}
@@ -98,6 +98,9 @@
 <script>
 
 $(document).ready(function(){
+    // if ( $('.iat-width-half').length ) {
+    //     $('.iat-width-half').matchHeight();
+    // }
     var data;
         $.ajax({
         type: "GET",  

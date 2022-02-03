@@ -1,0 +1,94 @@
+.iat-section {
+    padding: 40px;
+}
+.iat-section-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.iat-heading {
+    font-family: 'newyork';
+    font-size: 32px;
+    line-height: 38px;
+    color: #000000;
+}
+.iat-text {
+    margin-top: 50px;
+}
+.iat-text p, .iat-author p {
+    font-family: "Arimo";
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+    margin: 0;
+}
+.iat-width-half {
+    width: 50%;
+}
+.iat-width-one {
+    width: 100%;
+    text-align: center;
+}
+.iat-image {
+    position: relative;
+}
+.iat-image.align-center {
+    text-align: center;
+}
+.iat-content {
+    padding: 0px 50px;
+}
+.iat-button {
+    margin-top: 50px;
+}
+.iat-button a {
+    font-family: "Inter";
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    padding: 12px 50px;
+    color: #FFFFFF;
+    display: inline-block;
+    border-radius: 8px;
+}
+.iat-author {
+    text-align: right;
+    margin-top: 50px;
+}
+.iat-author a, .iat-text a {
+    font-family: "Arimo";
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 18px;
+    text-decoration-line: underline;
+    color: #000000;
+    margin-top: 50px;
+    display: inline-block;
+}
+@media (max-width: 768px) {
+    .iat-width-half {
+        width: 100%;
+    }
+    .iat-section-wrapper {
+        text-align: center;
+    }
+    .iat-heading {
+        font-size: 24px;
+        line-height: 29px;
+        margin-top: 30px;
+    }
+    .iat-content {
+        padding: 0;
+        order: 2;
+    }
+    .iat-image {
+        order: 1;
+    }
+    .iat-text, .iat-author, .iat-button, .iat-author a, .iat-text a {
+        margin-top: 30px;
+    }
+    .iat-author {
+        text-align: center;
+    }
+}

@@ -1,0 +1,68 @@
+{{ 'how-it-works.scss.css' | asset_url | stylesheet_tag }}
+<div class="hiw-section">
+    <div class="hiw-section-wrapper">
+        <div class="hiw-main-heading">
+            <h2 class="h1 hiw-heading">{{ section.settings.heading }}</h2>
+        </div>
+        <div class="hiw-block">
+            {% for block in section.blocks %}
+                <div class="hiw-item">
+                    <div class="hiw-number">{{ forloop.index }}</div>
+                    <div class="hiw-item-content">
+                        <h2 class="h1 hiw-item-title">{{ block.settings.title }}</h2>
+                        <p class="hiw-item-text">{{ block.settings.subtitle }}</p>
+                    </div>
+                    <div class="hiw-item-image">
+                        <img src="{{ block.settings.image | img_url: '72x' }}" alt="{{ block.settings.image.alt | escape }}">
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+    "name": "How it works",
+    "settings": [
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "how_it_works",
+            "name": "How it works",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title"
+                },
+                {
+                    "type": "text",
+                    "id": "subtitle",
+                    "label": "Sub title"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                }
+            ]
+        }
+    ],  
+    "presets": [
+        {
+            "category": "Images",
+            "name":"How it works",
+            "blocks": [
+                {
+                    "type": "how_it_works"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

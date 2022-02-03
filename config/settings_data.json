@@ -1,8 +1,17 @@
 {
   "current": {
+    "main_background": "#f4f2ea",
     "question_heading": "#5a5a5a",
-    "quiz_button_background_active": "#CCBC9B",
-    "next_button_color": "#000000",
+    "progress_bar_text": "#161e1d",
+    "quiz_button_background": "#ffffff",
+    "quiz_button_text": "#161e1d",
+    "quiz_button_border": "#e4b13e",
+    "quiz_button_background_active": "#e4b13e",
+    "quiz_button_text_active": "#161e1d",
+    "quiz_button_border_active": "#e4b13e",
+    "next_button_background": "#161e1d",
+    "next_button_text": "#f4f2ea",
+    "next_button_color": "#161e1d",
     "quiz_button_padding_top": 20,
     "quiz_button_width": 220,
     "quiz_answers_wrapper_width": 1330,
@@ -1268,7 +1277,7 @@
           "sub_title": "Your Results Are Ready!",
           "text": "Your Recommendations are based on your goals for @category-names. To perfect your routine we recommend you take the following supplements.",
           "btn_text": "Check Out Our Recommendations",
-          "btn_link": "shopify:\/\/pages\/recommend-products"
+          "btn_link": "shopify:\/\/pages\/recommendations"
         }
       },
       "163954615855b4c57c": {

@@ -1,0 +1,24 @@
+@font-face {
+    font-family: 'newyork';
+    src: url('NewYorkExtraLarge-Medium.eot');
+    src: url('NewYorkExtraLarge-Medium.eot?#iefix') format('embedded-opentype'),
+        url('NewYorkExtraLarge-Medium.woff2') format('woff2'),
+        url('NewYorkExtraLarge-Medium.woff') format('woff'),
+        url('NewYorkExtraLarge-Medium.ttf') format('truetype'),
+        url('NewYorkExtraLarge-Medium.svg#NewYorkExtraLarge-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Inter';
+    src: url('Inter-Regular.eot');
+    src: url('Inter-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Inter-Regular.woff2') format('woff2'),
+        url('Inter-Regular.woff') format('woff'),
+        url('Inter-Regular.ttf') format('truetype'),
+        url('Inter-Regular.svg#Inter-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

@@ -150,7 +150,7 @@ html, body {
     .page.page-default {
         .asset-wrapper.swiper-wrapper {
             .swiper-wrapper {
-                .swiper-slide-active {
+                .swiper-slide { /* was .swiper-slide-active */
                     display: flex;
                     justify-content: center;
                     .btn--quiz-back {
@@ -592,7 +592,7 @@ html, body {
         max-width: 100px;
     }
     .container.section-cover {
-        .page.page-default .asset-wrapper.swiper-wrapper .swiper-wrapper .swiper-slide-active .slide-inner {
+        .page.page-default .asset-wrapper.swiper-wrapper .swiper-wrapper .swiper-slide .slide-inner { /* was .swiper-slide-active */
             background-position: left;
             .slide-wrapper {
                 padding: 20px;

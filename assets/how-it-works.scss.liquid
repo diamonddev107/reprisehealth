@@ -1,0 +1,112 @@
+.hiw-section {
+    background: #F2F4EA;
+    padding: 50px 100px;
+}
+.hiw-section-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.hiw-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 25px;
+    margin-bottom: 15px;
+    border-left: 1px solid #333333;
+    position: relative;
+}
+.hiw-item::after {
+    content: '';
+    width: 9px;
+    height: 9px;
+    background: #333333;
+    position: absolute;
+    left: -4.5px;
+    border-radius: 50%;
+    bottom: 0;
+}
+.hiw-item:last-child {
+    border: none;
+}
+.hiw-item:last-child::after {
+    content: none;
+}
+.hiw-heading {
+    font-family: 'newyork';
+    font-size: 32px;
+    line-height: 38px;
+    color: #000000;
+}
+.hiw-item-title {
+    font-family: 'newyork';
+    font-size: 24px;
+    line-height: 29px;
+    letter-spacing: 0.0025em;
+    color: #000000;
+}
+.hiw-item-text {
+    font-family: 'Arimo';
+    font-size: 18px;
+    line-height: 21px;
+    color: #000000;
+}
+.hiw-item-content {
+    padding: 0 50px;
+}
+.hiw-number {
+    position: absolute;
+    left: -18px;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    background: #8CA3DF;
+    border-radius: 50%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    color: #FFFFFF;
+}
+@media (max-width: 768px) {
+    .hiw-section-wrapper {
+        flex-wrap: wrap;
+    }
+    .hiw-main-heading {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .hiw-section {
+        padding: 30px;
+    }
+    .hiw-heading {
+        font-size: 24px;
+        line-height: 29px;
+    }
+    .hiw-item {
+        align-items: flex-start;
+    }
+    .hiw-item-title {
+        font-size: 18px;
+        line-height: 21px;
+        margin: 0;
+    }
+    .hiw-item-text {
+        font-size: 16px;
+        line-height: 18px;
+    }
+    .hiw-number {
+        left: -14px;
+        width: 28px;
+        height: 28px;
+    }
+    .hiw-item-content {
+        padding: 0 30px;
+        padding-right: 0px;
+    }
+    .hiw-item-image img {
+        min-width: 50px;
+    }
+}

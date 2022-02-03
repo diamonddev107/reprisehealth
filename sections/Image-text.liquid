@@ -1,0 +1,131 @@
+{% assign author = section.settings.author %}
+{% assign button = section.settings.btn_text %}
+{% assign image = section.settings.image %}
+{% assign position = section.settings.image_position %}
+{% assign background_color = section.settings.background %}
+
+{% capture image_block %}
+<div class="iat-image iat-width-half {% if position == "right" %}align-center{% endif %}">
+    <div class="iat-image-wrapper">
+        <img src="{{ image | img_url: 'master' }}" alt="{{ image.alt | escape }}">
+    </div>
+</div>
+{% endcapture %}
+
+<div class="iat-section" data-section-id="{{ section.id }}">
+    <div class="iat-section-wrapper">
+        {% if image != blank and position == "left" %}
+            {{ image_block }}
+        {% endif %}
+        <div class="iat-content {% if image == blank %}iat-width-one{% else %}iat-width-half{% endif %}">
+            <div class="iat-content-wrapper">
+                <h2 class="h1 iat-heading">{{ section.settings.title }}</h2>
+                <div class="iat-text">{{ section.settings.text }}</div>
+                {% if author != blank %}
+                    <div class="iat-author">
+                        {{ author }}
+                    </div>
+                {% endif %}
+                {% if button != blank %}
+                    <div class="iat-button">
+                        <a href="{{ section.settings.btn_link }}">{{ button }}</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% if image != blank and position == "right" %}
+            {{ image_block }}
+        {% endif %}
+    </div>
+</div>
+
+{% if button != blank %}
+<style>
+    [data-section-id="{{ section.id }}"] .iat-button a {
+        background: {{ section.settings.btn_background }};
+        color: {{ section.settings.btn_color }};
+    }
+</style>
+{% endif %}
+
+{% if background_color != blank %}
+<style>
+    .iat-section[data-section-id="{{ section.id }}"] {
+        background: {{ background_color }};
+    }
+</style>
+{% endif %}
+{% schema %}
+{
+    "name": "Image and text",
+    "settings": [
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+        },
+        {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text"
+        },
+        {
+            "type": "richtext",
+            "id": "author",
+            "label": "Author"
+        },
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+        },
+        {
+            "type": "select",
+            "id": "image_position",
+            "label": "Image position",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                },
+                {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ]
+        },
+        {
+            "type": "color",
+            "id": "background",
+            "label": "Background color"
+        },
+        {
+            "type": "text",
+            "id": "btn_text",
+            "label": "Button label",
+            "default": "Take the quiz"
+        },
+        {
+            "type": "url",
+            "id": "btn_link",
+            "label": "Button link"
+        },
+        {
+            "type": "color",
+            "id": "btn_background",
+            "label": "Button background"
+        },
+        {
+            "type": "color",
+            "id": "btn_color",
+            "label": "Button color"
+        }
+    ],  
+    "presets": [
+        {
+            "category": "Images",
+            "name":"Image and text"
+        }
+    ]
+}
+{% endschema %}
