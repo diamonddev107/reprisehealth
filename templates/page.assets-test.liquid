@@ -269,7 +269,8 @@
         /* display: none; */
     }
     div#shopify-section-header .site-header {
-        width: calc(100% - 17px);
+        /* width: calc(100% - 17px); */
+        width: 100%;
         top: 0;
         position: fixed;
         z-index: 9;
@@ -281,12 +282,12 @@
             width: 100%;
         }
     }
-    .header-mobile__item {
-        min-width: unset;
-        width: unset;
+    .header-mobile__item.text-left, .header-mobile__item.text-right {
+        min-width: 35px;
+        width: 35px;
     }
     .header-mobile__item.text-center {
-        width: unset;
+        width: 175px;
     }
     .header-mobile {
         height: 70px;

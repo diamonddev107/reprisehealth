@@ -1,6 +1,9 @@
 html {
     scroll-behavior: smooth;
 }
+.rec-section .main-section {
+    position: relative;
+}
 #shopify-section-footer {
     display: none;
 }
@@ -268,7 +271,22 @@ body.learn-more-popup-opened {
     height: 100vh;
     overflow: hidden;
 }
-
+.btn--quiz-back {
+    position: absolute;
+    width: 100px;
+    background: #272C2F;
+    border-radius: 60px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    left: 0;
+    margin-top: 22px;
+    margin-left: 22px;
+}
+.btn--quiz-back span {
+    color: #fff;
+    margin-left: 10px;
+}
 @media (min-width: 768px) {
     .add_custom_bottle_to_cart {
         display: block;

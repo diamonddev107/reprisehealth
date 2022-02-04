@@ -58,6 +58,11 @@ $(document).ready(function(){
     });
   }
   function checkForAutomaticTransition(swiper) {
+    // temp start
+    // var indexBeforeLast = slideLen - 1;
+    // var currentSlide = $(swiper.slides[indexBeforeLast]);
+    // swiper.slideNext();
+    // temp end
     if (swiper.realIndex == 0) {
       $backButton.addClass("hide");
     } else {
@@ -68,8 +73,16 @@ $(document).ready(function(){
     var whyWeAsk = currentSlide.data('why-we-ask');
     var wowSlide = currentSlide.data('question-type');
     
-    window.history.pushState(null, null, "?question="+currentSlide.attr("id"));
-
+    var queryString = window.location.search;
+    var section_id = queryString.replace("?question=", "");
+    
+    if (section_id.trim() == "") {
+      window.history.pushState(null, null, "?question="+currentSlide.attr("id"));  
+    } else {
+      var section = $("#"+section_id.trim());
+      swiper.slideTo(section.index(),10);
+    }
+    
     if (wowSlide == "Information Page" && quiz.healthCategories.length == 1) {
         var wowText = currentSlide.find(".question-heading").text();
         var singleResult = wowText.replace("those are some great goals", "That's a great goal");
@@ -100,7 +113,7 @@ $(document).ready(function(){
       //     swiper.slideNext(300);
       //   }, transitionTime);
     } else {
-      if (!currentSlide.find('.slide-inner').hasClass('full-screen')) {
+      if (!currentSlide.find('.slide-inner').hasClass('full-screen') || currentSlide.attr("id") == "calculating_slide") {
         $('#MainContent .container').removeClass("section-cover");
         $('body').removeClass("header-transparent");
         $('.breadcrumbs-progress-wrapper').removeClass("hide");  
@@ -123,6 +136,7 @@ $(document).ready(function(){
     });
   }
   function reachSlideEnd() {
+    $('body').removeClass("header-transparent");
     $('.breadcrumbs-progress-wrapper').addClass("hide");
     $(".calculating-announcement-bar").removeClass('hide');
     $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
@@ -131,13 +145,14 @@ $(document).ready(function(){
     setTimeout(
       function() 
       {
-        var cat_arr = quiz.healthCategories;
-        var cat_names = AdjustString(cat_arr);
+        // var cat_arr = quiz.healthCategories;
+        // var cat_names = AdjustString(cat_arr);
 
-        $(".pre-product-recommendation").removeClass("hide");
-        $("#goals_for_category_names").text($("#goals_for_category_names").text().replace("@category-names", cat_names));
-        $(".page.page-default").addClass("hide");
-        $(".calculating-announcement-bar").removeClass('show');
+        // $(".pre-product-recommendation").removeClass("hide");
+        // $("#goals_for_category_names").text($("#goals_for_category_names").text().replace("@category-names", cat_names));
+        // $(".page.page-default").addClass("hide");
+        // $(".calculating-announcement-bar").removeClass('show');
+        location.href = "https://reprisehealth.com/pages/recommendations";
       }, 5000
     );
   }

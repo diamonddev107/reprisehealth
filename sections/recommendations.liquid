@@ -44,6 +44,10 @@
 
 <div class="rec-section">
     <div class="main-section">
+        <a href="{{ section.settings.back_link }}" class="btn--quiz-back">
+            <img src="{{ 'back-arrow.png' | asset_img_url:'15x' }}" />
+            <span>Back</span>
+        </a>
         <div class="wrapper rec-main-wrapper">
             <div class="rec-main-content">
                 <h2 class="h1 main-heading">{{ section.settings.heading }}</h2>
@@ -198,6 +202,12 @@
             "id": "herb_text",
             "label": "Herb text",
             "default": "Your 30-day supply of personalized herbal gummies formulated by our expert herbalist includes:"
+        },
+        {
+            "type": "text",
+            "id": "back_link",
+            "label": "Back link",
+            "default": "pages/assets?question=Values02"
         }
     ]
 }
