@@ -263,8 +263,7 @@ $(document).ready(function(){
     var emoticonImages = $(thisEmoticonWrapper).find('img');
     var emoticonMessages = $(thisMessageWrapper).find('p');
     var index = $(this).index();
-    $(this).closest(".number-range").find(".range-slider-bar").val(index + 1);
-
+    $(this).closest(".number-range").find(".range-slider-bar").val(parseInt($(this).data("index")));
     
     $(thisQuestion).find('.range-dot-wrapper').removeClass('range-dot-wrapper-active').addClass('range-dot-wrapper-inactive');
     $(this).removeClass('range-dot-wrapper-inactive').addClass('range-dot-wrapper-active');
@@ -401,7 +400,9 @@ $(document).ready(function(){
         }
       }
       if (singleInputEl.attr("name") == "userAge") {
-        if ( !( singleInput > 1 && singleInput < 1000 ) ){
+        var min = singleInputEl.data("min") != "" ? singleInputEl.data("min") : 1;
+        var max = singleInputEl.data("max") != "" ? singleInputEl.data("max") : 1000;
+        if ( !( singleInput >= min && singleInput <= max ) ){
           $(nothingSlected).slideDown();
           return false;
         }

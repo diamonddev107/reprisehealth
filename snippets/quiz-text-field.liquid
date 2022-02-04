@@ -7,7 +7,7 @@
     {% when "zipcode" %}
       <input type="text" id="userZip" class="single-answer-input" name="userZip" placeholder="{{ placeholder }}">
     {% when "number" %}
-      <input type="text" id="userAge" class="single-answer-input" name="userAge" placeholder="{{ placeholder }}">
+      <input type="text" id="userAge" class="single-answer-input" name="userAge" data-min="{{ min }}" data-max="{{ max }}" placeholder="{{ placeholder }}">
     {% when "email" %}
       <input type="text" id="userEmail" class="single-answer-input" name="userEmail" placeholder="{{ placeholder }}">
     {% else %}

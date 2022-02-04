@@ -1,4 +1,5 @@
-
+{% assign rangeMin =  item["minimum_value"] %}
+{% assign rangeMax =  item["maximum_value"] %}
 <div class="slide-inner {% if item['unique_slide_id'] == "UserName" %}full-screen{% endif %}">
   <div class="slide-top">
     <div class="slide-header">
@@ -12,7 +13,7 @@
   </div>
   <div class="slide-bottom">
     <div class="slide-answer-wrapper">
-      {% render 'quiz-text-field', slide_id: item['unique_slide_id'], placeholder: item['placeholder'], validation: item["data_validation"] %}
+      {% render 'quiz-text-field', slide_id: item['unique_slide_id'], min: rangeMin, max: rangeMax, placeholder: item['placeholder'], validation: item["data_validation"] %}
     </div>
     <div class="slide-continue-wrapper">
       <p class="nothing-selected text-center">{{ item['nothing_selected_text'] }}</p>

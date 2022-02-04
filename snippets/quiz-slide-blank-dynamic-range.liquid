@@ -1,5 +1,17 @@
-{% assign rangeMin =  item["minimum_value"] %}
-{% assign rangeMax =  item["maximum_value"] %}
+
+
+{% if item["minimum_value"] != blank %}
+  {% assign rangeMin =  item["minimum_value"] %}  
+{% else %}
+  {% assign rangeMin =  1 %}    
+{% endif %}
+
+{% if item["maximum_value"] != blank %}
+  {% assign rangeMax =  item["maximum_value"] %}
+{% else %}
+  {% assign rangeMax =  item['answer_choices'].size %}
+{% endif %}
+
 <div class="slide-inner" data-range-min="{{ item['minimum_value'] }}">
   <div class="slide-top">
     <div class="slide-header">
