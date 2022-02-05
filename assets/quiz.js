@@ -76,12 +76,12 @@ $(document).ready(function(){
     var queryString = window.location.search;
     var section_id = queryString.replace("?question=", "");
     
-    if (section_id.trim() == "") {
-      window.history.pushState(null, null, "?question="+currentSlide.attr("id"));  
-    } else {
-      var section = $("#"+section_id.trim());
-      swiper.slideTo(section.index(),10);
-    }
+    // if (section_id.trim() == "") {
+    //   window.history.pushState(null, null, "?question="+currentSlide.attr("id"));  
+    // } else {
+    //   var section = $("#"+section_id.trim());
+    //   swiper.slideTo(section.index(),10);
+    // }
     
     if (wowSlide == "Information Page" && quiz.healthCategories.length == 1) {
         var wowText = currentSlide.find(".question-heading").text();
