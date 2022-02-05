@@ -31,6 +31,7 @@ $(document).ready(function(){
   // temp start
   var slideLen = $(".mySwiper").data("len");
   // temp end
+  var internalCounter = 0;
   var swiper = new Swiper(".mySwiper", {
     allowTouchMove: false,
     speed: 1,
@@ -76,12 +77,15 @@ $(document).ready(function(){
     var queryString = window.location.search;
     var section_id = queryString.replace("?question=", "");
     
-    // if (section_id.trim() == "") {
-    //   window.history.pushState(null, null, "?question="+currentSlide.attr("id"));  
-    // } else {
-    //   var section = $("#"+section_id.trim());
-    //   swiper.slideTo(section.index(),10);
-    // }
+    internalCounter++;
+    if (section_id.trim() == "") {
+      window.history.pushState(null, null, "?question="+currentSlide.attr("id"));  
+    } else {
+      var section = $("#"+section_id.trim());
+      if (internalCounter <= 1) {
+        swiper.slideTo(section.index(),10);  
+      }
+    }
     
     if (wowSlide == "Information Page" && quiz.healthCategories.length == 1) {
         var wowText = currentSlide.find(".question-heading").text();
