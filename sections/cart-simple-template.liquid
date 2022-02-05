@@ -65,7 +65,15 @@
                                         <span data-cart-item-regular-price>{{ item.original_line_price | money }}</span>
                                     </div>
                                 </div>
+                                <p class="cart__remove">
+                                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="text-link text-link--accent" aria-label="{{ 'cart.label.remove' | t: product: item.title }}" data-cart-remove>{{ 'cart.general.remove' | t }}</a>
+                                </p>
                             </td>
+                            <!-- <td class="cart__quantity-td text-center small--hide">
+                                <p class="cart__remove">
+                                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="text-link text-link--accent" aria-label="{{ 'cart.label.remove' | t: product: item.title }}" data-cart-remove>{{ 'cart.general.remove' | t }}</a>
+                                </p>
+                            </td> -->
                             <td class="cart__final-price text-right small--hide" data-cart-item-line-price>
                              
                                 <dl {% unless item.original_line_price != item.final_line_price %}class="hide" {% endunless %}data-cart-item-discounted-price-group>
@@ -86,6 +94,9 @@
                                 <div {% if item.original_line_price != item.final_line_price %}class="hide" {% endif %}data-cart-item-regular-price-group>
                                     <span data-cart-item-regular-price>{{ item.original_line_price | money }}</span>
                                 </div>
+                                <p class="cart__remove">
+                                    <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="text-link text-link--accent" aria-label="{{ 'cart.label.remove' | t: product: item.title }}" data-cart-remove>{{ 'cart.general.remove' | t }}</a>
+                                </p>
                             </td>
                         </tr>
                     {%- endfor -%}
@@ -126,6 +137,9 @@
     </div>
 </div>
 <style>
+    .navUser-action .icon {
+        color: black;
+    }
     .section-header .title {
         font-family: 'Newyork';
         font-weight: normal;
