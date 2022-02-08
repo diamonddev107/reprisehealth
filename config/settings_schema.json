@@ -35,6 +35,18 @@
       },
       {
         "type": "color",
+        "id": "rec_background_1",
+        "label": "Recommend page background 1",
+        "default": "#E4B13E"
+      },
+      {
+        "type": "color",
+        "id": "rec_background_2",
+        "label": "Recommend page background 2",
+        "default": "#E08A51"
+      },
+      {
+        "type": "color",
         "id": "question_heading",
         "label": "Question heading",
         "default": "#5a5a5a"
