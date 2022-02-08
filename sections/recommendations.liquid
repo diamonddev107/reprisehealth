@@ -98,14 +98,14 @@
                 }
             })
         }
-        $(".herb-item .btn-learn-more").on("click", function() {
-            var heading = $(this).closest(".herb-item").find(".herb-item-heading.mobile-hide").text();
-            var image = $(this).closest(".herb-item").find(".herb-item-image").html();
-            var content = $(this).closest(".herb-item").find(".herb-item-content").html();
-            var history = $(this).closest(".herb-item").find(".herb-item-history").html();
-            var science = $(this).closest(".herb-item").find(".herb-item-science").html();
-            var sourcing = $(this).closest(".herb-item").find(".herb-item-sourcing").html();
-            var ingredients = $(this).closest(".herb-item").find(".herb-item-ingredients").html();
+        $("#herb_section").on("click", ".herb-item.product", function() {
+            var heading = $(this).find(".herb-item-heading.mobile-hide").text();
+            var image = $(this).find(".herb-item-image").html();
+            var content = $(this).find(".herb-item-content").html();
+            var history = $(this).find(".herb-item-history").html();
+            var science = $(this).find(".herb-item-science").html();
+            var sourcing = $(this).find(".herb-item-sourcing").html();
+            var ingredients = $(this).find(".herb-item-ingredients").html();
             
             $(".herb-learn-more-modal .herb-heading").text(heading);
             $(".herb-learn-more-modal .herb-image").html(image);

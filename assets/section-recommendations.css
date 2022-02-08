@@ -123,6 +123,9 @@ html {
     padding: 30px 15px;
     width: 23%;
 }
+.herb-item.product:hover {
+    cursor: pointer;
+}
 .rec-section .desktop-hide {
     display: none;
 }
