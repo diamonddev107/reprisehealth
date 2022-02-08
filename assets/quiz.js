@@ -82,6 +82,7 @@ $(document).ready(function(){
       window.history.pushState(null, null, "?question="+currentSlide.attr("id"));  
     } else {
       var section = $("#"+section_id.trim());
+      window.history.pushState(null, null, "?question="+currentSlide.attr("id"));
       if (internalCounter <= 1) {
         swiper.slideTo(section.index(),10);  
       }
