@@ -2,12 +2,12 @@
     <div class="hw-wrapper">
         {% if q_text contains "height" %}
         <div class="input-wrapper">
-            <input type="text" class="single-answer-input" name="userNumber" data-min="{{ min }}" data-max="{{ max }}" placeholder="{{ placeholder }}">
+            <input type="text" pattern="\d*" class="single-answer-input" name="userNumber" data-min="{{ min }}" data-max="{{ max }}" placeholder="{{ placeholder }}">
             <span>ft</span>
         </div>
         {% endif %}
         <div class="input-wrapper">
-            <input type="text" class="single-answer-input" name="userNumber" data-min="{{ min }}" data-max="{{ max }}" placeholder="{{ placeholder }}">
+            <input type="text" pattern="\d*" class="single-answer-input" name="userNumber" data-min="{{ min }}" data-max="{{ max }}" placeholder="{{ placeholder }}">
             {% if q_text contains "height" %}
             <span>in</span>
             {% else %}
