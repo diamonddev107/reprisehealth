@@ -79,6 +79,7 @@ $(document).ready(function(){
     var section_id = queryString.replace("?question=", "");
     
     internalCounter++;
+
     if (section_id.trim() == "") {
       window.history.pushState(null, null, "?question="+currentSlide.attr("id"));  
     } else {
@@ -89,6 +90,13 @@ $(document).ready(function(){
       }
     }
     
+    if (backButtonStatus == 1 && wowSlide == "Yes/No") {
+      var prevSkipValue = currentSlide.find('.btn--quiz-active').data('skip-question');
+      if (prevSkipValue != '') {
+        enableSlide(prevSkipValue);
+      }
+    }
+
     if (wowSlide == "Information Page" && quiz.healthCategories.length == 1) {
         var wowText = currentSlide.find(".question-heading").text();
         var singleResult = wowText.replace("those are some great goals", "That's a great goal");
@@ -107,6 +115,7 @@ $(document).ready(function(){
     var nextSlideIndex = swiper.realIndex + 1;
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var nextSlide = $(swiper.slides[nextSlideIndex]);
+
     setBreadCrumbsProgress(currentSection, currentSlide.data("slide-category"), nextSlide.data("slide-category"));
     
     if ( currentSlide.data('transition-time') ) {
@@ -542,6 +551,14 @@ $(document).ready(function(){
       }
     });
   }
+  function enableSlide(id) {
+    swiper.slides.each(function(e,i){
+      var slideId = $(this).data('unique-slide-id');
+      if ( slideId == id ) {
+        $(this).attr('data-show-slide',"true");
+      }
+    });
+  }
   function submitToKlaviyo(q) {
     var email = q.email;
     var name = q.name;
@@ -700,7 +717,6 @@ $(document).ready(function(){
         var currentTotalEl = $('span[data-total-score-'+item[1]+']');
         var currentTotal = Math.round(currentTotalEl.attr('data-total-score'));
         var newTotal = flag == "plus" ? (currentTotal + item[0]) : (currentTotal - item[0]);
-        console.log(currentTotal, item[0], newTotal);
         currentTotalEl.attr('data-total-score',newTotal).html(newTotal);
       }
     }
