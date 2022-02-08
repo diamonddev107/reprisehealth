@@ -1,0 +1,19 @@
+<form action="javascript:void(0);" class="single-text-input only-height-weight {% if q_text contains "weight" %}only-weight{% endif %}">
+    <div class="hw-wrapper">
+        {% if q_text contains "height" %}
+        <div class="input-wrapper">
+            <input type="text" class="single-answer-input" name="userNumber" data-min="{{ min }}" data-max="{{ max }}" placeholder="{{ placeholder }}">
+            <span>ft</span>
+        </div>
+        {% endif %}
+        <div class="input-wrapper">
+            <input type="text" class="single-answer-input" name="userNumber" data-min="{{ min }}" data-max="{{ max }}" placeholder="{{ placeholder }}">
+            {% if q_text contains "height" %}
+            <span>in</span>
+            {% else %}
+            <span>lbs</span>    
+            {% endif %}
+        </div>
+    </div>
+    <a class="inline-continue">Confirm</a>
+</form>

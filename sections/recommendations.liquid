@@ -81,8 +81,14 @@
 
 <script>
     $(document).ready(function() {
+        
         var topHandleStr = localStorage.getItem('recommend_product_handles');
+        var user_name = localStorage.getItem('user_name');
+        var categories = localStorage.getItem('categories');
         var topHandleArr = topHandleStr.split(",");
+        
+        $(".rec-section .main-heading").text($(".rec-section .main-heading").text().replace("@name", user_name));
+        $(".rec-section .main-text").text($(".rec-section .main-text").text().replace("@category-names", categories));
 
         for (var i = 0; i < topHandleArr.length; i++) {
             $(".quiz-rec-products .herb-item-container").each(function() {
@@ -120,7 +126,7 @@
         $(".add_custom_bottle_to_cart").on("click", function() {
             var custom_bottle_variant_id = $("#custom_bottle_variant_id").val();
             var properties = {};
-            properties['_customerName'] = localStorage.getItem('user_name');
+            properties['_customerName'] = user_name;
             $("#herb_section .herb-wrapper .herb-item.product").each(function(i, e) {
             var product_name = $(this).attr("data-product-name");
             properties['Herb-'+ i] = product_name;
@@ -149,7 +155,6 @@
             .catch((error) => {
             });
         })
-        
     });
 </script>
 {% schema %}

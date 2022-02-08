@@ -149,32 +149,13 @@ $(document).ready(function(){
     setTimeout(
       function() 
       {
-        // var cat_arr = quiz.healthCategories;
-        // var cat_names = AdjustString(cat_arr);
-
-        // $(".pre-product-recommendation").removeClass("hide");
-        // $("#goals_for_category_names").text($("#goals_for_category_names").text().replace("@category-names", cat_names));
+        // $(".pre-product-recommendation").removeClass("hide");        
         // $(".page.page-default").addClass("hide");
         // $(".calculating-announcement-bar").removeClass('show');
+        quizResultFunc();
         location.href = "https://reprisehealth.com/pages/recommendations";
       }, 5000
     );
-  }
-  function AdjustString(arr) {
-    var return_str = '';
-    for (var i = 0; i < arr.length; i++) {
-      return_str += arr[i];
-      if (arr.length > 1) {
-        if (i < arr.length - 1) {
-          if (arr.length >= 2 && i == arr.length - 2) {
-            return_str += " and ";
-          } else {
-            return_str += ", ";
-          }
-        }
-      }
-    }
-    return return_str;
   }
   // country list vertical slider - start
   var initial_slick_var = 0;
@@ -219,36 +200,10 @@ $(document).ready(function(){
   $(".why-we-ask").on("click", ".why-we-ask-content", function() {
     $(this).addClass("hide");
   })
-  $("#checkout_our_recommendations").on("click", function() {
-    // Select top 3 products from quiz result - start.
-    var allArr = [];
-
-    $("#devScoreWrapper .product-score-wrapper").each(function(e) {
-      var temp = [];
-      var s = Number($(this).find('span[data-total-score]').text());
-      var h = $(this).find('span[data-product-handle]').text();
-      temp.push(s);
-      temp.push(h);
-      allArr.push(temp);
-    })
-
-    allArr.sort(sortFunction);
-
-    function sortFunction(a, b) {
-      if (a[0] === b[0]) {
-        return 0;
-      }
-      else {
-        return (a[0] > b[0]) ? -1 : 1;
-      }
-    }
-
-    var topArr = allArr.slice(0, 3);
-    var topHandleArr= topArr.map(function(value,index) { return value[1]; });
-    localStorage.setItem('recommend_product_handles', topHandleArr);
-    localStorage.setItem('user_name',  quiz.name);
-    // Select top 3 products from quiz result - end.
-  })
+  
+  // $("#checkout_our_recommendations").on("click", function() {
+  //   quizResultFunc();
+  // })
   
   $backButton.on('click', function() {
     var preSlideIndex = swiper.realIndex - 1;
@@ -406,7 +361,7 @@ $(document).ready(function(){
     if ( singleInput.length === 0 ) {
       $(nothingSlected).text("Please enter your info :)").slideDown();
     } else {
-      if (singleInputEl.attr("name") == "userName") {
+      if (singleInputEl.attr("name") == "userText") {
         if (!/^[A-Za-z\s]+$/.test(singleInput)) {
           $(nothingSlected).slideDown();
           return false;
@@ -418,7 +373,7 @@ $(document).ready(function(){
           return false;
         }
       }
-      if (singleInputEl.attr("name") == "userAge") {
+      if (singleInputEl.attr("name") == "userNumber") {
         var min = singleInputEl.data("min") != "" ? singleInputEl.data("min") : 1;
         var max = singleInputEl.data("max") != "" ? singleInputEl.data("max") : 1000;
         if ( !( singleInput >= min && singleInput <= max ) ){
@@ -440,9 +395,22 @@ $(document).ready(function(){
         quiz.name = singleInput;
         // $(nameFields).html(singleInput);
       }
-      swiper.slideNext();
+      // swiper.slideNext();
+      inlineContinueSkipFunc();
     }
   });
+  function inlineContinueSkipFunc() {
+    var numberOfSlides = swiper.slides.length;
+    var nextSlideIndex = swiper.realIndex + 1;
+    for (var i = nextSlideIndex; i < numberOfSlides; i++) {
+      var targetSlide = $(swiper.slides[i]);
+      var targetSlideState = targetSlide.attr('data-show-slide');
+      if ( targetSlideState == "true" ) {
+        swiper.slideTo(i,10);
+        break;
+      }
+    }
+  }
   $sectionCoverButton.on('click',function(){
     // swiper.slideNext();
     var thisSlide = $(this).closest('.swiper-slide');
@@ -473,6 +441,56 @@ $(document).ready(function(){
       $(this).closest(".slide-continue-wrapper").find(".nothing-selected").slideDown();
     }
   });
+  // Select top 3 products from quiz result - start.
+  function quizResultFunc() {
+    var allArr = [];
+
+    $("#devScoreWrapper .product-score-wrapper").each(function(e) {
+      var temp = [];
+      var s = Number($(this).find('span[data-total-score]').text());
+      var h = $(this).find('span[data-product-handle]').text();
+      temp.push(s);
+      temp.push(h);
+      allArr.push(temp);
+    })
+
+    allArr.sort(sortFunction);
+
+    function sortFunction(a, b) {
+      if (a[0] === b[0]) {
+        return 0;
+      }
+      else {
+        return (a[0] > b[0]) ? -1 : 1;
+      }
+    }
+
+    var topArr = allArr.slice(0, 3);
+    var topHandleArr= topArr.map(function(value,index) { return value[1]; });
+    localStorage.setItem('recommend_product_handles', topHandleArr);
+    localStorage.setItem('user_name',  quiz.name);
+
+    var cat_arr = quiz.healthCategories;
+    var cat_names = AdjustString(cat_arr);
+    localStorage.setItem('categories',  cat_names);
+  }
+  // Select top 3 products from quiz result - end.
+  function AdjustString(arr) {
+    var return_str = '';
+    for (var i = 0; i < arr.length; i++) {
+      return_str += arr[i];
+      if (arr.length > 1) {
+        if (i < arr.length - 1) {
+          if (arr.length >= 2 && i == arr.length - 2) {
+            return_str += " and ";
+          } else {
+            return_str += ", ";
+          }
+        }
+      }
+    }
+    return return_str;
+  }
   function slideContinueFromThisSlide(thisSlide) {
     var isScoreableSlide = thisSlide.data('scoreable-slide');
     var selectedAnswersSelector = $(thisSlide).find('.btn--quiz-active');

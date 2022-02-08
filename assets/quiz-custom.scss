@@ -569,7 +569,81 @@ html, body {
         color: blue;
     }
 }
+.only-height-weight {
+    .hw-wrapper {
+        display: flex;
+        .input-wrapper {
+            width: 50%;
+            position: relative;
+           
+            input.single-answer-input {
+                @media (min-width: 799px) {
+                    width: 100%;
+                }
+                @media (max-width: 798px) {
+                    max-width: 300px;
+                    width: 35vw;
+                }
+            }
+            
+            &:nth-child(2) {
+                margin-left: 10px;
+            }
+            span {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 19px;
+                right: 20px;
+                color: #272c2f;
+                font-family: "DM Sans",sans-serif;
+                @media (max-width: 798px) {
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+    .inline-continue {
+        position: relative;
+        background-image: unset;
+        display: inline-block;
+        right: 0;
+        margin-top: 25px;
+        background: #161e1d;
+        color: #f4f2ea!important;
+        border-color: #161e1d;
+        border-radius: 10px;
+        padding: 20px 10px;
+        min-width: 220px;
+        cursor: pointer;
+        font-family: 'DM Sans',sans-serif;
+        font-weight: 700;
+        line-height: 130%;
+        letter-spacing: 0em;
+        text-align: center;
+        font-size: 20px;
+        transform: unset;
+        height: unset;
+        @media (max-width: 1024px) {
+            font-size: 13px;
+        }
+    }
+}
+.only-height-weight.only-weight {
+    .hw-wrapper .input-wrapper {
+        width: 100%;
+        input.single-answer-input {
+            @media (min-width: 799px) {
+                width: 608px;
+            }
+            @media (max-width: 798px) {
+                max-width: 600px;
+                width: 70vw;
+            }
+        }
+    }
 
+}
 @media (max-width: 798px) {
     .page.page-default {
         padding-top: 0;

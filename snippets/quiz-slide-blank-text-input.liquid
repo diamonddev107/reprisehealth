@@ -13,7 +13,11 @@
   </div>
   <div class="slide-bottom">
     <div class="slide-answer-wrapper">
-      {% render 'quiz-text-field', slide_id: item['unique_slide_id'], min: rangeMin, max: rangeMax, placeholder: item['placeholder'], validation: item["data_validation"] %}
+      {% if item["question_format_text"] contains "height" or item["question_format_text"] contains "weight" %}
+        {% render 'quiz-height-weight-field', q_text: item["question_format_text"], min: rangeMin, max: rangeMax, placeholder: item['placeholder'], validation: item["data_validation"] %}
+      {% else %}
+        {% render 'quiz-text-field', slide_id: item['unique_slide_id'], min: rangeMin, max: rangeMax, placeholder: item['placeholder'], validation: item["data_validation"] %}  
+      {% endif %}
     </div>
     <div class="slide-continue-wrapper">
       <p class="nothing-selected text-center">{{ item['nothing_selected_text'] }}</p>

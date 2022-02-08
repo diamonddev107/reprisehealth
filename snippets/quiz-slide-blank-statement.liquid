@@ -6,7 +6,7 @@
   {% assign section_button = 'Let’s Go!' %}
 {% endif %}
 
-<div class="slide-inner" {% if item["slide_main_image"] != blank %} style="background-image: url('{{ item['slide_main_image'] }}')" {% endif %}>
+<div class="slide-inner">
   <div class="slide-wrapper">
     <div class="slide-top">
       <div class="slide-header">
@@ -19,3 +19,18 @@
     </div>
   </div>
 </div>
+<style>
+  #{{ item['unique_slide_id'] }} .slide-inner {
+    background-image: url({{ item['slide_main_image'] }});
+  }
+</style>
+
+{% if item["slide_mobile_main_image"] != blank %}
+  <style>
+    @media (max-width: 798px) {
+      #{{ item['unique_slide_id'] }} .slide-inner {
+        background-image: url({{ item['slide_mobile_main_image'] }});
+      }
+    }
+  </style>
+{% endif %}

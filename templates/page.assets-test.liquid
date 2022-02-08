@@ -86,7 +86,7 @@
                         </section>
                         {% elsif item["question_type"] == "Health Topics Listing" %}
                         <section id="{{ item['unique_slide_id'] }}" class="swiper-slide" 
-                                data-show-slide="false"
+                                data-show-slide="{{ slideIsActive }}"
                                 data-answer-value=""
                                 data-scoreable-slide="true"
                                 data-question-type="{{ item['question_type'] }}"
@@ -265,9 +265,6 @@
 </div>
  
 <style>
-    div#shopify-section-header {
-        /* display: none; */
-    }
     div#shopify-section-header .site-header {
         /* width: calc(100% - 17px); */
         width: 100%;
