@@ -15,10 +15,6 @@ $(document).ready(function(){
   var current_lifestyle = 0;
   var current_basics = 0;
   var current_values = 0;
-  var flag_goals = 0;
-  var flag_lifestyle = 0;
-  var flag_basics = 0;
-  var flag_values = 0;
   var timestamp = new Date().getTime();
   var quiz = {};
   var questionsArray = [];
@@ -593,7 +589,6 @@ $(document).ready(function(){
         $('.crumbBasics').removeClass('current').removeClass('visited');
         $('.crumbValues').removeClass('current').removeClass('visited');
         $('.crumbResults').removeClass('current').removeClass('visited');
-        console.log(current_goals);
         if (backButtonStatus) {
           if (currentSlideCategory == nextSlideCategory) {
             current_goals--;
