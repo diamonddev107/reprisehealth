@@ -15,10 +15,15 @@ $(document).ready(function(){
   var current_lifestyle = 0;
   var current_basics = 0;
   var current_values = 0;
+  var flag_goals = 0;
+  var flag_lifestyle = 0;
+  var flag_basics = 0;
+  var flag_values = 0;
   var timestamp = new Date().getTime();
   var quiz = {};
   var questionsArray = [];
   var answerObject = {};
+  var backButtonStatus = 0;
   quiz.questions = questionsArray;
   quiz.answers = answerObject;
   var $sectionCoverButton = $('.btn-section-cover');
@@ -69,7 +74,7 @@ $(document).ready(function(){
     } else {
       $backButton.removeClass("hide");
     }
-
+    
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var whyWeAsk = currentSlide.data('why-we-ask');
     var wowSlide = currentSlide.data('question-type');
@@ -102,8 +107,11 @@ $(document).ready(function(){
     var currentSlide = $(swiper.slides[swiper.realIndex]);
     var currentSection = currentSlide.data('slide-section');
     $(".why-we-ask .why-we-ask-content p.text").text(whyWeAsk);
-
-    setBreadCrumbsProgress(currentSection);
+    
+    var nextSlideIndex = swiper.realIndex + 1;
+    var currentSlide = $(swiper.slides[swiper.realIndex]);
+    var nextSlide = $(swiper.slides[nextSlideIndex]);
+    setBreadCrumbsProgress(currentSection, currentSlide.data("slide-category"), nextSlide.data("slide-category"));
     
     if ( currentSlide.data('transition-time') ) {
       $('.breadcrumbs-progress-wrapper').addClass("hide");
@@ -207,6 +215,7 @@ $(document).ready(function(){
   // })
   
   $backButton.on('click', function() {
+    backButtonStatus = 1;
     var preSlideIndex = swiper.realIndex - 1;
     var prevSlide = $(swiper.slides[preSlideIndex]);
 
@@ -574,7 +583,9 @@ $(document).ready(function(){
     thisQuestionObject.answer = thisSlideAnswer;
     return thisQuestionObject;
   }
-  function setBreadCrumbsProgress(sectionLabel) {
+  function setBreadCrumbsProgress(sectionLabel, currentSlideCategory, nextSlideCategory) {
+    
+
     switch(sectionLabel) {
       case 'Goals':
         $('.crumbGoals').addClass('current').removeClass('visited');
@@ -582,7 +593,15 @@ $(document).ready(function(){
         $('.crumbBasics').removeClass('current').removeClass('visited');
         $('.crumbValues').removeClass('current').removeClass('visited');
         $('.crumbResults').removeClass('current').removeClass('visited');
-        current_goals++;
+        console.log(current_goals);
+        if (backButtonStatus) {
+          if (currentSlideCategory == nextSlideCategory) {
+            current_goals--;
+          }
+        } else {
+          current_goals++;
+        }
+        backButtonStatus = 0;
         total_goals = total_goals == 0 ? $("#questionSectionNumbers").attr("data-goals-number") : total_goals;
         $(".quizProgressBar .crumbGoals .subProgressBar").css("background", "#000");
         $(".quizProgressBar .crumbGoals .subProgressBar").css("width", "calc((100% + 50px) * "+ current_goals +" / "+ total_goals +")");
@@ -593,7 +612,16 @@ $(document).ready(function(){
         $('.crumbBasics').removeClass('current').removeClass('visited');
         $('.crumbValues').removeClass('current').removeClass('visited');
         $('.crumbResults').removeClass('current').removeClass('visited');
-        current_lifestyle++;
+        
+        if (backButtonStatus) {
+          if (currentSlideCategory == nextSlideCategory) {
+            current_lifestyle--;
+          }
+          current_lifestyle = current_lifestyle == 1 ? 0 : current_lifestyle;
+        } else {
+          current_lifestyle++;
+        }
+        backButtonStatus = 0;
         total_lifestyle = total_lifestyle == 0 ? $("#questionSectionNumbers").attr("data-lifestyle-number") : total_lifestyle;
         $(".quizProgressBar .crumbLifestyle .subProgressBar").css("background", "#000");
         $(".quizProgressBar .crumbLifestyle .subProgressBar").css("width", "calc((100% + 50px) * "+ current_lifestyle +" / "+ total_lifestyle +")");
@@ -604,7 +632,16 @@ $(document).ready(function(){
         $('.crumbBasics').addClass('current').removeClass('visited');
         $('.crumbValues').removeClass('current').removeClass('visited');
         $('.crumbResults').removeClass('current').removeClass('visited');
-        current_basics++;
+        
+        if (backButtonStatus) {
+          if (currentSlideCategory == nextSlideCategory) {
+            current_basics--;
+          }
+          current_basics = current_basics == 1 ? 0 : current_basics;
+        } else {
+          current_basics++;
+        }
+        backButtonStatus = 0;
         total_basics = total_basics == 0 ? $("#questionSectionNumbers").attr("data-basics-number") : total_basics;
         $(".quizProgressBar .crumbBasics .subProgressBar").css("background", "#000");
         $(".quizProgressBar .crumbBasics .subProgressBar").css("width", "calc((100% + 50px) * "+ current_basics +" / "+ total_basics +")");
@@ -615,7 +652,16 @@ $(document).ready(function(){
         $('.crumbBasics').removeClass('current').addClass('visited');
         $('.crumbValues').addClass('current').removeClass('visited');
         $('.crumbResults').removeClass('current').removeClass('visited');
-        current_values++;
+        
+        if (backButtonStatus) {
+          if (currentSlideCategory == nextSlideCategory) {
+            current_values--;
+          }
+          current_values = current_values == 1 ? 0 : current_values;
+        } else {
+          current_values++;
+        }
+        backButtonStatus = 0;
         total_values = total_values == 0 ? $("#questionSectionNumbers").attr("data-values-number") : total_values;
         $(".quizProgressBar .crumbValues .subProgressBar").css("background", "#000");
         $(".quizProgressBar .crumbValues .subProgressBar").css("width", "calc((100% + 50px) * "+ current_values +" / "+ total_values +")");
@@ -628,7 +674,9 @@ $(document).ready(function(){
         $('.crumbResults').addClass('current').removeClass('visited');
         break;
       default:
-        //
+        $(".quizProgressBar .crumbGoals .subProgressBar").css("width", "0px");
+        backButtonStatus = 0;
+        current_goals = 0;
     }
   }
   function getProductScores(answer) {
@@ -736,8 +784,14 @@ $(document).ready(function(){
 
   }
   function setActiveCategorySlides(slideWrapper) {
-    var categoryButtons = slideWrapper.find('.btn--quiz-active');
+    total_goals = 0;
+    total_lifestyle = 0;
+    total_basics = 0;
+    total_values = 0;
     var categoriesSelected = [];
+
+    var categoryButtons = slideWrapper.find('.btn--quiz-active');
+
     if ( categoryButtons.length ) {
       categoryButtons.each(function(){
         var buttonCategory = $(this).data('category');
