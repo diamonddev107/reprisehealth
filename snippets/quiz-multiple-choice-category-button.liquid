@@ -2,7 +2,7 @@
 {% comment %} 
 {% assign show_product_wishlist = show_product_wishlist | default: settings.show_product_wishlist %} 
 {% endcomment %}
-<a class="btn--kleva btn--category btn--quiz {% if active_state == 1 %} btn--quiz-active{% endif %}" data-category="{{ button_text }}">
+<a class="btn--kleva btn--category btn--quiz {% if active_state == 1 %} btn--quiz-active{% endif %}" data-category="{{ button_text }}" data-answer="{{ button_text }}">
     {{ button_text }}
     {% if subtext != blank %}
         <span class="answer-subtext">{{ subtext }}</span>

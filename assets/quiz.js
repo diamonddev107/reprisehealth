@@ -756,10 +756,10 @@ $(document).ready(function(){
       case "Health Topics Listing":
           var selectedAnswersArray = [];
           var selectedAnswer = $(slide).find('.btn--quiz-active');
-          var scoresArr = [];
+          var scoresArr = getProductScores(selectedAnswer);
 
           selectedAnswer.each(function( index ) {
-            selectedAnswersArray.push($(this).data('category'));
+            selectedAnswersArray.push($(this).data('answer'));
           });
           
           slide.attr('data-answer-value',selectedAnswersArray.toString());
