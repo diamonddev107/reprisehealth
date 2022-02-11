@@ -1273,6 +1273,7 @@
         "type": "pre-product-recommendation",
         "settings": {
           "image": "shopify:\/\/shop_images\/debashis-rc-biswas-ezAE9WHvipg-unsplash_2.jpg",
+          "mobile_image": "shopify:\/\/shop_images\/mobile_debashis-rc-biswas-ezAE9WHvipg-unsplash_1.png",
           "title": "Created Just For @name",
           "sub_title": "Your Results Are Ready!",
           "text": "Your Recommendations are based on your goals for @category-names. To perfect your routine we recommend you take the following supplements.",
@@ -1306,17 +1307,158 @@
         "settings": {
           "quiz_collection": "quiz",
           "custom_bottle": "custom-bottle",
-          "heading": "Kai, your results are ready!",
-          "text": "<p>You said you needed help with <strong>Sleep<\/strong>, <strong>Energy<\/strong> and <strong>Stress<\/strong>. These herbal gummies are personalized for your needs.<\/p>",
+          "heading": "@name, your results are ready!",
+          "text": "<p>You said you needed help with <strong>@category-names<\/strong>. These herbal gummies are personalized for your needs.<\/p>",
           "link_text": "View My Formula",
           "main_image": "shopify:\/\/shop_images\/rec-page-image.png",
           "herb_heading": "Herbal Formula",
-          "herb_text": "Your 30-day supply of personalized herbal gummies formulated by our expert herbalist includes:"
+          "herb_text": "Your 30-day supply of personalized herbal gummies formulated by our expert herbalist includes:",
+          "back_link": "assets?question=Values02"
+        }
+      },
+      "164387073866c0928e": {
+        "type": "Image-text",
+        "disabled": true,
+        "settings": {
+          "title": "Herbal Therapy, Simplified",
+          "text": "<p>You’re looking to treat the whole you.  <br\/>Your health is a system, not just symptoms.<\/p><p><br\/>We can help with tasty herbal gummies selected just for you.  <br\/>Not too sweet, and easy to eat while you’re on the go.<\/p>",
+          "author": "",
+          "image": "shopify:\/\/shop_images\/leaves-g93988a756_640_1.png",
+          "image_position": "left",
+          "background": "#e4b13e",
+          "btn_text": "",
+          "btn_link": "",
+          "btn_background": "",
+          "btn_color": ""
+        }
+      },
+      "1643871011e2ed182c": {
+        "type": "Image-text",
+        "disabled": true,
+        "settings": {
+          "title": "Find Your Balance",
+          "text": "<p>Our personalized herbal recommendations draw on the rich history of traditional Chinese medicine.<\/p><p><br\/>Traditional Chinese medicine focuses on balance -- yin and yang. Your health is a system, not just symptoms.  Thousands of years of history have shown that it helps -- and modern science backs this up.<\/p>",
+          "author": "",
+          "image": "shopify:\/\/shop_images\/ffa15c9c-4c06-4113-9d0c-8ed84f68bdfe_2.png",
+          "image_position": "left",
+          "background": "#f2f4ea",
+          "btn_text": "Take the quiz",
+          "btn_link": "shopify:\/\/pages\/assets",
+          "btn_background": "#000000",
+          "btn_color": "#ffffff"
+        }
+      },
+      "1643871034c8a12f6a": {
+        "type": "Image-text",
+        "disabled": true,
+        "settings": {
+          "title": "Prepared by Expert Herbalists",
+          "text": "<p>Our certified, trained herbalists customize your selection of herbs.<\/p><p><br\/>Your health needs are always changing.  We listen to you first, then prepare an assortment of herbs made just for you.<\/p>",
+          "author": "",
+          "image": "shopify:\/\/shop_images\/laboratory-g75b12dc04_640_3.png",
+          "image_position": "right",
+          "background": "#e4b13e",
+          "btn_text": "",
+          "btn_link": "",
+          "btn_background": "",
+          "btn_color": ""
+        }
+      },
+      "1643871189cd5fb933": {
+        "type": "Image-text",
+        "disabled": true,
+        "settings": {
+          "title": "What People Are Saying",
+          "text": "<p>“I was skeptical about herbs in gummies at first, but the flavors are amazing and I love the variety.  Would highly recommend!”<\/p>",
+          "author": "<p>-Andrew W., Verified Customer<\/p><p><\/p><p><a href=\"#\" target=\"_blank\" title=\"See More Reviews\">See More Reviews<\/a><\/p>",
+          "image": "shopify:\/\/shop_images\/happy-g3293c2789_640_2.png",
+          "image_position": "right",
+          "background": "#e4b13e",
+          "btn_text": "",
+          "btn_link": "",
+          "btn_background": "",
+          "btn_color": ""
+        }
+      },
+      "1643871279e216cc51": {
+        "type": "Image-text",
+        "disabled": true,
+        "settings": {
+          "title": "Our Promise to You",
+          "text": "<p>These days it’s not easy to find health solutions you can trust.<\/p><p><br\/>Our products are 100 percent <strong>plant-based<\/strong> with no artificial ingredients.  We’re always <strong>sustainably sourced<\/strong> and <strong>non-GMO<\/strong>.<\/p><p><\/p><p><\/p><p><a href=\"#\" target=\"_blank\" title=\"Learn More About Our Promise\">Learn More About Our Promise<\/a><\/p>",
+          "author": "",
+          "image": "shopify:\/\/shop_images\/f5195da3-5df8-4039-ab82-ce4bfd9b8947_2.png",
+          "image_position": "left",
+          "background": "#f4f2ea",
+          "btn_text": "",
+          "btn_link": "",
+          "btn_background": "",
+          "btn_color": ""
+        }
+      },
+      "1643871417dab5175e": {
+        "type": "Image-text",
+        "disabled": true,
+        "settings": {
+          "title": "Ready to Begin Your Health Journey?",
+          "text": "<p>Just a few questions and you’ll get your personalized results.<\/p>",
+          "author": "",
+          "image_position": "left",
+          "background": "#e4b13e",
+          "btn_text": "Take the quiz",
+          "btn_link": "shopify:\/\/pages\/assets",
+          "btn_background": "#ffffff",
+          "btn_color": "#000000"
+        }
+      },
+      "1643916799b0599471": {
+        "type": "how-it-works",
+        "disabled": true,
+        "blocks": {
+          "1643916799b0599471-0": {
+            "type": "how_it_works",
+            "settings": {
+              "title": "Take the Quiz",
+              "subtitle": "Tell us about your goals and lifestyle.  We’ll customize your formulas.",
+              "image": "shopify:\/\/shop_images\/1.jpg"
+            }
+          },
+          "593faf8a-f21b-4ecf-9f04-a5a283c421b0": {
+            "type": "how_it_works",
+            "settings": {
+              "title": "Receive Your Personalized Herbs",
+              "subtitle": "Tasty herbal gummies in a variety of flavors, made for you.",
+              "image": "shopify:\/\/shop_images\/1_copy.jpg"
+            }
+          },
+          "c9f6ffea-3e04-4de8-8b07-a5222d85f072": {
+            "type": "how_it_works",
+            "settings": {
+              "title": "Boost Your Health",
+              "subtitle": "Take your herbs each day.  Hit your health goals.",
+              "image": "shopify:\/\/shop_images\/1_copy_copy.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "1643916799b0599471-0",
+          "593faf8a-f21b-4ecf-9f04-a5a283c421b0",
+          "c9f6ffea-3e04-4de8-8b07-a5222d85f072"
+        ],
+        "settings": {
+          "heading": "How It Works"
         }
       }
     },
     "content_for_index": [
-      "163954615855b4c57c"
+      "163954615855b4c57c",
+      "164387073866c0928e",
+      "1643916799b0599471",
+      "1643871034c8a12f6a",
+      "1643871011e2ed182c",
+      "1643871189cd5fb933",
+      "1643871279e216cc51",
+      "1643871417dab5175e"
     ]
   }
 }
