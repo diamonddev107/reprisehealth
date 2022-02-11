@@ -86,7 +86,8 @@ $(document).ready(function(){
       var section = $("#"+section_id.trim());
       window.history.pushState(null, null, "?question="+currentSlide.attr("id"));
       if (internalCounter <= 1) {
-        swiper.slideTo(section.index(),10);  
+        quiz = JSON.parse(localStorage.getItem("quiz"));
+        swiper.slideTo(section.index(),10);
       }
     }
     
@@ -160,13 +161,13 @@ $(document).ready(function(){
     $(".calculating-announcement-bar span").text(slideLen + "/" + slideLen + " Questions Completed");
     $(".why-we-ask").addClass("hide");
     submitToKlaviyo(quiz);
+    quizResultFunc();
     setTimeout(
       function() 
       {
         // $(".pre-product-recommendation").removeClass("hide");        
         // $(".page.page-default").addClass("hide");
         // $(".calculating-announcement-bar").removeClass('show');
-        quizResultFunc();
         location.href = "https://reprisehealth.com/pages/recommendations";
       }, 5000
     );
@@ -488,6 +489,7 @@ $(document).ready(function(){
     var cat_arr = quiz.healthCategories;
     var cat_names = AdjustString(cat_arr);
     localStorage.setItem('categories',  cat_names);
+    localStorage.setItem('quiz', JSON.stringify(quiz));
   }
   // Select top 3 products from quiz result - end.
   function AdjustString(arr) {

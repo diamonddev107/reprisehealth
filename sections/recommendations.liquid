@@ -88,7 +88,7 @@
         var topHandleArr = topHandleStr.split(",");
         
         $(".rec-section .main-heading").text($(".rec-section .main-heading").text().replace("@name", user_name));
-        $(".rec-section .main-text").text($(".rec-section .main-text").text().replace("@category-names", categories));
+        $(".rec-section .main-text").html($(".rec-section .main-text").html().replace("@category-names", categories));
 
         for (var i = 0; i < topHandleArr.length; i++) {
             $(".quiz-rec-products .herb-item-container").each(function() {
