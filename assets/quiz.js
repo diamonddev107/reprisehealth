@@ -291,6 +291,12 @@ $(document).ready(function(){
     $button.toggleClass('btn--quiz-active');
     checkQuizContinue(1, thisQuestionAnswersWrapper, thisQuestionWrapper);
     checkQuizMax($(this).closest(".slide-answer-wrapper-categories").data("max-choices-allowed"), thisQuestionAnswersWrapper);
+    
+    // Initial true value setting
+    swiper.slides.each(function(e,i){
+      $(this).attr('data-show-slide',"true");
+    });
+
     setActiveCategorySlides(thisQuestionAnswersWrapper);
   });
   $(".other-answer-continue").on("click", function() {
